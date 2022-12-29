@@ -8,18 +8,25 @@ public class SpawnPointCreator : MonoBehaviour
 
 	public List<Transform> Points => m_Points;
 
-
+	[SerializeField] private MeshRenderer m_Renderer;
+	[SerializeField] private int m_PointCount = 10;
     private void Start()
 	{
-		var collider = GetComponentInChildren<CapsuleCollider>();
+		var collider = m_Renderer.GetComponent<CapsuleCollider>();
+		var radius = m_Renderer.transform.localScale.x / 2;
 
-		GameObject parentPoint = new GameObject("Spawn Points");
-		parentPoint.transform.SetParent(collider.transform);
-		parentPoint.transform.localPosition = new Vector3(0, -collider.height / 2, 0);
-		parentPoint.transform.localScale = Vector3.one;
+        GameObject pointParent = new GameObject("SpawnPoints");
+		var pointParentTransform = pointParent.transform;
 
-        CreateEnemiesAroundPoint(10, parentPoint.transform, collider.radius);
-	}
+        pointParentTransform.SetParent(collider.transform);
+		pointParentTransform.localPosition = new Vector3(0, -collider.height / 2, 0);
+        pointParentTransform.localScale = Vector3.one;
+
+        CreateEnemiesAroundPoint(m_PointCount, pointParentTransform, radius);
+
+        pointParentTransform.SetParent(transform);
+        pointParentTransform.localScale = Vector3.one;
+    }
 
 	public void CreateEnemiesAroundPoint(int num, Transform parent, float radius)
 	{
