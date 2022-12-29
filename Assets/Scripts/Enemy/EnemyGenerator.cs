@@ -1,48 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class EnemyGenerator : MonoBehaviour
+public class EnemyGenerator
 {
-    [SerializeField] private List<Enemy> enemyPrefabs;
-    List<Transform> m_SpawnPoints = new List<Transform>();
+    private EnemyManager m_EnemyManager;
+
+    List<Point> m_Points = new List<Point>();
     Transform lastPoint;
 
-    private void Start()
+    public EnemyGenerator(EnemyManager enemyManager)
     {
-        m_SpawnPoints = Tower.Instance.Components.SpawnPointCreator.Points;
-        StartCoroutine(SpawnEnemy());
+        m_EnemyManager = enemyManager;
 
+        m_Points = Tower.Instance.Components.SpawnPointCreator.Points;
     }
 
-    IEnumerator SpawnEnemy()
+    public void StartSpawn()
+    {
+        m_EnemyManager.StartCoroutine(SpawnEnemy());
+    }
+
+    private IEnumerator SpawnEnemy()
     {
         yield return new WaitForSeconds(2);
 
         Spawn();
-        StartCoroutine(SpawnEnemy());
+        m_EnemyManager.StartCoroutine(SpawnEnemy());
     }
 
     private void Spawn()
     {
-        var prefab = enemyPrefabs.RandomItem();
-        var spawnPoint = GetPoint();
+        var prefab = m_EnemyManager.GetEenemyPrefabs();
+        var point = GetPoint();
 
-        var enemyIns = Instantiate(prefab, spawnPoint);
+        var enemyIns = Object.Instantiate(prefab, point.StartPoint);
         enemyIns.transform.localPosition = Vector3.zero;
+
+        m_EnemyManager.AddEnemy(enemyIns, point.FinishPoint);
     }
 
-    private Transform GetPoint()
+    private Point GetPoint()
     {
-        var point = m_SpawnPoints.RandomItem();
+        var point = m_Points.RandomItem();
         if(lastPoint != null)
         {
-            if(lastPoint == point)
+            if(lastPoint == point.StartPoint)
             {
                 return GetPoint();
             }
         }
-        lastPoint = point; 
+        lastPoint = point.StartPoint; 
         return point;
     }
 }

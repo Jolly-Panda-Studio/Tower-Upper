@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SpawnPointCreator : MonoBehaviour
 {
-	private List<Transform> m_Points = new List<Transform>();
+	private List<Point> m_Points = new List<Point>();
 
-	public List<Transform> Points => m_Points;
+	public List<Point> Points => m_Points;
 
 	[SerializeField] private MeshRenderer m_Renderer;
 	[SerializeField] private int m_PointCount = 10;
@@ -14,6 +14,7 @@ public class SpawnPointCreator : MonoBehaviour
 	{
 		var collider = m_Renderer.GetComponent<CapsuleCollider>();
 		var radius = m_Renderer.transform.localScale.x / 2;
+		var height = m_Renderer.transform.localScale.y * 2;
 
         GameObject pointParent = new GameObject("SpawnPoints");
 		var pointParentTransform = pointParent.transform;
@@ -22,13 +23,13 @@ public class SpawnPointCreator : MonoBehaviour
 		pointParentTransform.localPosition = new Vector3(0, -collider.height / 2, 0);
         pointParentTransform.localScale = Vector3.one;
 
-        CreateEnemiesAroundPoint(m_PointCount, pointParentTransform, radius);
+        CreateEnemiesAroundPoint(m_PointCount, pointParentTransform, radius, height);
 
         pointParentTransform.SetParent(transform);
         pointParentTransform.localScale = Vector3.one;
     }
 
-	public void CreateEnemiesAroundPoint(int num, Transform parent, float radius)
+	public void CreateEnemiesAroundPoint(int num, Transform parent, float radius, float height)
 	{
 		for (int i = 0; i < num; i++)
 		{
@@ -46,11 +47,21 @@ public class SpawnPointCreator : MonoBehaviour
 
 			/* Now spawn */
 			var point = new GameObject($"({i + 1})");
-			point.transform.SetParent(parent);
-			point.transform.localPosition = spawnPos;
+            point.transform.SetParent(parent);
+            point.transform.localPosition = Vector3.zero;
             point.transform.localScale = Vector3.one;
 
-            m_Points.Add(point.transform);
+            var startPoint = new GameObject($"START");
+			startPoint.transform.SetParent(point.transform);
+			startPoint.transform.localPosition = new Vector3(spawnPos.x, 0, spawnPos.z);
+            startPoint.transform.localScale = Vector3.one;
+
+            var finishPoint = new GameObject($"FINISH");
+            finishPoint.transform.SetParent(point.transform);
+            finishPoint.transform.localPosition = new Vector3(startPoint.transform.localPosition.x, startPoint.transform.localPosition.y + height, startPoint.transform.localPosition.z);
+            finishPoint.transform.localScale = Vector3.one;
+
+            m_Points.Add(new Point(startPoint.transform, finishPoint.transform));
 
         }
 	}
@@ -60,7 +71,24 @@ public class SpawnPointCreator : MonoBehaviour
 		Gizmos.color = Color.red;
         foreach (var point in m_Points)
         {
-            Gizmos.DrawSphere(point.position, 0.1f);
+			Vector3 start = point.StartPoint.position;
+			Vector3 finish = point.FinishPoint.position;
+
+			Gizmos.DrawSphere(start, 0.1f);
+			Gizmos.DrawSphere(finish, 0.1f);
+			Gizmos.DrawLine(start, finish);
         }
     }
+}
+
+public struct Point
+{
+    public Point(Transform startPoint, Transform finishPoint)
+    {
+        StartPoint = startPoint ?? throw new ArgumentNullException(nameof(startPoint));
+        FinishPoint = finishPoint ?? throw new ArgumentNullException(nameof(finishPoint));
+    }
+
+    public Transform StartPoint { get; private set; }
+    public Transform FinishPoint { get; private set; }
 }
