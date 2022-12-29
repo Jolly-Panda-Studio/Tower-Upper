@@ -61,7 +61,7 @@ public class SpawnPointCreator : MonoBehaviour
             finishPoint.transform.localPosition = new Vector3(startPoint.transform.localPosition.x, startPoint.transform.localPosition.y + height, startPoint.transform.localPosition.z);
             finishPoint.transform.localScale = Vector3.one;
 
-            m_Points.Add(new Point(startPoint.transform, finishPoint.transform));
+            m_Points.Add(new Point(startPoint.transform, finishPoint.transform, point.transform));
 
         }
 	}
@@ -83,12 +83,14 @@ public class SpawnPointCreator : MonoBehaviour
 
 public struct Point
 {
-    public Point(Transform startPoint, Transform finishPoint)
-    {
-        StartPoint = startPoint ?? throw new ArgumentNullException(nameof(startPoint));
-        FinishPoint = finishPoint ?? throw new ArgumentNullException(nameof(finishPoint));
+	public Point(Transform startPoint, Transform finishPoint, Transform centerPoint)
+	{
+		StartPoint = startPoint ?? throw new ArgumentNullException(nameof(startPoint));
+		FinishPoint = finishPoint ?? throw new ArgumentNullException(nameof(finishPoint));
+		CenterPoint = centerPoint ?? throw new ArgumentNullException(nameof(centerPoint));
     }
 
-    public Transform StartPoint { get; private set; }
+	public Transform StartPoint { get; private set; }
     public Transform FinishPoint { get; private set; }
+    public Transform CenterPoint { get; private set; }
 }

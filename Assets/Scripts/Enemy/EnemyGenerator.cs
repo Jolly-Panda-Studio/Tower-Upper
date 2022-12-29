@@ -38,7 +38,7 @@ public class EnemyGenerator
         var enemyIns = Object.Instantiate(prefab, point.StartPoint);
         enemyIns.transform.localPosition = Vector3.zero;
 
-        m_EnemyManager.AddEnemy(enemyIns, point.FinishPoint);
+        m_EnemyManager.AddEnemy(enemyIns, point.FinishPoint, point.CenterPoint);
     }
 
     private Point GetPoint()

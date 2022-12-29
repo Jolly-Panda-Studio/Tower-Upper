@@ -21,9 +21,9 @@ public class EnemyManager : MonoBehaviour
         m_EnemyGenerator.StartSpawn();
     }
 
-    public void AddEnemy(Enemy enemy,Transform moveTarget)
+    public void AddEnemy(Enemy enemy,Transform moveTarget,Transform lookAtTarget)
     {
-        enemy.SetTargetMove(moveTarget).Climb();
+        enemy.SetTargetMove(moveTarget).SetLookAt(lookAtTarget).Climb();
         enemies.Add(enemy);
     }
 
