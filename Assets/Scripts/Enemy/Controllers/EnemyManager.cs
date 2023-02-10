@@ -4,40 +4,32 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] private List<Enemy> enemyPrefabs;
+
     [Header("Componenets")]
     [SerializeField] private EnemyGenerator m_EnemyGenerator;
 
-
-    [SerializeField] private List<Enemy> enemyPrefabs;
-    private List<Enemy> enemies;
-
     private void Start()
     {
-        enemies = new List<Enemy>();
-
         m_EnemyGenerator = new EnemyGenerator(this);
-
 
         m_EnemyGenerator.StartSpawn();
     }
 
     public void AddEnemy(Enemy enemy,Transform moveTarget,Transform lookAtTarget)
     {
+        EnemyCounter.SpawnEnemy();
+
         enemy.SetTargetMove(moveTarget).SetLookAt(lookAtTarget).Climb();
-        enemies.Add(enemy);
+
+        enemy.onDie += OnKill;
     }
 
-    public void RemoveEnemy(Enemy enemy)
+    private void OnKill(Enemy enemy)
     {
-        if (enemies.Contains(enemy))
-        {
-            enemies.Remove(enemy);
-        }
-    }
+        EnemyCounter.KillEnemy();
 
-    public void DoClib()
-    {
-
+        enemy.onDie -= OnKill;
     }
 
     public Enemy GetEenemyPrefabs() => enemyPrefabs.RandomItem();

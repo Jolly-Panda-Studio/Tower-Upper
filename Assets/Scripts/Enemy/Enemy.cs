@@ -1,11 +1,21 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class Enemy : MonoBehaviour
 {
-    private Vector3 m_Destination;
     [SerializeField] private float m_Speed = 10;
-    DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> doClimbing;
+    private Vector3 m_Destination;
+    DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> m_DoClimbing;
+
+    //[Header("Component")]
+
+    public event Action<Enemy> onDie;
+
+    private void Awake()
+    {
+        
+    }
 
     public Enemy SetTargetMove(Transform destination)
     {
@@ -21,7 +31,7 @@ public class Enemy : MonoBehaviour
 
     public void Climb()
     {
-        doClimbing = transform.DOMoveY(m_Destination.y, GetMoveTime(m_Destination));
+        m_DoClimbing = transform.DOMoveY(m_Destination.y, GetMoveTime(m_Destination));
     }
 
     public float GetMoveTime(Vector3 position)
@@ -31,11 +41,19 @@ public class Enemy : MonoBehaviour
 
     public void Kill()
     {
-        if(doClimbing != null)
+        if(m_DoClimbing != null)
         {
-            doClimbing.Kill();
+            m_DoClimbing.Kill();
 
             //fall animation
+
+            onDie?.Invoke(this);
         }
+    }
+
+    public void FallDown(float force)
+    {
+        var rigidbody = gameObject.GetOrAddComponent<Rigidbody>();
+        rigidbody.AddForce(Vector3.down * force, ForceMode.Impulse);
     }
 }
