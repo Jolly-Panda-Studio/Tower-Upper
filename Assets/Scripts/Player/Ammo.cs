@@ -15,10 +15,9 @@ public class Ammo : MonoBehaviour
     {
         if (other.TryGetComponent(out Enemy enemy))
         {
+            Destroy(gameObject);
             enemy.Kill();
-
-            var rigid = enemy.gameObject.GetOrAddComponent<Rigidbody>();
-            rigid.AddForce(Vector3.down * force, ForceMode.Impulse);
+            enemy.FallDown(force);
         }
     }
 }
