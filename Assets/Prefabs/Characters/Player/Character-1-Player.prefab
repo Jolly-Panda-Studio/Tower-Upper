@@ -154,6 +154,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4958327559822345976, guid: 2717c503375f0f146ba78ea996399b37, type: 3}
   m_PrefabInstance: {fileID: 8041226638207362976}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7462746515947974606 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 579043983118747758, guid: 2717c503375f0f146ba78ea996399b37, type: 3}
+  m_PrefabInstance: {fileID: 8041226638207362976}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51291ba121d00e4daae0ca3681c80ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8988462125012973378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,6 +679,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7696264505060867274, guid: 3c93dc30280ee4c49ba131013ee68027, type: 3}
   m_PrefabInstance: {fileID: 8988462125012973378}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &273569955435580470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617902104967039880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c58355a91ccacd946b021ca85f98a7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AimIK: {fileID: 3463603579808436528}
 --- !u!114 &3463603579808436528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,21 +772,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9f5380d69248c4fbf88e8add2977e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
+  weapons:
+  - {fileID: 7462746515947974606}
   timeBetweenShooting: 1
---- !u!114 &273569955435580470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617902104967039880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c58355a91ccacd946b021ca85f98a7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AimIK: {fileID: 3463603579808436528}
 --- !u!4 &2018471521665648739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6971118715700838177, guid: 3c93dc30280ee4c49ba131013ee68027, type: 3}
