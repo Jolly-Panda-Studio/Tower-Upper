@@ -19,6 +19,11 @@ namespace Lindon.UserManager
 
         public static UserIntefaceData Data => instance.gameObject.GetOrAddComponent<UserIntefaceData>();
 
+        private void Awake()
+        {
+            Initialization();
+        }
+
         public void Initialization()
         {
             if (instance == null)
@@ -42,11 +47,6 @@ namespace Lindon.UserManager
 
         }
 
-        public UserIntefaceData GetData()
-        {
-            return gameObject.GetOrAddComponent<UserIntefaceData>();
-        }
-
         private void LoadDatas()
         {
             openPagesStack = new Stack<UIPage>();
@@ -62,7 +62,7 @@ namespace Lindon.UserManager
         {
             PagesInitialization(LoadTiming.InStart);
 
-            //Open<EntryPage>();
+            Open<HomePage>();
         }
 
         #region Pages's Function
@@ -163,17 +163,17 @@ namespace Lindon.UserManager
         {
             if (instance.openPagesStack.Count > 0)
             {
-                //if (instance.openPagesStack.Peek() == GetPageOfType<EntryPage>())
-                //{
-                //    Application.Quit();
-                //}
-                //else
+                if (instance.openPagesStack.Peek() == GetPageOfType<HomePage>())
+                {
+                    Application.Quit();
+                }
+                else
                 {
                     if (instance.CloseTopPage())
                     {
                         if (instance.openPagesStack.Count < 1)
                         {
-                            //Open<EntryPage>();
+                            Open<HomePage>();
                         }
                         else
                         {
@@ -202,11 +202,5 @@ namespace Lindon.UserManager
         /// </summary>
         /// <returns>return active page/dialog title</returns>
         public static string GetTitle() => instance.openPagesStack.Count > 0 ? instance.openPagesStack.Peek().Title : string.Empty;
-    }
-
-    public static class UserInterface
-    {
-        public static UserIntefaceData Data => UserInterfaceManager.instance.GetData();
-        //
     }
 }
