@@ -10,10 +10,13 @@ public class SpawnPointCreator : MonoBehaviour
 
 	[SerializeField] private MeshRenderer m_Renderer;
 	[SerializeField] private int m_PointCount = 10;
+
+	[SerializeField] private float radiusOffset = 0;
+
     private void Start()
 	{
 		var collider = m_Renderer.GetComponent<CapsuleCollider>();
-		var radius = m_Renderer.transform.localScale.x / 2;
+		var radius = (m_Renderer.transform.localScale.x / 2) + radiusOffset;
 		var height = m_Renderer.transform.localScale.y * 2;
 
         GameObject pointParent = new GameObject("SpawnPoints");
