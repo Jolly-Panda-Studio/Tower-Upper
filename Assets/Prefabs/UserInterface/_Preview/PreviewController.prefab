@@ -115,6 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4688127656235084809}
+  - component: {fileID: 316880248}
   m_Layer: 0
   m_Name: PreviewController
   m_TagString: Untagged
@@ -139,3 +140,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &316880248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4688127656235084808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff77cfdf029fad43911f14833723f6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 4688127655236878327}
+  roatetTransform: {fileID: 4688127655236878327}
+  rotateSpeed: 0.5
+  cooldown: 3
+  rotateX: 0
+  rotateY: 1

@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Lindon.TowerUpper.Initilizer;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lindon.TowerUpper.Data
 {
-    public class GameData : MonoBehaviour
+    public class GameData : MonoBehaviour, IInitilizer
     {
         public static GameData Instance { get; private set; }
 
         private List<ItemData> m_Items;
         [SerializeField] private List<ItemModel> m_Models;
 
-        private void Awake()
+        public void Init()
         {
             if (Instance == null)
             {

@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using Lindon.TowerUpper.Initilizer;
+using UnityEngine;
 
 namespace Lindon.TowerUpper.Profile
 {
-    public class ProfileController : MonoBehaviour
+    public class ProfileController : MonoBehaviour, IInitilizer
     {
         public static ProfileController Instance { get; private set; }
 
         public Profile Profile { get; private set; }
 
-        private void Awake()
+        public void Init()
         {
             if (Instance == null)
             {

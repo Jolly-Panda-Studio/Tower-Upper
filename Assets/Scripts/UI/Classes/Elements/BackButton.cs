@@ -13,7 +13,10 @@ public class BackButton : UIElement
     public override void DoCreate()
     {
         m_Button.onClick.RemoveAllListeners();
-        m_Button.onClick.AddListener(UserInterfaceManager.OnBackPressed);
+        m_Button.onClick.AddListener(() =>
+        {
+            UserInterfaceManager.OnBackPressed();
+        });
     }
 
     protected override void SetValues()

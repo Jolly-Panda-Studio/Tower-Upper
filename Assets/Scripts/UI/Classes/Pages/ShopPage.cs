@@ -14,7 +14,6 @@ public class ShopPage : UIPage
     [SerializeField] private BuyButton m_BuyButton;
 
     [Header("Preview")]
-    [SerializeField] private PreviewHandler m_PreviewHandler;
     [SerializeField] private PreviewDisplayer m_PreviewDisplayer;
     [SerializeField] private EventTrigger m_PreviewTrigger;
 
@@ -72,6 +71,8 @@ public class ShopPage : UIPage
 
         m_ProfileController.Profile.OnAddItem += Profile_OnAddItem;
         m_ProfileController.Profile.OnActiveItem += OnActiveItem;
+
+        m_PreviewDisplayer ??= FindObjectOfType<PreviewDisplayer>();
 
         m_PreviewDisplayer.Setup(m_PreviewTrigger);
 

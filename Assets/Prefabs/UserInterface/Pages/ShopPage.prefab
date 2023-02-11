@@ -930,7 +930,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Shop
   loadTiming: 0
-  elements: []
+  elements:
+  - {fileID: 0}
+  - {fileID: 0}
   onOpen:
     m_PersistentCalls:
       m_Calls: []
@@ -938,9 +940,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_BuyButton: {fileID: 366134059980586716}
-  m_PreviewHandler: {fileID: 3006855227114831628}
   m_PreviewDisplayer: {fileID: 0}
-  m_PreviewTrigger: {fileID: 5385141955983912309}
+  m_PreviewTrigger: {fileID: 1877121460}
   m_SlotParent: {fileID: 933723538268799116}
   m_SlotPrefab: {fileID: 1084755224213851485, guid: 18d90b9673e55774ca1fcaf0f88da347, type: 3}
   m_TabGroup: {fileID: 3315155538378994972}
@@ -1407,8 +1408,6 @@ GameObject:
   - component: {fileID: 8062031528148888739}
   - component: {fileID: 8062031528148888741}
   - component: {fileID: 1412362562277800829}
-  - component: {fileID: 3006855227114831628}
-  - component: {fileID: 5385141955983912309}
   m_Layer: 5
   m_Name: Preview
   m_TagString: Untagged
@@ -1471,31 +1470,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &3006855227114831628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8062031528148888736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 843f6072ba1c9d5408425b1c6c63f0c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5385141955983912309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8062031528148888736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
 --- !u!1 &8062031528368495365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1856,6 +1830,7 @@ GameObject:
   - component: {fileID: 8062031528723638888}
   - component: {fileID: 8062031528723638890}
   - component: {fileID: 8062031528723638891}
+  - component: {fileID: 1877121460}
   m_Layer: 5
   m_Name: Floor
   m_TagString: Untagged
@@ -1922,6 +1897,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1877121460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062031528723638889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &8482143916735581160
 GameObject:
   m_ObjectHideFlags: 0

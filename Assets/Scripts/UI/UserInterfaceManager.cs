@@ -1,3 +1,4 @@
+using Lindon.TowerUpper.Initilizer;
 using Lindon.UserManager.Base.Element;
 using Lindon.UserManager.Base.Page;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ namespace Lindon.UserManager
 {
     [RequireComponent(typeof(UserInterfaceShortcuts))]
     [RequireComponent(typeof(UserIntefaceData))]
-    public class UserInterfaceManager : MonoBehaviour
+    public class UserInterfaceManager : MonoBehaviour, IInitilizer
     {
         public static UserInterfaceManager instance;
 
@@ -19,12 +20,7 @@ namespace Lindon.UserManager
 
         public static UserIntefaceData Data => instance.gameObject.GetOrAddComponent<UserIntefaceData>();
 
-        private void Awake()
-        {
-            Initialization();
-        }
-
-        public void Initialization()
+        public void Init()
         {
             if (instance == null)
             {
