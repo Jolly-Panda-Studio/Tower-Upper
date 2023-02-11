@@ -11,6 +11,8 @@ public static class EnemyCounter
     /// </summary>
     public static int AliveEnemy { get; private set; }
 
+    public static int TotalEnemy { get; private set; } = 10;
+
     /// <summary>
     /// Increase the number of enemies killed
     /// </summary>
