@@ -5,13 +5,18 @@ using Lindon.UserManager.Page.Shop;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ShopPage : UIPage
 {
     private ProfileController m_ProfileController;
 
     [SerializeField] private BuyButton m_BuyButton;
+
+    [Header("Preview")]
     [SerializeField] private PreviewHandler m_PreviewHandler;
+    [SerializeField] private PreviewDisplayer m_PreviewDisplayer;
+    [SerializeField] private EventTrigger m_PreviewTrigger;
 
     private Dictionary<ItemCategory, List<ShopData>> m_ShopItems;
 
@@ -55,6 +60,8 @@ public class ShopPage : UIPage
 
     protected override void SetValues()
     {
+        m_PreviewDisplayer.Open();
+
         LoadProfile();
         UpdateSlots();
     }
@@ -65,9 +72,17 @@ public class ShopPage : UIPage
 
         m_ProfileController.Profile.OnAddItem += Profile_OnAddItem;
         m_ProfileController.Profile.OnActiveItem += OnActiveItem;
+
+        m_PreviewDisplayer.Setup(m_PreviewTrigger);
+
         LoadItems();
         GenerateSlots();
         GenerateTabs();
+    }
+
+    private void OnDisable()
+    {
+        m_PreviewDisplayer?.Close();
     }
 
     private void OnDestroy()
@@ -347,6 +362,7 @@ public class ShopPage : UIPage
             ItemCategory category = item.Category;
             SetSlotSkin(itemId, category);
             SetActiveItem(itemId, category);
+            DisplayItem(itemId);
         }
     }
 
@@ -378,5 +394,10 @@ public class ShopPage : UIPage
                 slot.SetLockSkin();
                 break;
         }
+    }
+
+    private void DisplayItem(int itemId)
+    {
+        m_PreviewDisplayer.Display(itemId);
     }
 }

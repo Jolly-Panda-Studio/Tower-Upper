@@ -7,13 +7,16 @@ namespace Lindon.TowerUpper.Data
     {
         public static GameData Instance { get; private set; }
 
-        [SerializeField] private List<ItemData> m_Items;
+        private List<ItemData> m_Items;
+        [SerializeField] private List<ItemModel> m_Models;
 
         private void Awake()
         {
             if (Instance == null)
             {
                 Instance = this;
+
+                LoadItems();
 
                 DontDestroyOnLoad(gameObject);
             }
@@ -23,19 +26,30 @@ namespace Lindon.TowerUpper.Data
             }
         }
 
+        #region Item
+
+        #region Data
+
+        private void LoadItems()
+        {
+            m_Items = new List<ItemData>();
+            foreach (var model in m_Models)
+            {
+                m_Items.Add(model.Data);
+            }
+        }
+
         public List<ItemData> GetItems() => m_Items;
 
         public ItemCategory GetItemCategory(int itemId)
         {
-            foreach (var item in m_Items)
+            var item = GetItem(itemId);
+            if (item == null)
             {
-                if (item.Equals(itemId))
-                {
-                    return item.Category;
-                }
+                Debug.LogError($"Item with {itemId} was not found");
+                return ItemCategory.None;
             }
-            Debug.LogError($"Item with {itemId} was not found");
-            return ItemCategory.None;
+            return item.Category;
         }
 
         public ItemData GetItem(int itemId)
@@ -50,5 +64,25 @@ namespace Lindon.TowerUpper.Data
             Debug.LogError($"Item with {itemId} was not found");
             return null;
         }
+        #endregion
+
+        #region Model
+
+        public ItemModel GetModel(int itemId)
+        {
+            foreach (var model in m_Models)
+            {
+                if (model.Equals(itemId))
+                {
+                    return model;
+                }
+            }
+            Debug.LogError($"Model with {itemId} was not found");
+            return null;
+        }
+
+        #endregion
+
+        #endregion
     }
 }

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b238f39c75837242b4afe24bb65fe5b, type: 3}
-  m_Name: ItemData-Skin 3
+  m_Name: ItemData-Skin-Character-6
   m_EditorClassIdentifier: 
   m_Id: 103
-  m_Icon: {fileID: 21300000, guid: c28d54c4733dc4fc7bedc4189f66bfbc, type: 3}
+  m_Icon: {fileID: 21300000, guid: 793419d20ed1c4c928ffd26adec2578e, type: 3}
   m_Cost: 100
   m_Category: 1
