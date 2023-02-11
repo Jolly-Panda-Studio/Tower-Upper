@@ -62,7 +62,8 @@ public class ShopPage : UIPage
         m_PreviewDisplayer.Open();
 
         LoadProfile();
-        UpdateSlots();
+
+        SortSlots(ItemCategory.Skin);
     }
 
     protected override void SetValuesOnSceneLoad()
@@ -222,6 +223,10 @@ public class ShopPage : UIPage
             {
                 slot.gameObject.SetActive(value);
             }
+            if (value)
+            {
+                slots[0].SelectSlot();
+            }
         }
 
         SortSlots(selectedTagCategory);
@@ -250,31 +255,17 @@ public class ShopPage : UIPage
         }
     }
 
-    /// <summary>
-    /// Update slots based data taken from the profile
-    /// </summary>
-    private void UpdateSlots()
-    {
-        //foreach (var data in m_ShopItems)
-        //{
-        //    var category = data.Key;
-        //    var shopItems = data.Value;
-        //    foreach (var shopItem in shopItems)
-        //    {
-        //        ItemData item = shopItem.Item;
-        //        int itemId = item.Id;
-        //        SetSlotSkin(itemId, category);
-        //    }
-        //}
-    }
-
     private void SortSlots(ItemCategory category)
     {
         if (!m_ShopItems.ContainsKey(category)) return;
-        foreach(var items in m_ShopItems[category])
+
+        int index = -1;
+
+        foreach (var items in m_ShopItems[category])
         {
             var itemState = items.State;
-            var slot = GetSlot(items.Id, category);
+            var itemId = items.Id;
+            var slot = GetSlot(itemId, category);
 
             switch (itemState)
             {
@@ -283,12 +274,25 @@ public class ShopPage : UIPage
                     break;
                 case ShopData.ItemState.Unlock:
                     slot.transform.SetSiblingIndex(1);
+                    if (index == -1)
+                    {
+                        index = m_ShopSlots[category].IndexOf(slot);
+                    }
                     break;
                 case ShopData.ItemState.Active:
                     slot.transform.SetAsFirstSibling();
+                    index = m_ShopSlots[category].IndexOf(slot);
                     break;
             }
         }
+
+        if (index == -1)
+        {
+            index = 0;
+        }
+        ShopSlot selectedSlot = m_ShopSlots[category][index];
+        Debug.Log($"Item id: {selectedSlot.Id} - {index}");
+        selectedSlot.SelectSlot();
     }
 
     private void Profile_OnAddItem(int itemId)

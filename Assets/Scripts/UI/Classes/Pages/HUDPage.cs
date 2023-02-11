@@ -1,3 +1,4 @@
+using Lindon.UserManager;
 using Lindon.UserManager.Base.Page;
 using TMPro;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class HUDPage : UIPage
         EnemyCounter.OnKillEnemy += DisplayEnemyCount;
 
         m_PauseButton.onClick.RemoveAllListeners();
-        m_PauseButton.onClick.AddListener(() => { /*PAUSE PAGE*/ });
+        m_PauseButton.onClick.AddListener(() => { /*PAUSE PAGE*/UserInterfaceManager.OnBackPressed(); });
     }
 
     private void OnDestroy()

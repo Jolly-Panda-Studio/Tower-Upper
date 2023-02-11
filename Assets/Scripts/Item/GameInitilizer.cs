@@ -1,9 +1,7 @@
 using Lindon.TowerUpper.Data;
 using Lindon.TowerUpper.Profile;
 using Lindon.UserManager;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 namespace Lindon.TowerUpper.Initilizer
@@ -28,6 +26,11 @@ namespace Lindon.TowerUpper.Initilizer
 
             foreach (var initilizer in _initilizers)
             {
+                if (initilizer == null)
+                {
+                    Debug.LogError("A controller was not found");
+                    continue;
+                }
                 initilizer.Init();
             }
         }

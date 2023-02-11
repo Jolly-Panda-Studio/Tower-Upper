@@ -108,7 +108,13 @@ namespace Lindon.UserManager.Page.Shop
 
         public void SelectSlot()
         {
+            if (m_Toggle.isOn) return;
             m_Toggle.isOn = true;
+        }
+
+        public void SetIsOn(bool value)
+        {
+            m_Toggle.isOn = value;
         }
     }
 }
