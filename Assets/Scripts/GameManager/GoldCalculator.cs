@@ -1,6 +1,25 @@
-public static class GoldCalculator
-{
-    private const int GoldPerKill = 10;
+using Lindon.TowerUpper.Profile;
+using System;
 
-    public static int GoldAmount => EnemyCounter.KilledEnemy * GoldPerKill;
+namespace Lindon.TowerUpper.GameController
+{
+    public static class GoldCalculator
+    {
+        private static int m_Gold;
+
+        public static int GoldAmount
+        {
+            get
+            {
+                return m_Gold;
+            }
+            set
+            {
+                m_Gold = value;
+                GoldChanged?.Invoke();
+            }
+        }
+
+        public static event Action GoldChanged;
+    }
 }

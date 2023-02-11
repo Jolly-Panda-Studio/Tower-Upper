@@ -1,6 +1,4 @@
 using Lindon.UserManager.Base.Page;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +10,7 @@ public class HUDPage : UIPage
 
     protected override void SetValues()
     {
-        m_EnemyScoreText.SetText($"{0}/{EnemyCounter.TotalEnemy}");
+        DisplayEnemyCount();
         Time.timeScale = 1;
     }
 
@@ -29,8 +27,8 @@ public class HUDPage : UIPage
         EnemyCounter.OnKillEnemy -= DisplayEnemyCount;
     }
 
-    private void DisplayEnemyCount(int killedEnemy)
+    private void DisplayEnemyCount()
     {
-        m_EnemyScoreText.SetText($"{killedEnemy}/{EnemyCounter.TotalEnemy}");
+        m_EnemyScoreText.SetText($"{EnemyCounter.KilledEnemy}/{EnemyCounter.TotalEnemy}");
     }
 }

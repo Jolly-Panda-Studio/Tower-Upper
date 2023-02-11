@@ -20,7 +20,7 @@ public class HomePage : UIPage
     protected override void SetValuesOnSceneLoad()
     {
         m_ShopButton.onClick.RemoveAllListeners();
-        m_ShopButton.onClick.AddListener(() => { /*SHOP PAGE*/ });
+        m_ShopButton.onClick.AddListener(() => { UserInterfaceManager.Open<ShopPage>(); });
 
         m_SettingButton.onClick.RemoveAllListeners();
         m_SettingButton.onClick.AddListener(() => { /*SETTING PAGE*/ });

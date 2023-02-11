@@ -20,7 +20,7 @@ public static class EnemyCounter
     {
         KilledEnemy++;
 
-        OnKillEnemy?.Invoke(KilledEnemy);
+        OnKillEnemy?.Invoke();
     }
 
     /// <summary>
@@ -28,5 +28,5 @@ public static class EnemyCounter
     /// </summary>
     public static void SpawnEnemy() => AliveEnemy++;
 
-    public static event Action<int> OnKillEnemy;
+    public static event Action OnKillEnemy;
 }
