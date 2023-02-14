@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PreviewDisplayer : MonoBehaviour
 {
-    List<SubModel> objects;
+    List<ItemModel> objects;
     [SerializeField] protected Transform parent;
     private GameObject storedObject = null;
     public virtual GameObject ActiveObject
@@ -65,7 +65,7 @@ public class PreviewDisplayer : MonoBehaviour
 
     public void Setup(EventTrigger trigger = null)
     {
-        objects = new List<SubModel>();
+        objects = new List<ItemModel>();
 
         if (trigger != null)
         {

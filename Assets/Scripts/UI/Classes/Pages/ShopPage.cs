@@ -250,7 +250,7 @@ public class ShopPage : UIPage
             var category = (ItemCategory)key;
             var id = m_ProfileController.Profile.GetActiveItem(category);
             if (id == -1) continue;
-            ShopData shopData = GetData(id);
+            ShopData shopData = GetData(id, category);
             shopData.ChangeState(ShopData.ItemState.Active);
         }
     }

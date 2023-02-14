@@ -52,7 +52,7 @@ namespace Lindon.TowerUpper.GameController.Level
 
         private Player InstantiateModel(int skinId)
         {
-            var skin = GameData.Instance.GetModel(skinId);
+            var skin = GameData.Instance.GetSubModel(skinId);
             var model = Instantiate(skin, m_CharacterParent);
             var playerObject = model.GetOrAddComponent<Player>();
             return playerObject;
@@ -60,7 +60,7 @@ namespace Lindon.TowerUpper.GameController.Level
 
         private Weapon InstantiateWeapon(int weaponId)
         {
-            var skin = GameData.Instance.GetModel(weaponId);
+            var skin = GameData.Instance.GetSubModel(weaponId);
             var model = Instantiate(skin);
             var weaponObject = model.AddComponent<Weapon>();
             return weaponObject;

@@ -98,7 +98,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &586653610391725630
 RectTransform:
   m_ObjectHideFlags: 0
@@ -669,6 +669,8 @@ MonoBehaviour:
       m_Calls: []
   m_EnemyScoreText: {fileID: 3366050894220179394}
   m_PauseButton: {fileID: 3663647645245918227}
+  trigger: {fileID: 2436163009764106303}
+  rotateSpeed: 1
 --- !u!1 &6985858046861432276
 GameObject:
   m_ObjectHideFlags: 0

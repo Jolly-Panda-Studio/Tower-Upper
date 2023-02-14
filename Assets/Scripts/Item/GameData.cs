@@ -70,7 +70,7 @@ namespace Lindon.TowerUpper.Data
 
         #region Model
 
-        public SubModel GetModel(int itemId)
+        public SubModel GetSubModel(int itemId)
         {
             foreach (var model in m_Models)
             {
@@ -79,10 +79,25 @@ namespace Lindon.TowerUpper.Data
                     return model.GetSubModel();
                 }
             }
+            Debug.LogError($"SubModel with {itemId} was not found");
+            return null;
+
+        }
+
+        public ItemModel GetModel(int itemId)
+        {
+            foreach (var model in m_Models)
+            {
+                if (model.Equals(itemId))
+                {
+                    return model;
+                }
+            }
             Debug.LogError($"Model with {itemId} was not found");
             return null;
 
         }
+
         #endregion
 
         #endregion
