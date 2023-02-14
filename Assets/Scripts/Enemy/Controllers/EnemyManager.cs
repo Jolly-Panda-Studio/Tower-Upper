@@ -12,7 +12,20 @@ public class EnemyManager : MonoBehaviour
     private void Start()
     {
         m_EnemyGenerator = new EnemyGenerator(this);
+    }
 
+    private void OnEnable()
+    {
+        GameStarter.OnStartGame += StartGame;
+    }
+
+    private void OnDisable()
+    {
+        GameStarter.OnStartGame += StartGame;
+    }
+
+    private void StartGame()
+    {
         m_EnemyGenerator.StartSpawn();
     }
 

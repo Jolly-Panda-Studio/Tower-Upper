@@ -1,6 +1,7 @@
 using Lindon.TowerUpper.Initilizer;
 using Lindon.UserManager.Base.Element;
 using Lindon.UserManager.Base.Page;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,6 +53,21 @@ namespace Lindon.UserManager
 
             allPages = new List<UIPage>(GetComponentsInChildren<UIPage>(true));
             PagesInitialization(LoadTiming.InAwake);
+        }
+
+        private void OnEnable()
+        {
+            GameStarter.OnStartGame += StartGame;
+        }
+
+        private void OnDisable()
+        {
+            GameStarter.OnStartGame += StartGame;
+        }
+
+        private void StartGame()
+        {
+            Open<HUDPage>();
         }
 
         private void Start()

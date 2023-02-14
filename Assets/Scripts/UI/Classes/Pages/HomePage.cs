@@ -33,6 +33,7 @@ public class HomePage : UIPage
 
     private void OnPointerDownDelegate(PointerEventData data)
     {
-        UserInterfaceManager.Open<HUDPage>();
+        //UserInterfaceManager.Open<HUDPage>();
+        GameStarter.StartGame();
     }
 }

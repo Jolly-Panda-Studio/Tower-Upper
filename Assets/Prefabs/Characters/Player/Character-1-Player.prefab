@@ -775,6 +775,19 @@ MonoBehaviour:
   weapons:
   - {fileID: 7462746515947974606}
   timeBetweenShooting: 1
+--- !u!114 &7299763485925765767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617902104967039880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e98f812bb2ea7f4eb090908c3509a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Mode: 0
 --- !u!4 &2018471521665648739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6971118715700838177, guid: 3c93dc30280ee4c49ba131013ee68027, type: 3}

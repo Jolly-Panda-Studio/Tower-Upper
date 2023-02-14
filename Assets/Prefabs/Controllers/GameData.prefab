@@ -54,3 +54,5 @@ MonoBehaviour:
   - {fileID: -1583645929124585429, guid: 8fc1c74913c744d499b2e7d8d5eb76e1, type: 3}
   - {fileID: 8853686716218284318, guid: 4abdf363e00dddf40910554f46b4dd60, type: 3}
   - {fileID: 6717844192619609073, guid: 1aab7ebaa651b7746baa11d4f52b88db, type: 3}
+  m_Chapters:
+  - {fileID: 11400000, guid: 3f9270b55e3f0ff4c9f68411dc55453a, type: 2}

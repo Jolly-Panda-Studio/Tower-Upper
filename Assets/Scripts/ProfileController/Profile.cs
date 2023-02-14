@@ -13,7 +13,7 @@ namespace Lindon.TowerUpper.Profile
         public int GoldAmount { get => GoldCalculator.GoldAmount; private set => GoldCalculator.GoldAmount = value; }
         private readonly List<int> m_ItemsId;
 
-        public Dictionary<ItemCategory, int> ActiveItemsId;
+        private Dictionary<ItemCategory, int> m_ActiveItemsId;
 
         public event Action<int> OnAddItem;
         public event Action<int,ItemCategory> OnActiveItem;
@@ -25,29 +25,30 @@ namespace Lindon.TowerUpper.Profile
             GoldAmount = goldAmount;
 
             m_ItemsId = new List<int>();
-            ActiveItemsId = new Dictionary<ItemCategory, int>();
+            m_ActiveItemsId = new Dictionary<ItemCategory, int>();
             foreach (var key in System.Enum.GetValues(typeof(ItemCategory)))
             {
-                ActiveItemsId.Add((ItemCategory)key, -1);
+                m_ActiveItemsId.Add((ItemCategory)key, -1);
             }
 
-            ActiveItemsId[ItemCategory.Skin] = 102;
+            m_ActiveItemsId[ItemCategory.Skin] = 102;
+            m_ActiveItemsId[ItemCategory.Weapon] = 201;
         }
 
         public void SetActiveItem(int itemId, ItemCategory category)
         {
-            if (!ActiveItemsId.ContainsKey(category))
+            if (!m_ActiveItemsId.ContainsKey(category))
             {
                 Debug.LogWarning($"The {category} doesn't add to active item list!");
                 return;
             }
-            ActiveItemsId[category] = itemId;
+            m_ActiveItemsId[category] = itemId;
             OnActiveItem?.Invoke(itemId,category);
         }
 
         public int GetActiveItem(ItemCategory category)
         {
-            var itemId = ActiveItemsId[category];
+            var itemId = m_ActiveItemsId[category];
             if (itemId == -1)
             {
                 Debug.LogWarning($"There are no active items in {category}!");

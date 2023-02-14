@@ -79,3 +79,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Data: {fileID: 11400000, guid: e426770a491f93140a0072446a845d4f, type: 2}
+  m_SubModel: {fileID: 8189276046866111944, guid: 2895f4ebfa2c45849bbdd652c988ddb6, type: 3}

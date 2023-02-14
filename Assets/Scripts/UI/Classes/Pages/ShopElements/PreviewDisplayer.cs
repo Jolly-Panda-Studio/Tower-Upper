@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PreviewDisplayer : MonoBehaviour
 {
-    List<ItemModel> objects;
+    List<SubModel> objects;
     [SerializeField] protected Transform parent;
     private GameObject storedObject = null;
     public virtual GameObject ActiveObject
@@ -65,7 +65,7 @@ public class PreviewDisplayer : MonoBehaviour
 
     public void Setup(EventTrigger trigger = null)
     {
-        objects = new List<ItemModel>();
+        objects = new List<SubModel>();
 
         if (trigger != null)
         {
@@ -143,7 +143,7 @@ public class PreviewDisplayer : MonoBehaviour
         var obj = objects.Find(x => x.Equals(itemId));
         if (obj == null)
         {
-            ItemModel prefab = GameData.Instance.GetModel(itemId);
+            var prefab = GameData.Instance.GetModel(itemId);
             obj = Instantiate(prefab, parent);
             obj.transform.localPosition = Vector3.zero;
             objects.Add(obj);
