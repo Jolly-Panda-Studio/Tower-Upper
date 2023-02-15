@@ -30,9 +30,6 @@ namespace Lindon.TowerUpper.Profile
             {
                 m_ActiveItemsId.Add((ItemCategory)key, -1);
             }
-
-            m_ActiveItemsId[ItemCategory.Skin] = 102;
-            m_ActiveItemsId[ItemCategory.Weapon] = 201;
         }
 
         public void SetActiveItem(int itemId, ItemCategory category)

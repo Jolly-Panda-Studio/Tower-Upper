@@ -1,4 +1,5 @@
-﻿using Lindon.TowerUpper.Initilizer;
+﻿using Lindon.TowerUpper.Data;
+using Lindon.TowerUpper.Initilizer;
 using UnityEngine;
 
 namespace Lindon.TowerUpper.Profile
@@ -15,7 +16,7 @@ namespace Lindon.TowerUpper.Profile
             {
                 Instance = this;
 
-                LoadProfile(new Profile(SystemInfo.deviceUniqueIdentifier, 0, 1000));
+                LoadProfile(CreateSampleProfile());
 
                 DontDestroyOnLoad(gameObject);
             }
@@ -23,6 +24,31 @@ namespace Lindon.TowerUpper.Profile
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void OnEnable()
+        {
+            Profile.OnAddItem += Profile_OnAddItem;
+        }
+
+        private void Profile_OnAddItem(int itemId)
+        {
+            var category = GameData.Instance.GetItemCategory(itemId);
+            Profile.SetActiveItem(itemId, category);
+        }
+
+        private void OnDisable()
+        {
+            Profile.OnAddItem -= Profile_OnAddItem;
+        }
+
+        private Profile CreateSampleProfile()
+        {
+            Debug.Log("Sample Profile Created!");
+            var sampleProfile = new Profile(SystemInfo.deviceUniqueIdentifier, 0, 1000);
+            sampleProfile.SetActiveItem(200, Data.ItemCategory.Weapon);
+            sampleProfile.SetActiveItem(100, Data.ItemCategory.Skin);
+            return sampleProfile;
         }
 
         public void LoadProfile(Profile profile)

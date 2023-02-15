@@ -248,6 +248,7 @@ public class ShopPage : UIPage
         foreach (var key in System.Enum.GetValues(typeof(ItemCategory)))
         {
             var category = (ItemCategory)key;
+            if (category == ItemCategory.None) continue;
             var id = m_ProfileController.Profile.GetActiveItem(category);
             if (id == -1) continue;
             ShopData shopData = GetData(id, category);
@@ -291,7 +292,6 @@ public class ShopPage : UIPage
             index = 0;
         }
         ShopSlot selectedSlot = m_ShopSlots[category][index];
-        Debug.Log($"Item id: {selectedSlot.Id} - {index}");
         selectedSlot.SelectSlot();
     }
 
