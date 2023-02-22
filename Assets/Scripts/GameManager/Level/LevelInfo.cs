@@ -60,11 +60,10 @@ namespace Lindon.TowerUpper.GameController.Level
 
         private Weapon InstantiateWeapon(int weaponId)
         {
-            return null;
-            //var skin = GameData.Instance.GetSubModel(weaponId, CharacterModelType.Weapon);
-            //var model = Instantiate(skin);
-            //var weaponObject = model.AddComponent<Weapon>();
-            //return weaponObject;
+            var skin = GameData.Instance.GetGameModel(weaponId);
+            var model = Instantiate(skin);
+            var weaponObject = model.AddComponent<Weapon>();
+            return weaponObject;
         }
 
         private void SetAimTarget(Player playerObject)

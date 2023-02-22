@@ -51,18 +51,17 @@ namespace Lindon.TowerUpper.Data
 
         public List<ItemData> GetItems() => m_Items;
 
-        public ItemCategory GetItemCategory(int itemId)
+        public ItemCategory GetItemByCategory(int itemId)
         {
-            var item = GetItem(itemId);
+            var item = GetItemById(itemId);
             if (item == null)
             {
-                Debug.LogError($"Item with {itemId} was not found");
                 return ItemCategory.None;
             }
             return item.Category;
         }
 
-        public ItemData GetItem(int itemId)
+        public ItemData GetItemById(int itemId)
         {
             foreach (var item in m_Items)
             {
@@ -74,6 +73,7 @@ namespace Lindon.TowerUpper.Data
             Debug.LogError($"Item with {itemId} was not found");
             return null;
         }
+
         #endregion
 
         #region Model
@@ -82,16 +82,15 @@ namespace Lindon.TowerUpper.Data
 
         public GameModel GetGameModel(int itemId)
         {
-            foreach (var model in m_ShopModels)
+            foreach (var model in m_Models)
             {
                 if (model.Equals(itemId))
                 {
-                    return model.GetGameModel();
+                    return model;
                 }
             }
             Debug.LogError($"Game Model with {itemId} was not found");
             return null;
-
         }
 
         public ShopModel GetPreviewModel(int itemId)
@@ -105,7 +104,6 @@ namespace Lindon.TowerUpper.Data
             }
             Debug.LogError($"Model with {itemId} was not found");
             return null;
-
         }
 
         #endregion

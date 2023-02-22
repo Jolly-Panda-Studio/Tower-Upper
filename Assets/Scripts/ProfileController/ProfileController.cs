@@ -33,7 +33,7 @@ namespace Lindon.TowerUpper.Profile
 
         private void Profile_OnAddItem(int itemId)
         {
-            var category = GameData.Instance.GetItemCategory(itemId);
+            var category = GameData.Instance.GetItemByCategory(itemId);
             Profile.SetActiveItem(itemId, category);
         }
 

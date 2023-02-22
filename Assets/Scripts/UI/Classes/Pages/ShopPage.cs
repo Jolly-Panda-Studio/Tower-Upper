@@ -297,7 +297,7 @@ public class ShopPage : UIPage
 
     private void Profile_OnAddItem(int itemId)
     {
-        ItemCategory category = GameData.Instance.GetItemCategory(itemId);
+        ItemCategory category = GameData.Instance.GetItemByCategory(itemId);
 
         OnActiveItem(itemId, category);
     }
