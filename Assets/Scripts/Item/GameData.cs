@@ -12,7 +12,7 @@ namespace Lindon.TowerUpper.Data
         private List<ItemData> m_Items;
         private List<ShopModel> m_ShopModels;
         [SerializeField] private List<GameModel> m_Models;
-        [SerializeField] private List<ChapterData> m_Chapters;
+        [SerializeField,AssetPopup(typeof(ChapterData))] private List<ChapterData> m_Chapters;
 
         public void Init()
         {
