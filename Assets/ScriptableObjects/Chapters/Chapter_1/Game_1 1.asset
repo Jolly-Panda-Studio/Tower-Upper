@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f7338f9ec888044ab9505b8e6779ff, type: 3}
   m_Name: Game_1 1
   m_EditorClassIdentifier: 
-  m_Id: 1010
   m_Level: 1
   m_SpawnPointCount: 10
   m_MaxEnemyCount: 2
-  m_EnemiesId: 8a130000
-  m_BossEnemyId: 0
+  m_Enemies:
+  - {fileID: 11400000, guid: 56d4111c077251040932cf6a2f391349, type: 2}
+  m_BossEnemy: {fileID: 0}

@@ -4,7 +4,7 @@ namespace Lindon.TowerUpper.Data
 {
     public abstract class GameModel : MonoBehaviour
     {
-        [SerializeField] private GameModelData m_Data;
+        [SerializeField, AssetPopup(typeof(GameModelData))] private GameModelData m_Data;
 
         public int Id => m_Data.Id;
 

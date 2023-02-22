@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Level: 8
   m_SpawnPointCount: 10
-  m_MaxEnemyCount: 10
-  m_EnemiesId: 8a130000
-  m_BossEnemyId: 0
+  m_MaxEnemyCount: 20
+  m_Enemies:
+  - {fileID: 11400000, guid: 56d4111c077251040932cf6a2f391349, type: 2}
+  - {fileID: 11400000, guid: a7a537e98f168544bbc6704203ed8cfe, type: 2}
+  - {fileID: 11400000, guid: 907090f46cb1f9f44a0d1afd2f186ec8, type: 2}
+  m_BossEnemy: {fileID: 0}
