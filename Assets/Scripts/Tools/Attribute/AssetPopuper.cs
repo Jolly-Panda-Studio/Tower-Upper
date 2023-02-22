@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+#if UNITY_EDITOR
 
 /// <summary>
 /// Utility to show asset object fields as a popup.
@@ -340,3 +341,4 @@ public static class AssetPopuper
     }
 }
 
+#endif

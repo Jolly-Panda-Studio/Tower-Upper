@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Lindon.TowerUpper.GameController.Events;
 using Lindon.TowerUpper.GameController.Level;
 using Lindon.TowerUpper.Profile;
 using UnityEngine;
@@ -19,14 +20,16 @@ namespace Lindon.UserManager.Page.Home
         private void OnEnable()
         {
             ProfileController.Instance.OnLoadProfile += Load;
+            ReturnHome.OnReturnHome += Load;
         }
 
         private void OnDisable()
         {
             ProfileController.Instance.OnLoadProfile -= Load;
+            ReturnHome.OnReturnHome -= Load;
         }
 
-        public void Load()
+        private void Load()
         {
             Load(ProfileController.Instance.Profile);
         }

@@ -20,7 +20,7 @@ public class HomePage : UIPage
 
     protected override void SetValues()
     {
-        m_StageInfo.Load();
+        ReturnHome.Return();
     }
 
     protected override void SetValuesOnSceneLoad()

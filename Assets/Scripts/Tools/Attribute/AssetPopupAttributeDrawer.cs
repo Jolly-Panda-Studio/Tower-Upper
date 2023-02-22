@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
-
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(AssetPopupAttribute))]
 public class AssetPopupAttributeDrawer : PropertyDrawer
 {
@@ -16,3 +16,4 @@ public class AssetPopupAttributeDrawer : PropertyDrawer
         return AssetPopuper.GetAssetPopupHeight(property, label, typePopup.ChosenType);
     }
 }
+#endif
