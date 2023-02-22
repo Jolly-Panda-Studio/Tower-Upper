@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     public event Action<Enemy> OnDie;
     public event Action<Enemy> OnFinishClimb;
 
+    private Transform m_lookAtTarget;
+
     private void OnEnable()
     {
         GameRunnig.OnChange += OnChangeRunnig;
@@ -55,6 +57,7 @@ public class Enemy : MonoBehaviour
 
     public Enemy SetLookAt(Transform lookAtTarget)
     {
+        m_lookAtTarget = lookAtTarget;
         transform.LookAt(lookAtTarget);
         return this;
     }
@@ -78,8 +81,6 @@ public class Enemy : MonoBehaviour
         {
             m_DoClimbing.Kill();
 
-            //fall animation
-
             OnDie?.Invoke(this);
         }
     }
@@ -87,6 +88,7 @@ public class Enemy : MonoBehaviour
     public void FallDown(float force)
     {
         var rigidbody = gameObject.GetOrAddComponent<Rigidbody>();
-        rigidbody.AddForce(Vector3.down * force, ForceMode.Impulse);
+        var forceVector = -(transform.forward / 4) + Vector3.down;
+        rigidbody.AddForce(forceVector * force, ForceMode.Impulse);
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6065260544451553096}
   - component: {fileID: 1982932137631947292}
   - component: {fileID: 2984048819629533987}
+  - component: {fileID: 1895594800166475653}
   m_Layer: 0
   m_Name: Enemy_Base
   m_TagString: Untagged
@@ -75,6 +76,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Speed: 1
+--- !u!114 &1895594800166475653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8556589643321952412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777d66cb696f8ba4fac02644ec62ddd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animator: {fileID: 6420664996765988176}
+  m_enemy: {fileID: 2984048819629533987}
+  m_fallParameter: Fall
+  m_victoryParameter: Victory
 --- !u!1001 &1959772140695406909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236,6 +253,11 @@ PrefabInstance:
 --- !u!4 &3664255380600767888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 87264198265273594, guid: 3c93dc30280ee4c49ba131013ee68027, type: 3}
+  m_PrefabInstance: {fileID: 3741376976987896170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6420664996765988176 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7707561402461146170, guid: 3c93dc30280ee4c49ba131013ee68027, type: 3}
   m_PrefabInstance: {fileID: 3741376976987896170}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7005280023089777318 stripped

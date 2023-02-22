@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2984048819629533987, guid: da8e0cb17375efe43b1d3e235b56393b, type: 3}
       propertyPath: m_Speed
-      value: 0.1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3187099735440860821, guid: da8e0cb17375efe43b1d3e235b56393b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

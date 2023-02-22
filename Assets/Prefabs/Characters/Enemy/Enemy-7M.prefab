@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 3927074713340564901, guid: 7034a260c15bef845bbe4d46150ce991, type: 3}
     - target: {fileID: 2984048819629533987, guid: da8e0cb17375efe43b1d3e235b56393b, type: 3}
       propertyPath: m_Speed
-      value: 0.1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5378060139319038366, guid: da8e0cb17375efe43b1d3e235b56393b, type: 3}
       propertyPath: m_Mesh
