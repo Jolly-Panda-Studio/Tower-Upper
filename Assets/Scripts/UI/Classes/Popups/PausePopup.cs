@@ -53,5 +53,7 @@ public class PausePopup : UIPopup
     private void OnGiveUp()
     {
         GameFinisher.FinishGame();
+        UserInterfaceManager.OnBackPressed();
+        UserInterfaceManager.Open<HomePage>();
     }
 }
