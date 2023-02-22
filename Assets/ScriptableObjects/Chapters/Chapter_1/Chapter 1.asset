@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cba09e35469bb44a9304004ac49220, type: 3}
   m_Name: Chapter 1
   m_EditorClassIdentifier: 
-  m_Id: 2001
   m_Level: 1
   m_Level1: {fileID: 11400000, guid: fce39e09494526e458da3ca1d7cc9127, type: 2}
   m_Level2: {fileID: 11400000, guid: dc05625e6c35be340a8ea343bad93715, type: 2}
