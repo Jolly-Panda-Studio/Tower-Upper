@@ -25,6 +25,7 @@ namespace Lindon.TowerUpper.Manager.Enemies
         {
             GameStarter.OnStartGame += StartGame;
             GameFinisher.OnFinishGame += FinishGame;
+            GameRestarter.OnRestartGame += FinishGame;
             GameRunnig.OnChange += OnChangeRunnig;
         }
 
@@ -32,6 +33,7 @@ namespace Lindon.TowerUpper.Manager.Enemies
         {
             GameStarter.OnStartGame -= StartGame;
             GameFinisher.OnFinishGame -= FinishGame;
+            GameRestarter.OnRestartGame -= FinishGame;
             GameRunnig.OnChange -= OnChangeRunnig;
         }
 

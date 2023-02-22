@@ -1,7 +1,9 @@
 using Lindon.TowerUpper.GameController;
+using Lindon.TowerUpper.GameController.Events;
 using Lindon.TowerUpper.Manager.Enemies;
 using Lindon.UserManager;
 using Lindon.UserManager.Base.Page;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -43,14 +45,25 @@ public class HUDPage : UIPage
         trigger.triggers.Add(dragEntry);
     }
 
+    private void OnEnable()
+    {
+        GameRestarter.OnRestartGame += RestartGame;
+    }
+
     private void OnDisable()
     {
+        GameRestarter.OnRestartGame -= RestartGame;
         m_ActiveDrag = false;
     }
 
     private void OnDestroy()
     {
         EnemyCounter.OnKillEnemy -= DisplayEnemyCount;
+    }
+
+    private void RestartGame()
+    {
+        DisplayEnemyCount(0, EnemyCounter.TotalEnemy);
     }
 
     private void DisplayEnemyCount(int killedCount, int totalCount)

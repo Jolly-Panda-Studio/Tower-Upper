@@ -16,12 +16,14 @@ public class Enemy : MonoBehaviour
     {
         GameRunnig.OnChange += OnChangeRunnig;
         GameFinisher.OnFinishGame += GameFinished;
+        GameRestarter.OnRestartGame += GameFinished;
     }
 
     private void OnDisable()
     {
         GameRunnig.OnChange -= OnChangeRunnig;
         GameFinisher.OnFinishGame -= GameFinished;
+        GameRestarter.OnRestartGame -= GameFinished;
     }
 
     private void OnChangeRunnig(bool state)
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour
 
     private void GameFinished()
     {
+        m_DoClimbing.Kill();
         Destroy(gameObject);
     }
 

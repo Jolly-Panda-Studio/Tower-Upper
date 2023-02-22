@@ -28,11 +28,13 @@ namespace Lindon.TowerUpper.GameController.Level
 
         private void OnEnable()
         {
+            GameRestarter.OnRestartGame += StartGame;
             GameStarter.OnStartGame += StartGame;
         }
 
         private void OnDisable()
         {
+            GameRestarter.OnRestartGame -= StartGame;
             GameStarter.OnStartGame -= StartGame;
         }
 

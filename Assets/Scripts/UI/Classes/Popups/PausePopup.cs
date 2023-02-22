@@ -46,8 +46,9 @@ public class PausePopup : UIPopup
 
     private void OnRestart()
     {
-        Debug.Log("Not yet!!");
-        //GameRunnig.IsRunning = true;
+        GameRunnig.IsRunning = true;
+        GameRestarter.RestartGame();
+        UserInterfaceManager.OnBackPressed();
     }
 
     private void OnGiveUp()
