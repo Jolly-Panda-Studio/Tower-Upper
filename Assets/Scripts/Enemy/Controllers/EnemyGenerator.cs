@@ -1,57 +1,76 @@
+using Lindon.TowerUpper.GameController;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class EnemyGenerator
+namespace Lindon.TowerUpper.Manager.Enemies
 {
-    private EnemyManager m_EnemyManager;
-
-    List<Point> m_Points = new List<Point>();
-    Transform lastPoint;
-
-    public EnemyGenerator(EnemyManager enemyManager)
+    public class EnemyGenerator
     {
-        m_EnemyManager = enemyManager;
+        private List<Enemy> m_Prefabs;
 
-        m_Points = Tower.Instance.Components.SpawnPointCreator.Points;
-    }
+        private EnemyManager m_EnemyManager;
 
-    public void StartSpawn()
-    {
-        m_EnemyManager.StartCoroutine(SpawnEnemy());
-    }
+        List<Point> m_Points = new List<Point>();
+        Transform lastPoint;
 
-    private IEnumerator SpawnEnemy()
-    {
-        yield return new WaitForSeconds(2);
-
-        Spawn();
-        m_EnemyManager.StartCoroutine(SpawnEnemy());
-    }
-
-    private void Spawn()
-    {
-        var prefab = m_EnemyManager.GetEenemyPrefabs();
-        var point = GetPoint();
-
-        var enemyIns = Object.Instantiate(prefab, point.StartPoint);
-        enemyIns.transform.localPosition = Vector3.zero;
-
-        m_EnemyManager.AddEnemy(enemyIns, point.FinishPoint, point.CenterPoint);
-    }
-
-    private Point GetPoint()
-    {
-        var point = m_Points.RandomItem();
-        if(lastPoint != null)
+        public EnemyGenerator(EnemyManager enemyManager)
         {
-            if(lastPoint == point.StartPoint)
-            {
-                return GetPoint();
-            }
+            m_EnemyManager = enemyManager;
+
+            m_Points = GameManager.Instance.Tower.Components.SpawnPointCreator.Points;
+
+            m_Prefabs = new List<Enemy>();
         }
-        lastPoint = point.StartPoint; 
-        return point;
+
+        public void AddPrefab(Enemy newPrefab)
+        {
+            m_Prefabs.Add(newPrefab);
+        }
+
+        public void StartSpawn()
+        {
+            m_EnemyManager.StartCoroutine(SpawnEnemy());
+        }
+
+        private IEnumerator SpawnEnemy()
+        {
+            yield return new WaitForSeconds(2);
+
+            Spawn();
+            m_EnemyManager.StartCoroutine(SpawnEnemy());
+        }
+
+        private void Spawn()
+        {
+            var prefab = GetEnemyPrefab();
+            var point = GetPoint();
+
+            var enemyIns = Object.Instantiate(prefab, point.StartPoint);
+            enemyIns.transform.localPosition = Vector3.zero;
+
+            m_EnemyManager.AddEnemy(enemyIns, point.FinishPoint, point.CenterPoint);
+        }
+
+        private Point GetPoint()
+        {
+            var point = m_Points.RandomItem();
+            if (lastPoint != null)
+            {
+                if (lastPoint == point.StartPoint)
+                {
+                    return GetPoint();
+                }
+            }
+            lastPoint = point.StartPoint;
+            return point;
+        }
+
+        private Enemy GetEnemyPrefab() => m_Prefabs.RandomItem();
+
+        internal void AddBossPrefab(Enemy enemyPrefab)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

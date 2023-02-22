@@ -10,7 +10,7 @@ public class TowerComponents : MonoBehaviour
 
     public SpawnPointCreator SpawnPointCreator => m_SpawnPointCreator;
 
-    private void Awake()
+    public void LoadComponents()
     {
         m_SpawnPointCreator ??= gameObject.GetOrAddComponent<SpawnPointCreator>();
     }

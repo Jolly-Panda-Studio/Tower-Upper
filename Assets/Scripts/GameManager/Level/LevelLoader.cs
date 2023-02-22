@@ -1,6 +1,8 @@
 using Lindon.TowerUpper.Data;
 using Lindon.TowerUpper.Initilizer;
+using Lindon.TowerUpper.Manager.Enemies;
 using Lindon.TowerUpper.Profile;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Lindon.TowerUpper.GameController.Level
@@ -8,9 +10,6 @@ namespace Lindon.TowerUpper.GameController.Level
     public class LevelLoader : MonoBehaviour, IInitilizer
     {
         public static LevelLoader Instance { get; private set; }
-
-        [Header("Component")]
-        [SerializeField] private LevelInfo m_LevelInfo;
 
         public void Init()
         {
@@ -54,17 +53,34 @@ namespace Lindon.TowerUpper.GameController.Level
             return (chapterLevel + 1, gameLevel);
         }
 
-        private void Load(GameInfo levelData, Profile.Profile profile)
+        private void Load(GameInfo gameInfo, Profile.Profile profile)
         {
             LoadCharacter(profile);
-
+            LoadEnemyManager(gameInfo);
         }
 
         private void LoadCharacter(Profile.Profile profile)
         {
             var characterSkinId = profile.GetActiveItem(ItemCategory.Skin);
             var weaponId = profile.GetActiveItem(ItemCategory.Weapon);
-            m_LevelInfo.SpawnCharacter(characterSkinId, weaponId);
+            GameManager.Instance.LevelInfo.SpawnCharacter(characterSkinId, weaponId);
+        }
+
+        private void LoadEnemyManager(GameInfo gameInfo)
+        {
+            foreach (var id in gameInfo.EnemiesId)
+            {
+                var prefab = GameData.Instance.GetEnemyModel(id);
+                var enemyPrefab = prefab.GetOrAddComponent<Enemy>();
+                GameManager.Instance.EnemyManager.Generator.AddPrefab(enemyPrefab);
+            }
+
+            if (gameInfo.HasBossFight)
+            {
+                var prefab = GameData.Instance.GetEnemyModel(gameInfo.BossEnemyId);
+                var enemyPrefab = prefab.GetOrAddComponent<Enemy>();
+                GameManager.Instance.EnemyManager.Generator.AddBossPrefab(enemyPrefab);
+            }
         }
     }
 }

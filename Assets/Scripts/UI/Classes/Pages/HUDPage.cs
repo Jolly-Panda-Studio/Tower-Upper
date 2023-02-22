@@ -1,3 +1,5 @@
+using Lindon.TowerUpper.GameController;
+using Lindon.TowerUpper.Manager.Enemies;
 using Lindon.UserManager;
 using Lindon.UserManager.Base.Page;
 using TMPro;
@@ -22,7 +24,7 @@ public class HUDPage : UIPage
         m_ActiveDrag = true;
         DisplayEnemyCount();
         Time.timeScale = 1;
-        roatetTransform = Tower.Instance.transform;
+        roatetTransform = GameManager.Instance.Tower.transform;
     }
 
     protected override void SetValuesOnSceneLoad()

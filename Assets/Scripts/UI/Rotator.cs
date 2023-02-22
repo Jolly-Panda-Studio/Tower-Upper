@@ -1,3 +1,4 @@
+using Lindon.TowerUpper.GameController;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,7 +13,7 @@ public class Rotator : MonoBehaviour
 
     private void Start()
     {
-        roatetTransform = Tower.Instance.transform;
+        roatetTransform = GameManager.Instance.Tower.transform;
 
         EventTrigger.Entry dragEntry = new EventTrigger.Entry();
         dragEntry.eventID = EventTriggerType.Drag;

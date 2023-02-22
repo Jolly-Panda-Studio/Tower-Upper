@@ -1,49 +1,57 @@
-﻿using System;
+﻿using Lindon.TowerUpper.GameController.Level;
+using Lindon.TowerUpper.Initilizer;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+namespace Lindon.TowerUpper.Manager.Enemies
 {
-    [SerializeField] private List<Enemy> enemyPrefabs;
-
-    [Header("Componenets")]
-    [SerializeField] private EnemyGenerator m_EnemyGenerator;
-
-    private void Start()
+    public class EnemyManager : MonoBehaviour
     {
-        m_EnemyGenerator = new EnemyGenerator(this);
+        public EnemyGenerator Generator => m_EnemyGenerator;
+
+        [Header("Componenets")]
+        private EnemyGenerator m_EnemyGenerator;
+
+        private void Start()
+        {
+            LoadControllers();
+        }
+
+        private void LoadControllers()
+        {
+            m_EnemyGenerator = new EnemyGenerator(this);
+        }
+
+        private void OnEnable()
+        {
+            GameStarter.OnStartGame += StartGame;
+        }
+
+        private void OnDisable()
+        {
+            GameStarter.OnStartGame += StartGame;
+        }
+
+        private void StartGame()
+        {
+            m_EnemyGenerator.StartSpawn();
+        }
+
+        public void AddEnemy(Enemy enemy, Transform moveTarget, Transform lookAtTarget)
+        {
+            EnemyCounter.SpawnEnemy();
+
+            enemy.SetTargetMove(moveTarget).SetLookAt(lookAtTarget).Climb();
+
+            enemy.onDie += OnKill;
+        }
+
+        private void OnKill(Enemy enemy)
+        {
+            EnemyCounter.KillEnemy();
+
+            enemy.onDie -= OnKill;
+        }
     }
-
-    private void OnEnable()
-    {
-        GameStarter.OnStartGame += StartGame;
-    }
-
-    private void OnDisable()
-    {
-        GameStarter.OnStartGame += StartGame;
-    }
-
-    private void StartGame()
-    {
-        m_EnemyGenerator.StartSpawn();
-    }
-
-    public void AddEnemy(Enemy enemy,Transform moveTarget,Transform lookAtTarget)
-    {
-        EnemyCounter.SpawnEnemy();
-
-        enemy.SetTargetMove(moveTarget).SetLookAt(lookAtTarget).Climb();
-
-        enemy.onDie += OnKill;
-    }
-
-    private void OnKill(Enemy enemy)
-    {
-        EnemyCounter.KillEnemy();
-
-        enemy.onDie -= OnKill;
-    }
-
-    public Enemy GetEenemyPrefabs() => enemyPrefabs.RandomItem();
 }

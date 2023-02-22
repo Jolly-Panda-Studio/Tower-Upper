@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efbaca4f5ecce964098d33cf44d1591c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Data: {fileID: 0}
 --- !u!136 &1982932137631947292
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -73,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0957afdc808674086fc3920d6a4695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 10
+  m_Speed: 1
 --- !u!1001 &1959772140695406909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,6 +85,10 @@ PrefabInstance:
     - target: {fileID: 7077265767207244307, guid: 2717c503375f0f146ba78ea996399b37, type: 3}
       propertyPath: m_Name
       value: WeaponParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077265767207244307, guid: 2717c503375f0f146ba78ea996399b37, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7300630966445610952, guid: 2717c503375f0f146ba78ea996399b37, type: 3}
       propertyPath: m_RootOrder
@@ -206,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Model
       objectReference: {fileID: 0}
+    - target: {fileID: 7707561402461146170, guid: 3c93dc30280ee4c49ba131013ee68027, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e41f7ad712ee2cd4cb2bb05551e5e3d8, type: 2}
     - target: {fileID: 8741134734186031348, guid: 3c93dc30280ee4c49ba131013ee68027, type: 3}
       propertyPath: m_Mesh
       value: 
