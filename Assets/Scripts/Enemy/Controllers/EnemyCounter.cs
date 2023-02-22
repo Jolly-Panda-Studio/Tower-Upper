@@ -7,7 +7,7 @@ namespace Lindon.TowerUpper.Manager.Enemies
         /// <summary>
         /// Number of enemies killed
         /// </summary>
-        private static int KilledEnemy { get; set; }
+        public static int KilledEnemy { get; private set; }
         /// <summary>
         /// Number of living enemies
         /// </summary>

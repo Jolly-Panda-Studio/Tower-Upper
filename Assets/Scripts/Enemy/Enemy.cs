@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 using System;
+using Lindon.TowerUpper.GameController.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,9 +12,29 @@ public class Enemy : MonoBehaviour
     public event Action<Enemy> OnDie;
     public event Action<Enemy> OnFinishClimb;
 
-    private void Awake()
+    private void OnEnable()
     {
-        
+        GameRunnig.OnChange += OnChangeRunnig;
+    }
+
+    private void OnDisable()
+    {
+        GameRunnig.OnChange -= OnChangeRunnig;
+    }
+
+    private void OnChangeRunnig(bool state)
+    {
+        if (m_DoClimbing != null)
+        {
+            if (state)
+            {
+                m_DoClimbing.Play();
+            }
+            else
+            {
+                m_DoClimbing.Pause();
+            }
+        }
     }
 
     public Enemy SetTargetMove(Transform destination)

@@ -1,3 +1,4 @@
+using Lindon.TowerUpper.Manager.Enemies;
 using Lindon.TowerUpper.Profile;
 using System;
 
@@ -21,5 +22,13 @@ namespace Lindon.TowerUpper.GameController
         }
 
         public static event Action GoldChanged;
+    }
+
+    public static class RewardCalculator
+    {
+        public static int GetGoldReward()
+        {
+            return EnemyCounter.KilledEnemy * 10;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Lindon.TowerUpper.GameController.Events;
+using System;
 using UnityEngine;
 
 namespace Lindon.TowerUpper.Manager.Enemies
@@ -24,12 +25,14 @@ namespace Lindon.TowerUpper.Manager.Enemies
         {
             GameStarter.OnStartGame += StartGame;
             GameFinisher.OnFinishGame += FinishGame;
+            GameRunnig.OnChange += OnChangeRunnig;
         }
 
         private void OnDisable()
         {
             GameStarter.OnStartGame -= StartGame;
             GameFinisher.OnFinishGame -= FinishGame;
+            GameRunnig.OnChange -= OnChangeRunnig;
         }
 
         private void StartGame()
@@ -40,6 +43,18 @@ namespace Lindon.TowerUpper.Manager.Enemies
         private void FinishGame()
         {
             EnemyCounter.Reset();
+        }
+
+        private void OnChangeRunnig(bool state)
+        {
+            if (state)
+            {
+                m_EnemyGenerator.StartSpawn();
+            }
+            else
+            {
+                m_EnemyGenerator.StopSpawn();
+            }
         }
     }
 }

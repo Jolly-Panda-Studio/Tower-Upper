@@ -42,13 +42,18 @@ namespace Lindon.TowerUpper.GameController
             GameRunnig.IsRunning = true;
         }
 
+        private void FinishGame()
+        {
+            GameRunnig.IsRunning = false;
+            GameFinisher.FinishGame();
+        }
+
         private void CheckWin(int killedCount, int totalCount)
         {
             if (killedCount == totalCount)
             {
                 OnWin();
-                GameRunnig.IsRunning = false;
-                GameFinisher.FinishGame();
+                FinishGame();
             }
         }
 
@@ -57,22 +62,21 @@ namespace Lindon.TowerUpper.GameController
             if (rechedCount > 0)
             {
                 OnLose();
-                GameRunnig.IsRunning = false;
-                GameFinisher.FinishGame();
+                FinishGame();
             }
         }
 
         private void OnLose()
         {
             Debug.Log("Lose Game");
-            UserInterfaceManager.Open<HomePage>();
+            UserInterfaceManager.Open<LosePopup>();
         }
 
         private void OnWin()
         {
             Debug.Log("Win Game");
             ProfileController.Instance.Profile.WinGame();
-            UserInterfaceManager.Open<HomePage>();
+            UserInterfaceManager.Open<WinPopup>();
         }
     }
 }

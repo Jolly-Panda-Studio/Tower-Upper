@@ -12,6 +12,7 @@ namespace Lindon.TowerUpper.Manager.Enemies
         private EnemyManager m_EnemyManager;
 
         Transform lastPoint;
+        private Coroutine m_coroutine;
 
         public EnemyGenerator(EnemyManager enemyManager)
         {
@@ -27,7 +28,13 @@ namespace Lindon.TowerUpper.Manager.Enemies
 
         public void StartSpawn()
         {
-            m_EnemyManager.StartCoroutine(SpawnEnemy());
+            m_coroutine ??= m_EnemyManager.StartCoroutine(SpawnEnemy());
+        }
+
+        public void StopSpawn()
+        {
+            m_EnemyManager.StopCoroutine(m_coroutine);
+            m_coroutine = null;
         }
 
         private IEnumerator SpawnEnemy()
