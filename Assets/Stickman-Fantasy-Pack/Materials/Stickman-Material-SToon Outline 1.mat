@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shotgun
+  m_Name: Stickman-Material-SToon Outline 1
   m_Shader: {fileID: 4800000, guid: 128c5f1edaefa4c4fb3f9f7a4615edb2, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
-  - _EMISSION
   - _SEGMENTED_ON
-  m_LightmapFlags: 1
+  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -39,11 +39,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: d315751db0737434488911ff623349bf, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 932066756c9ce5b44b8fc0658d641c13, type: 3}
+        m_Texture: {fileID: 2800000, guid: b78086321a861774db29c18b84bcb7f7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -60,7 +60,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmbientCol: 0
+    - _AmbientCol: 0.568
     - _BumpScale: 1
     - _Clipped: 0
     - _ColBright: 0
@@ -68,33 +68,33 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.568
+    - _GlossMapScale: 0
+    - _Glossiness: 0.51
     - _GlossyReflections: 1
-    - _Lumin: 0.22
-    - _MaxLight: 0.825
-    - _Metallic: 0.571
-    - _MinLight: 0.304
+    - _Lumin: 0.24
+    - _MaxLight: 1
+    - _Metallic: 0
+    - _MinLight: 0.668
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset: 0
-    - _OtlWidth: 1
+    - _Offset: 1.1
+    - _OtlWidth: 2.03
     - _Parallax: 0.02
     - _Segmented: 1
     - _ShnIntense: 0
     - _ShnOverlap: 0
-    - _ShnRange: 0.15
+    - _ShnRange: 0.262
     - _ShnSmooth: 0
-    - _SmoothnessTextureChannel: 0
+    - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Steps: 3
-    - _StpSmooth: 0.276
+    - _Steps: 25
+    - _StpSmooth: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OtlColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OtlColor: {r: 0.11320752, g: 0.10615875, b: 0.10615875, a: 1}
     - _ShnColor: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
