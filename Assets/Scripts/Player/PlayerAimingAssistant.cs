@@ -1,6 +1,7 @@
 using RootMotion.FinalIK;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Claims;
 using UnityEngine;
 
 [RequireComponent(typeof(AimIK))]
@@ -20,6 +21,6 @@ public class PlayerAimingAssistant : MonoBehaviour
 
     public void SetAimTransform(Transform aimTransform)
     {
-
+        m_AimIK.solver.transform = aimTransform;
     }
 }

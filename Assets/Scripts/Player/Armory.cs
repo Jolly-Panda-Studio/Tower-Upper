@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Armory : MonoBehaviour
 {
-    [SerializeField] private ItemModel[] m_WeaponModels;
+    [SerializeField] private ShopModel[] m_WeaponModels;
 
     public Weapon ActiveWeapon(int weaponId)
     {

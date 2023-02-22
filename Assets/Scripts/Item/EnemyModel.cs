@@ -1,6 +1,8 @@
-﻿namespace Lindon.TowerUpper.Data
+﻿using UnityEngine;
+
+namespace Lindon.TowerUpper.Data
 {
-    public class EnemyModel : SubModel
+    public class EnemyModel : GameModel
     {
     }
 }

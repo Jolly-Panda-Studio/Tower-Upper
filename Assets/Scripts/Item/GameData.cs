@@ -10,8 +10,10 @@ namespace Lindon.TowerUpper.Data
         public static GameData Instance { get; private set; }
 
         private List<ItemData> m_Items;
-        [SerializeField] private List<ItemModel> m_Models;
+        private List<ShopModel> m_ShopModels;
+        [SerializeField] private List<GameModel> m_Models;
         [SerializeField] private List<ChapterData> m_Chapters;
+
         public void Init()
         {
             if (Instance == null)
@@ -35,9 +37,15 @@ namespace Lindon.TowerUpper.Data
         private void LoadItems()
         {
             m_Items = new List<ItemData>();
+            m_ShopModels = new List<ShopModel>();
+
             foreach (var model in m_Models)
             {
-                m_Items.Add(model.Data);
+                if (model is IPurchasable purchasable)
+                {
+                    m_ShopModels.Add(purchasable.ShopModel);
+                    m_Items.Add(purchasable.Data);
+                }
             }
         }
 
@@ -70,23 +78,25 @@ namespace Lindon.TowerUpper.Data
 
         #region Model
 
-        public SubModel GetSubModel(int itemId)
+        #region Character
+
+        public GameModel GetGameModel(int itemId)
         {
-            foreach (var model in m_Models)
+            foreach (var model in m_ShopModels)
             {
                 if (model.Equals(itemId))
                 {
-                    return model.GetSubModel();
+                    return model.GetGameModel();
                 }
             }
-            Debug.LogError($"SubModel with {itemId} was not found");
+            Debug.LogError($"Game Model with {itemId} was not found");
             return null;
 
         }
 
-        public ItemModel GetModel(int itemId)
+        public ShopModel GetPreviewModel(int itemId)
         {
-            foreach (var model in m_Models)
+            foreach (var model in m_ShopModels)
             {
                 if (model.Equals(itemId))
                 {
@@ -97,6 +107,29 @@ namespace Lindon.TowerUpper.Data
             return null;
 
         }
+
+        #endregion
+
+        #region Weapon
+
+        #endregion
+
+        #region Enemy
+
+        public EnemyModel GetEnemyModel(int itemId)
+        {
+            foreach (var model in m_Models)
+            {
+                if (model.Equals(itemId) && model is EnemyModel enemy)
+                {
+                    return enemy;
+                }
+            }
+            Debug.LogError($"Game Model with {itemId} was not found");
+            return null;
+        }
+
+        #endregion
 
         #endregion
 

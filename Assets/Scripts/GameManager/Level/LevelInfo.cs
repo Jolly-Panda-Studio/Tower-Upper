@@ -9,23 +9,23 @@ namespace Lindon.TowerUpper.GameController.Level
         [SerializeField] private Transform m_CharacterParent;
         [SerializeField] private Transform m_AimTarget;
 
-        private ItemModel[] m_currentModels;
+        private ShopModel[] m_currentModels;
 
         private void Start()
         {
-            m_currentModels = GetComponentsInChildren<ItemModel>();
+            m_currentModels = GetComponentsInChildren<ShopModel>();
         }
 
-        public void SpawnCharacter(int skinId,int weaponId)
+        public void SpawnCharacter(int skinId, int weaponId)
         {
             var checkModel = CheckCurrentModel(skinId);
             var playerObject = InstantiateModel(skinId);
 
             var checkWeapon = CheckCurrentModel(weaponId);
 
-           //var weaponObject = InstantiateWeapon(weaponId);
+            //var weaponObject = InstantiateWeapon(weaponId);
 
-            var weaponObject= playerObject.ActiveGun(weaponId);
+            var weaponObject = playerObject.ActiveGun(weaponId);
 
             SetAimTarget(playerObject);
 
@@ -37,9 +37,9 @@ namespace Lindon.TowerUpper.GameController.Level
         {
             if (m_currentModels.Length == 0) return true;
 
-            foreach(var model in m_currentModels)
+            foreach (var model in m_currentModels)
             {
-                if(model.Equals(newModelId)) return false;
+                if (model.Equals(newModelId)) return false;
             }
 
             return true;
@@ -52,7 +52,7 @@ namespace Lindon.TowerUpper.GameController.Level
 
         private Player InstantiateModel(int skinId)
         {
-            var skin = GameData.Instance.GetSubModel(skinId);
+            var skin = GameData.Instance.GetGameModel(skinId);
             var model = Instantiate(skin, m_CharacterParent);
             var playerObject = model.GetOrAddComponent<Player>();
             return playerObject;
@@ -60,10 +60,11 @@ namespace Lindon.TowerUpper.GameController.Level
 
         private Weapon InstantiateWeapon(int weaponId)
         {
-            var skin = GameData.Instance.GetSubModel(weaponId);
-            var model = Instantiate(skin);
-            var weaponObject = model.AddComponent<Weapon>();
-            return weaponObject;
+            return null;
+            //var skin = GameData.Instance.GetSubModel(weaponId, CharacterModelType.Weapon);
+            //var model = Instantiate(skin);
+            //var weaponObject = model.AddComponent<Weapon>();
+            //return weaponObject;
         }
 
         private void SetAimTarget(Player playerObject)

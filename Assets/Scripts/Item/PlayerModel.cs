@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-
-namespace Lindon.TowerUpper.Data
+﻿namespace Lindon.TowerUpper.Data
 {
-    [RequireComponent(typeof(Player))]
-    public class PlayerModel : SubModel
+    public class PlayerModel : GameModel, IPurchasable
     {
+        [UnityEngine.SerializeField] private ShopModel m_ShopModel;
+
+        public ShopModel ShopModel => m_ShopModel;
     }
 }

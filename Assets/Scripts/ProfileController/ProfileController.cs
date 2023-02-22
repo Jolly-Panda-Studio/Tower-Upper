@@ -47,7 +47,7 @@ namespace Lindon.TowerUpper.Profile
             Debug.Log("Sample Profile Created!");
             var sampleProfile = new Profile(SystemInfo.deviceUniqueIdentifier, 0, 1000);
             sampleProfile.SetActiveItem(200, Data.ItemCategory.Weapon);
-            sampleProfile.SetActiveItem(100, Data.ItemCategory.Skin);
+            sampleProfile.SetActiveItem(5001, Data.ItemCategory.Skin);
             return sampleProfile;
         }
 

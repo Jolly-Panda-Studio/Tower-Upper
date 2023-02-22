@@ -1,4 +1,5 @@
 using Lindon.TowerUpper.Data;
+using Lindon.TowerUpper.Manager.Enemies;
 using Lindon.TowerUpper.Profile;
 using Lindon.UserManager;
 using System.Collections.Generic;
@@ -13,9 +14,6 @@ namespace Lindon.TowerUpper.Initilizer
 
     public static class GameInitilizer
     {
-        private static ProfileController m_ProfileController;
-        private static UserInterfaceManager m_UserInterfaceManager;
-        private static GameData m_GameData;
         private static List<IInitilizer> _initilizers;
 
 
@@ -39,12 +37,14 @@ namespace Lindon.TowerUpper.Initilizer
         {
             _initilizers = new List<IInitilizer>();
 
-            m_ProfileController = Object.FindObjectOfType<ProfileController>();
-            _initilizers.Add(m_ProfileController);
-            m_GameData = Object.FindObjectOfType<GameData>();
-            _initilizers.Add(m_GameData);
-            m_UserInterfaceManager = Object.FindObjectOfType<UserInterfaceManager>();
-            _initilizers.Add(m_UserInterfaceManager);
+            var  profileController = Object.FindObjectOfType<ProfileController>();
+            _initilizers.Add(profileController);
+            var gameData = Object.FindObjectOfType<GameData>();
+            _initilizers.Add(gameData);
+            var userInterfaceManager = Object.FindObjectOfType<UserInterfaceManager>();
+            _initilizers.Add(userInterfaceManager);
+            var enemyManager = Object.FindObjectOfType<EnemyManager>();
+            _initilizers.Add(enemyManager);
         }
     }
 }

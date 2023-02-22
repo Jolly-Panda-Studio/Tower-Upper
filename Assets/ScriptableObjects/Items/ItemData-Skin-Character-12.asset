@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b238f39c75837242b4afe24bb65fe5b, type: 3}
   m_Name: ItemData-Skin-Character-12
   m_EditorClassIdentifier: 
-  m_Id: 106
+  m_Model: {fileID: 11400000, guid: 478e87ba897ad0c4384d62a44963d741, type: 2}
   m_Icon: {fileID: 21300000, guid: bee99074e3aaa4f10b57618376e3c07a, type: 3}
   m_Cost: 100
   m_Category: 1
