@@ -53,5 +53,7 @@ MonoBehaviour:
   - {fileID: 6196670520157872134, guid: fa42ccc443849a34ca6c8e6be6d93ff0, type: 3}
   - {fileID: 6196670520157872134, guid: 8647f53a0027da0448bfdcab04ee1491, type: 3}
   - {fileID: 7192503366573884282, guid: 2d9ff0640a9ca6546b54dd7a177d720f, type: 3}
+  - {fileID: 6749631685131591745, guid: 670c82cc191825846872fd625125cf97, type: 3}
+  - {fileID: 6749631685131591745, guid: 5ef681e8fc210194daf5828cabe08fe0, type: 3}
   m_Chapters:
   - {fileID: 11400000, guid: 3f9270b55e3f0ff4c9f68411dc55453a, type: 2}
