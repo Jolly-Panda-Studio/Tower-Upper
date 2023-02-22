@@ -33,6 +33,7 @@ public class LosePopup : UIPopup
 
     private void Home()
     {
+        UserInterfaceManager.OnBackPressed();
         UserInterfaceManager.Open<HomePage>();
     }
 

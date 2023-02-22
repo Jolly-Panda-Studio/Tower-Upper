@@ -1,4 +1,5 @@
 using Lindon.TowerUpper.GameController;
+using Lindon.TowerUpper.GameController.Events;
 using Lindon.UserManager;
 using Lindon.UserManager.Base.Page;
 using System.Security.Claims;
@@ -37,6 +38,8 @@ public class WinPopup : UIPopup
     {
         GoldCalculator.GoldAmount += m_GoltRewardAmount;
         m_GoltRewardAmount = 0;
+        UserInterfaceManager.OnBackPressed();
+        UserInterfaceManager.Open<HomePage>();
     }
 
     private void ClaimAd()
