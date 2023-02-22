@@ -22,7 +22,7 @@ public class HUDPage : UIPage
     protected override void SetValues()
     {
         m_ActiveDrag = true;
-        DisplayEnemyCount();
+        DisplayEnemyCount(0, EnemyCounter.TotalEnemy);
         Time.timeScale = 1;
         roatetTransform = GameManager.Instance.Tower.transform;
     }
@@ -54,9 +54,9 @@ public class HUDPage : UIPage
         EnemyCounter.OnKillEnemy -= DisplayEnemyCount;
     }
 
-    private void DisplayEnemyCount()
+    private void DisplayEnemyCount(int killedCount, int totalCount)
     {
-        m_EnemyScoreText.SetText($"{EnemyCounter.KilledEnemy}/{EnemyCounter.TotalEnemy}");
+        m_EnemyScoreText.SetText($"{killedCount}/{totalCount}");
     }
 
     public void OnDrag(PointerEventData eventData)

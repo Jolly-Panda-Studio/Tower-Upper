@@ -1,7 +1,4 @@
-﻿using Lindon.TowerUpper.GameController.Level;
-using Lindon.TowerUpper.Initilizer;
-using System;
-using System.Collections.Generic;
+﻿using Lindon.TowerUpper.GameController.Events;
 using UnityEngine;
 
 namespace Lindon.TowerUpper.Manager.Enemies
@@ -26,16 +23,23 @@ namespace Lindon.TowerUpper.Manager.Enemies
         private void OnEnable()
         {
             GameStarter.OnStartGame += StartGame;
+            GameFinisher.OnFinishGame += FinishGame;
         }
 
         private void OnDisable()
         {
-            GameStarter.OnStartGame += StartGame;
+            GameStarter.OnStartGame -= StartGame;
+            GameFinisher.OnFinishGame -= FinishGame;
         }
 
         private void StartGame()
         {
             m_EnemyGenerator.StartSpawn();
+        }
+
+        private void FinishGame()
+        {
+            EnemyCounter.Reset();
         }
     }
 }

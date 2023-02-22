@@ -8,9 +8,8 @@ public class Enemy : MonoBehaviour
     private Vector3 m_Destination;
     DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> m_DoClimbing;
 
-    //[Header("Component")]
-
-    public event Action<Enemy> onDie;
+    public event Action<Enemy> OnDie;
+    public event Action<Enemy> OnFinishClimb;
 
     private void Awake()
     {
@@ -31,7 +30,10 @@ public class Enemy : MonoBehaviour
 
     public void Climb()
     {
-        m_DoClimbing = transform.DOMoveY(m_Destination.y, GetMoveTime(m_Destination));
+        m_DoClimbing = transform.DOMoveY(m_Destination.y, GetMoveTime(m_Destination)).OnComplete(() =>
+        {
+            OnFinishClimb?.Invoke(this);
+        });
     }
 
     public float GetMoveTime(Vector3 position)
@@ -47,7 +49,7 @@ public class Enemy : MonoBehaviour
 
             //fall animation
 
-            onDie?.Invoke(this);
+            OnDie?.Invoke(this);
         }
     }
 

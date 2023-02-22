@@ -1,3 +1,4 @@
+using Lindon.TowerUpper.GameController.Events;
 using Lindon.TowerUpper.Initilizer;
 using Lindon.UserManager.Base.Element;
 using Lindon.UserManager.Base.Page;
@@ -62,7 +63,7 @@ namespace Lindon.UserManager
 
         private void OnDisable()
         {
-            GameStarter.OnStartGame += StartGame;
+            GameStarter.OnStartGame -= StartGame;
         }
 
         private void StartGame()

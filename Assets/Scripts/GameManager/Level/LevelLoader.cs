@@ -1,4 +1,5 @@
 using Lindon.TowerUpper.Data;
+using Lindon.TowerUpper.GameController.Events;
 using Lindon.TowerUpper.Initilizer;
 using Lindon.TowerUpper.Manager.Enemies;
 using Lindon.TowerUpper.Profile;
@@ -32,7 +33,7 @@ namespace Lindon.TowerUpper.GameController.Level
 
         private void OnDisable()
         {
-            GameStarter.OnStartGame += StartGame;
+            GameStarter.OnStartGame -= StartGame;
         }
 
         private void StartGame()
@@ -48,7 +49,12 @@ namespace Lindon.TowerUpper.GameController.Level
 
         private (int, int) GetChapter(int profileLevel)
         {
-            var chapterLevel = (profileLevel % 10);
+            int chapterLevel = 0;
+            if (profileLevel > 10)
+            {
+                chapterLevel = (profileLevel % 10);
+            }
+
             var gameLevel = profileLevel - chapterLevel * 10;
             return (chapterLevel + 1, gameLevel);
         }

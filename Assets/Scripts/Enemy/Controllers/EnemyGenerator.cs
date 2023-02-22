@@ -79,14 +79,20 @@ namespace Lindon.TowerUpper.Manager.Enemies
 
             enemy.SetTargetMove(moveTarget).SetLookAt(lookAtTarget).Climb();
 
-            enemy.onDie += OnKill;
+            enemy.OnDie += OnKill;
+            enemy.OnFinishClimb += FinishClimbing;
         }
 
         private void OnKill(Enemy enemy)
         {
             EnemyCounter.KillEnemy();
+            enemy.OnDie -= OnKill;
+        }
 
-            enemy.onDie -= OnKill;
+        private void FinishClimbing(Enemy enemy)
+        {
+            EnemyCounter.ReachEndPath();
+            enemy.OnFinishClimb -= FinishClimbing;
         }
     }
 }

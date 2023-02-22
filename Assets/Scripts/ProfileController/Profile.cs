@@ -74,5 +74,10 @@ namespace Lindon.TowerUpper.Profile
         }
 
         public List<int> GetItems() => m_ItemsId;
+
+        public void WinGame()
+        {
+            Level++;
+        }
     }
 }
