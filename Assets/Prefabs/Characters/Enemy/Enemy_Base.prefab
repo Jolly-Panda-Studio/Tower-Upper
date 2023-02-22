@@ -92,6 +92,7 @@ MonoBehaviour:
   m_enemy: {fileID: 2984048819629533987}
   m_fallParameter: Fall
   m_victoryParameter: Victory
+  m_idleParameter: Idle
 --- !u!1001 &1959772140695406909
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,16 +9,17 @@ public class Enemy : MonoBehaviour
     private Vector3 m_Destination;
     DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> m_DoClimbing;
 
+    public float Speed => m_Speed;
+
     public event Action<Enemy> OnDie;
     public event Action<Enemy> OnFinishClimb;
-
-    private Transform m_lookAtTarget;
 
     private void OnEnable()
     {
         GameRunnig.OnChange += OnChangeRunnig;
         GameFinisher.OnFinishGame += GameFinished;
         GameRestarter.OnRestartGame += GameFinished;
+        ReturnHome.OnReturnHome += OnReturnHome;
     }
 
     private void OnDisable()
@@ -26,6 +27,7 @@ public class Enemy : MonoBehaviour
         GameRunnig.OnChange -= OnChangeRunnig;
         GameFinisher.OnFinishGame -= GameFinished;
         GameRestarter.OnRestartGame -= GameFinished;
+        ReturnHome.OnReturnHome -= OnReturnHome;
     }
 
     private void OnChangeRunnig(bool state)
@@ -46,6 +48,10 @@ public class Enemy : MonoBehaviour
     private void GameFinished()
     {
         m_DoClimbing.Kill();
+    }
+
+    private void OnReturnHome()
+    {
         Destroy(gameObject);
     }
 
@@ -57,7 +63,6 @@ public class Enemy : MonoBehaviour
 
     public Enemy SetLookAt(Transform lookAtTarget)
     {
-        m_lookAtTarget = lookAtTarget;
         transform.LookAt(lookAtTarget);
         return this;
     }

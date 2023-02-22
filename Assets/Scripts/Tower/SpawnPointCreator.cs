@@ -12,24 +12,24 @@ public class SpawnPointCreator : MonoBehaviour
 
 	[SerializeField] private float radiusOffset = 0;
 
-    public void CreatePoints(int pointCount)
+	public void CreatePoints(int pointCount)
 	{
-        var collider = m_Renderer.GetComponent<CapsuleCollider>();
-        var radius = (m_Renderer.transform.localScale.x / 2) + radiusOffset;
-        var height = m_Renderer.transform.localScale.y * 2;
+		var collider = m_Renderer.GetComponent<CapsuleCollider>();
+		var radius = (m_Renderer.transform.localScale.x / 2) + radiusOffset;
+		var height = m_Renderer.transform.localScale.y * 2;
 
-        GameObject pointParent = new GameObject("SpawnPoints");
-        var pointParentTransform = pointParent.transform;
+		GameObject pointParent = new GameObject("SpawnPoints");
+		var pointParentTransform = pointParent.transform;
 
-        pointParentTransform.SetParent(collider.transform);
-        pointParentTransform.localPosition = new Vector3(0, -collider.height / 2, 0);
-        pointParentTransform.localScale = Vector3.one;
+		pointParentTransform.SetParent(collider.transform);
+		pointParentTransform.localPosition = new Vector3(0, -collider.height / 2, 0);
+		pointParentTransform.localScale = Vector3.one;
 
-        CreateEnemiesAroundPoint(pointCount, pointParentTransform, radius, height);
+		CreateEnemiesAroundPoint(pointCount, pointParentTransform, radius, height);
 
-        pointParentTransform.SetParent(transform);
-        pointParentTransform.localScale = Vector3.one;
-    }
+		pointParentTransform.SetParent(transform);
+		pointParentTransform.localScale = Vector3.one;
+	}
 
 	private void CreateEnemiesAroundPoint(int num, Transform parent, float radius, float height)
 	{
@@ -49,38 +49,38 @@ public class SpawnPointCreator : MonoBehaviour
 
 			/* Now spawn */
 			var point = new GameObject($"({i + 1})");
-            point.transform.SetParent(parent);
-            point.transform.localPosition = Vector3.zero;
-            point.transform.localScale = Vector3.one;
+			point.transform.SetParent(parent);
+			point.transform.localPosition = Vector3.zero;
+			point.transform.localScale = Vector3.one;
 
-            var startPoint = new GameObject($"START");
+			var startPoint = new GameObject($"START");
 			startPoint.transform.SetParent(point.transform);
 			startPoint.transform.localPosition = new Vector3(spawnPos.x, 0, spawnPos.z);
-            startPoint.transform.localScale = Vector3.one;
+			startPoint.transform.localScale = Vector3.one;
 
-            var finishPoint = new GameObject($"FINISH");
-            finishPoint.transform.SetParent(point.transform);
-            finishPoint.transform.localPosition = new Vector3(startPoint.transform.localPosition.x, startPoint.transform.localPosition.y + height, startPoint.transform.localPosition.z);
-            finishPoint.transform.localScale = Vector3.one;
+			var finishPoint = new GameObject($"FINISH");
+			finishPoint.transform.SetParent(point.transform);
+			finishPoint.transform.localPosition = new Vector3(startPoint.transform.localPosition.x, startPoint.transform.localPosition.y + height, startPoint.transform.localPosition.z);
+			finishPoint.transform.localScale = Vector3.one;
 
-            m_Points.Add(new Point(startPoint.transform, finishPoint.transform, point.transform));
+			m_Points.Add(new Point(startPoint.transform, finishPoint.transform, point.transform));
 
-        }
+		}
 	}
 
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.red;
-        foreach (var point in m_Points)
-        {
+		foreach (var point in m_Points)
+		{
 			Vector3 start = point.StartPoint.position;
 			Vector3 finish = point.FinishPoint.position;
 
 			Gizmos.DrawSphere(start, 0.1f);
 			Gizmos.DrawSphere(finish, 0.1f);
 			Gizmos.DrawLine(start, finish);
-        }
-    }
+		}
+	}
 }
 
 public struct Point
@@ -90,9 +90,9 @@ public struct Point
 		StartPoint = startPoint ?? throw new ArgumentNullException(nameof(startPoint));
 		FinishPoint = finishPoint ?? throw new ArgumentNullException(nameof(finishPoint));
 		CenterPoint = centerPoint ?? throw new ArgumentNullException(nameof(centerPoint));
-    }
+	}
 
 	public Transform StartPoint { get; private set; }
-    public Transform FinishPoint { get; private set; }
-    public Transform CenterPoint { get; private set; }
+	public Transform FinishPoint { get; private set; }
+	public Transform CenterPoint { get; private set; }
 }
