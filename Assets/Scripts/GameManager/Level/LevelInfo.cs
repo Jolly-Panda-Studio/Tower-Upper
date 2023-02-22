@@ -1,5 +1,5 @@
 ﻿using Lindon.TowerUpper.Data;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lindon.TowerUpper.GameController.Level
@@ -9,61 +9,53 @@ namespace Lindon.TowerUpper.GameController.Level
         [SerializeField] private Transform m_CharacterParent;
         [SerializeField] private Transform m_AimTarget;
 
-        private ShopModel[] m_currentModels;
+        private List<PlayerModel> m_CurrentModels;
 
-        private void Start()
+        private void Awake()
         {
-            m_currentModels = GetComponentsInChildren<ShopModel>();
+            m_CurrentModels = new List<PlayerModel>();
         }
 
-        public void SpawnCharacter(int skinId, int weaponId)
+        public void ChangeItems(int skinId, int weaponId)
         {
-            var checkModel = CheckCurrentModel(skinId);
-            var playerObject = InstantiateModel(skinId);
+            var model = GetFromCurrentModels(skinId);
+            var playerModel = model == null ? InstantiateModel(skinId) : model;
 
-            var checkWeapon = CheckCurrentModel(weaponId);
+            var player = playerModel.GetComponent<Player>();
+            ActiveWeapon(weaponId, player);
+        }
 
-            //var weaponObject = InstantiateWeapon(weaponId);
+        private PlayerModel GetFromCurrentModels(int skinId)
+        {
+            PlayerModel playerModel = null;
+            foreach (var model in m_CurrentModels)
+            {
+                model.gameObject.SetActive(false);
+                if (model.Id == skinId)
+                {
+                    model.gameObject.SetActive(true);
+                    playerModel = model;
+                }
+            }
+            return playerModel;
+        }
 
-            var weaponObject = playerObject.ActiveGun(weaponId);
+        private void ActiveWeapon(int weaponId, Player player)
+        {
+            var weaponObject = player.ActiveGun(weaponId);
 
-            SetAimTarget(playerObject);
+            SetAimTarget(player);
 
             var weaponAim = weaponObject.GetAim();
-            SetAimTransform(playerObject, weaponAim);
+            SetAimTransform(player, weaponAim);
         }
 
-        private bool CheckCurrentModel(int newModelId)
-        {
-            if (m_currentModels.Length == 0) return true;
-
-            foreach (var model in m_currentModels)
-            {
-                if (model.Equals(newModelId)) return false;
-            }
-
-            return true;
-        }
-
-        private void DestroyOldCharacter()
-        {
-
-        }
-
-        private Player InstantiateModel(int skinId)
+        private PlayerModel InstantiateModel(int skinId)
         {
             var skin = GameData.Instance.GetGameModel(skinId);
-            var model = Instantiate(skin, m_CharacterParent);
-            var playerObject = model.GetOrAddComponent<Player>();
-            return playerObject;
-        }
-
-        private Weapon InstantiateWeapon(int weaponId)
-        {
-            var skin = GameData.Instance.GetGameModel(weaponId);
-            var model = Instantiate(skin);
-            var weaponObject = model.AddComponent<Weapon>();
-            return weaponObject;
+            var model = (PlayerModel)Instantiate(skin, m_CharacterParent);
+            m_CurrentModels.Add(model);
+            return model;
         }
 
         private void SetAimTarget(Player playerObject)

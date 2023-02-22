@@ -41,7 +41,7 @@ public class ShopPage : UIPage
         public int Id => Item.Id;
         public ItemCategory Category => Item.Category;
 
-        public event Action<int,ItemCategory, ItemState> OnChangeState;
+        public event Action<int, ItemCategory, ItemState> OnChangeState;
 
         public void ChangeState(ItemState newState)
         {
@@ -310,7 +310,7 @@ public class ShopPage : UIPage
             {
                 shopItem.ChangeState(ShopData.ItemState.Active);
             }
-            else if(shopItem.State == ShopData.ItemState.Lock)
+            else if (shopItem.State == ShopData.ItemState.Lock)
             {
                 continue;
             }
@@ -323,10 +323,15 @@ public class ShopPage : UIPage
 
     private ShopData GetData(int itemId)
     {
-        foreach (var items in m_ShopItems)
+        foreach (var items in m_ShopItems.Values)
         {
-            ItemCategory category = items.Key;
-            return GetData(itemId, category);
+            foreach (var item in items)
+            {
+                if (item.Id == itemId)
+                {
+                    return item;
+                }
+            }
         }
         Debug.LogError($"Item with {itemId} was not found");
         return null;
@@ -374,7 +379,7 @@ public class ShopPage : UIPage
     private void SetActiveItem(int itemId, ItemCategory category)
     {
         ShopData shopItem = GetData(itemId, category);
-        if(shopItem.State == ShopData.ItemState.Unlock || shopItem.State == ShopData.ItemState.Active)
+        if (shopItem.State == ShopData.ItemState.Unlock || shopItem.State == ShopData.ItemState.Active)
         {
             m_ProfileController.Profile.SetActiveItem(itemId, category);
         }

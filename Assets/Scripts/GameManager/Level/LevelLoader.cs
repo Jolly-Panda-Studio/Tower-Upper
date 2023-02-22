@@ -3,8 +3,10 @@ using Lindon.TowerUpper.GameController.Events;
 using Lindon.TowerUpper.Initilizer;
 using Lindon.TowerUpper.Manager.Enemies;
 using Lindon.TowerUpper.Profile;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace Lindon.TowerUpper.GameController.Level
 {
@@ -30,12 +32,26 @@ namespace Lindon.TowerUpper.GameController.Level
         {
             GameRestarter.OnRestartGame += StartGame;
             GameStarter.OnStartGame += StartGame;
+            ProfileController.Instance.Profile.OnActiveItem += ChangeActiveItem;
         }
 
         private void OnDisable()
         {
             GameRestarter.OnRestartGame -= StartGame;
             GameStarter.OnStartGame -= StartGame;
+            ProfileController.Instance.Profile.OnActiveItem -= ChangeActiveItem;
+        }
+
+        private void Start()
+        {
+            var profile = ProfileController.Instance.Profile;
+            LoadCharacter(profile);
+        }
+
+        private void ChangeActiveItem(int id, ItemCategory category)
+        {
+            var profile = ProfileController.Instance.Profile;
+            LoadCharacter(profile);
         }
 
         private void StartGame()
@@ -49,18 +65,6 @@ namespace Lindon.TowerUpper.GameController.Level
             Load(gameInfo, profile);
         }
 
-        private (int, int) GetChapter(int profileLevel)
-        {
-            int chapterLevel = 0;
-            if (profileLevel > 10)
-            {
-                chapterLevel = (profileLevel % 10);
-            }
-
-            var gameLevel = profileLevel - chapterLevel * 10;
-            return (chapterLevel + 1, gameLevel);
-        }
-
         private void Load(GameInfo gameInfo, Profile.Profile profile)
         {
             LoadCharacter(profile);
@@ -72,7 +76,7 @@ namespace Lindon.TowerUpper.GameController.Level
         {
             var characterSkinId = profile.GetActiveItem(ItemCategory.Skin);
             var weaponId = profile.GetActiveItem(ItemCategory.Weapon);
-            GameManager.Instance.LevelInfo.SpawnCharacter(characterSkinId, weaponId);
+            GameManager.Instance.LevelInfo.ChangeItems(characterSkinId, weaponId);
         }
 
         private void LoadTower(GameInfo gameInfo)
