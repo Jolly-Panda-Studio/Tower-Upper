@@ -135,14 +135,24 @@ namespace Lindon.TowerUpper.Data
 
         public GameInfo GetGameInfo(int chapterLevel, int gameLevel)
         {
+            var chapter = GetChapter(chapterLevel);
+            if (chapter != null)
+            {
+                return chapter.GetGame(gameLevel);
+            }
+            return null;
+        }
+
+        public ChapterData GetChapter(int chapterLevel)
+        {
             foreach (var chapter in m_Chapters)
             {
                 if (chapter.Equals(chapterLevel))
                 {
-                    return chapter.GetGame(gameLevel);
+                    return chapter;
                 }
             }
-            Debug.LogError($"Game with {chapterLevel} was not found");
+            Debug.LogError($"Chapter with {chapterLevel} was not found");
             return null;
         }
     }

@@ -5,7 +5,6 @@ namespace Lindon.TowerUpper.GameController.Level
     [CreateAssetMenu(fileName = "ChapterData", menuName = "Lindon/TowerUpper/Data/ChapterData")]
     public class ChapterData: ScriptableObject
     {
-        [SerializeField] private int m_Id;
         [SerializeField, Min(1)] private int m_Level;
         [SerializeField] private GameInfo m_Level1;
         [SerializeField] private GameInfo m_Level2;
@@ -21,47 +20,20 @@ namespace Lindon.TowerUpper.GameController.Level
         public GameInfo GetGame(int level)
         {
             level++;
-            if (level == 1)
+            return level switch
             {
-                return m_Level1;
-            }
-            else if (level == 2)
-            {
-                return m_Level2;
-            }
-            else if(level == 3)
-            {
-                return m_Level3;
-            }
-            else if (level == 4)
-            {
-                return m_Level4;
-            }
-            else if (level == 5)
-            {
-                return m_Level5;
-            }
-            else if (level == 6)
-            {
-                return m_Level6;
-            }
-            else if (level == 7)
-            {
-                return m_Level7;
-            }
-            else if (level == 8)
-            {
-                return m_Level8;
-            }
-            else if (level == 9)
-            {
-                return m_Level9;
-            }
-            else if (level == 10)
-            {
-                return m_Level10;
-            }
-            return null;
+                1 => m_Level1,
+                2 => m_Level2,
+                3 => m_Level3,
+                4 => m_Level4,
+                5 => m_Level5,
+                6 => m_Level6,
+                7 => m_Level7,
+                8 => m_Level8,
+                9 => m_Level9,
+                10 => m_Level10,
+                _ => null,
+            };
         }
 
         public bool Equals(int Level) => m_Level == Level;

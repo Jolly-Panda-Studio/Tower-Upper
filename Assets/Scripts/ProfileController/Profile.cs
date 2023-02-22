@@ -6,6 +6,34 @@ using UnityEngine;
 
 namespace Lindon.TowerUpper.Profile
 {
+    public struct ChapeterData
+    {
+        public ChapeterData(int chapterId, int levelId)
+        {
+            ChapterLevel = chapterId;
+            GameLevel = levelId;
+        }
+
+        public int ChapterLevel { get; private set; }
+        public int GameLevel { get; private set; }
+    }
+
+    public static class ProfileExtention
+    {
+        public static ChapeterData GetChapter(this Profile profile)
+        {
+            var profileLevel = profile.Level;
+            int chapterLevel = 0;
+            if (profileLevel > 10)
+            {
+                chapterLevel = (profileLevel / 10);
+            }
+
+            var gameLevel = profileLevel - chapterLevel * 10;
+            return new ChapeterData(chapterLevel, gameLevel);
+        }
+    }
+
     public class Profile
     {
         public string Token { get; private set; }
@@ -16,7 +44,7 @@ namespace Lindon.TowerUpper.Profile
         private Dictionary<ItemCategory, int> m_ActiveItemsId;
 
         public event Action<int> OnAddItem;
-        public event Action<int,ItemCategory> OnActiveItem;
+        public event Action<int, ItemCategory> OnActiveItem;
 
         public Profile(string token, int level, int goldAmount)
         {
@@ -40,7 +68,7 @@ namespace Lindon.TowerUpper.Profile
                 return;
             }
             m_ActiveItemsId[category] = itemId;
-            OnActiveItem?.Invoke(itemId,category);
+            OnActiveItem?.Invoke(itemId, category);
         }
 
         public int GetActiveItem(ItemCategory category)

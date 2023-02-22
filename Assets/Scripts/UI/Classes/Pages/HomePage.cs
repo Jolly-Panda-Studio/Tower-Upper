@@ -1,6 +1,7 @@
 using Lindon.TowerUpper.GameController.Events;
 using Lindon.UserManager;
 using Lindon.UserManager.Base.Page;
+using Lindon.UserManager.Page.Home;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,8 +15,12 @@ public class HomePage : UIPage
     [SerializeField] private Button m_ShopButton;
     [SerializeField] private Button m_SettingButton;
 
+    [Space]
+    [SerializeField] private StageInfo m_StageInfo;
+
     protected override void SetValues()
     {
+        m_StageInfo.Load();
     }
 
     protected override void SetValuesOnSceneLoad()
@@ -34,7 +39,6 @@ public class HomePage : UIPage
 
     private void OnPointerDownDelegate(PointerEventData data)
     {
-        //UserInterfaceManager.Open<HUDPage>();
         GameStarter.StartGame();
     }
 }

@@ -42,9 +42,9 @@ namespace Lindon.TowerUpper.GameController.Level
         {
             var profile = ProfileController.Instance.Profile;
 
-            var info = GetChapter(profile.Level);
+            var info = ProfileController.Instance.Profile.GetChapter();
 
-            var gameInfo = GameData.Instance.GetGameInfo(info.Item1, info.Item2);
+            var gameInfo = GameData.Instance.GetGameInfo(info.ChapterLevel, info.GameLevel);
 
             Load(gameInfo, profile);
         }
