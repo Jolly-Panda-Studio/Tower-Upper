@@ -162,6 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a2e39e99d8eed4b8889993e48e6511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_animator: {fileID: 1901186597381188575}
+  m_Armory: {fileID: 5875206091780477472}
+  m_IdleParameter: Idle
+  m_IdleName: Rifle Idle
+  m_Idles:
+  - Clip: {fileID: 7400000, guid: b158b4e26e462ea41a54d8b0acb94550, type: 2}
+    ShowWeapon: 1
+  m_FireParameter: Fire
 --- !u!114 &4500397383134996204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +339,11 @@ PrefabInstance:
 --- !u!4 &1165023729956821188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6971118715700838177, guid: 3c93dc30280ee4c49ba131013ee68027, type: 3}
+  m_PrefabInstance: {fileID: 8112281870795204581}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1901186597381188575 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7707561402461146170, guid: 3c93dc30280ee4c49ba131013ee68027, type: 3}
   m_PrefabInstance: {fileID: 8112281870795204581}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2472290343850005545 stripped

@@ -1,18 +1,17 @@
-using RootMotion.FinalIK;
 using UnityEngine;
 
 public class PlayerIdle : StateMachineBehaviour
 {
-    private AimIK m_AimIK;
+    private PlayerAimingAssistant m_AimIK;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (m_AimIK == null)
         {
-            m_AimIK = animator.GetComponent<AimIK>();
+            m_AimIK = animator.GetComponentInParent<PlayerAimingAssistant>();
         }
-        m_AimIK.enabled = false;
+        m_AimIK.SetActive(false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,7 +22,7 @@ public class PlayerIdle : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        m_AimIK.enabled = true;
+        m_AimIK.SetActive(true);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

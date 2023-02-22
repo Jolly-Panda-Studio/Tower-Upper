@@ -23,6 +23,7 @@ public class PreviewDisplayer : MonoBehaviour
     }
 
     [Header("Rotate")]
+    [SerializeField] private bool m_AutoRotate = false;
     [SerializeField] private Transform roatetTransform;
     [SerializeField, Min(0)] private float rotateSpeed = 1;
     [SerializeField] private float cooldown = 3;
@@ -118,6 +119,7 @@ public class PreviewDisplayer : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (!m_AutoRotate) return;
         if (!_dragged && !_autoRotate)
         {
             if (_cooldown > 0)
@@ -146,6 +148,7 @@ public class PreviewDisplayer : MonoBehaviour
             var prefab = GameData.Instance.GetPreviewModel(itemId);
             obj = Instantiate(prefab, parent);
             obj.transform.localPosition = Vector3.zero;
+            obj.transform.localEulerAngles = new Vector3(0, 180, 0);
             objects.Add(obj);
 
             ChangeLayer(obj.gameObject);

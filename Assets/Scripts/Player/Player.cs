@@ -1,4 +1,6 @@
+using Lindon.TowerUpper.GameController.Events;
 using RootMotion.FinalIK;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(AimIK))]
@@ -24,7 +26,6 @@ public class Player : MonoBehaviour
         m_Animator ??= GetComponentInChildren<PlayerAnimator>();
         m_AimingAssistant ??= GetComponentInChildren<PlayerAimingAssistant>();
     }
-
 
     public Weapon ActiveGun(int weaponId)
     {
