@@ -1,5 +1,8 @@
+using DG.Tweening;
+using Lindon.TowerUpper.GameController.Level;
 using Lindon.TowerUpper.Profile;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Lindon.UserManager.Page.Home
 {
@@ -9,6 +12,9 @@ namespace Lindon.UserManager.Page.Home
         [SerializeField] private Transform m_Parent;
         [SerializeField] private LevelSlot m_Prefab;
         [SerializeField] private LevelSlot m_BossPrefab;
+
+        [Space]
+        [SerializeField] private Slider m_slider;
 
         private void OnEnable()
         {
@@ -29,6 +35,8 @@ namespace Lindon.UserManager.Page.Home
         {
             var info = profile.GetChapter();
             m_Parent.DestroyChildren();
+
+            SliderAnimation(info.GameLevel);
 
             for (int i = 0; i < 10; i++)
             {
@@ -60,8 +68,16 @@ namespace Lindon.UserManager.Page.Home
                     data = new LevelSlot.Data(level, LevelSlot.Data.State.Future, bossLevel);
                 }
 
+
+
                 slot.SetData(data);
             }
+        }
+
+        private void SliderAnimation(int level)
+        {
+            m_slider.maxValue = 100;
+            m_slider.DOValue((level * 10) + 5, 0.2f);
         }
     }
 }
