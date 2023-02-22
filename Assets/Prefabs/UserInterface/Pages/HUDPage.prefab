@@ -36,10 +36,10 @@ RectTransform:
   m_Father: {fileID: 6606772981061662944}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -689, y: 1534.7}
-  m_SizeDelta: {x: 543.7473, y: 162.7845}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 271, y: -171.96667}
+  m_SizeDelta: {x: 543.7473, y: 162.78455}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &3107901907387596973
 CanvasRenderer:
@@ -90,15 +90,14 @@ GameObject:
   - component: {fileID: 586653610391725630}
   - component: {fileID: 5593367724897499557}
   - component: {fileID: 4402554056796482205}
-  - component: {fileID: 8318822999134192107}
   - component: {fileID: 2436163009764106303}
   m_Layer: 5
-  m_Name: Image
+  m_Name: TowerRotator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &586653610391725630
 RectTransform:
   m_ObjectHideFlags: 0
@@ -140,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.011764706}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -157,20 +156,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8318822999134192107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1629701008986176251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b02b2f4fbf313640b1c44548a3ce661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trigger: {fileID: 2436163009764106303}
-  rotateSpeed: 1
 --- !u!114 &2436163009764106303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,7 +694,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -788.1601, y: 1484.6666}
+  m_AnchoredPosition: {x: 121.84003, y: -172.00012}
   m_SizeDelta: {x: 243.6842, y: 155.9964}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7655589548939457220

@@ -11,14 +11,11 @@ namespace Lindon.TowerUpper.Manager.Enemies
 
         private EnemyManager m_EnemyManager;
 
-        List<Point> m_Points = new List<Point>();
         Transform lastPoint;
 
         public EnemyGenerator(EnemyManager enemyManager)
         {
             m_EnemyManager = enemyManager;
-
-            m_Points = GameManager.Instance.Tower.Components.SpawnPointCreator.Points;
 
             m_Prefabs = new List<Enemy>();
         }
@@ -54,7 +51,7 @@ namespace Lindon.TowerUpper.Manager.Enemies
 
         private Point GetPoint()
         {
-            var point = m_Points.RandomItem();
+            var point = GameManager.Instance.Tower.Components.SpawnPointCreator.Points.RandomItem();
             if (lastPoint != null)
             {
                 if (lastPoint == point.StartPoint)

@@ -56,6 +56,7 @@ namespace Lindon.TowerUpper.GameController.Level
         private void Load(GameInfo gameInfo, Profile.Profile profile)
         {
             LoadCharacter(profile);
+            LoadTower(gameInfo);
             LoadEnemyManager(gameInfo);
         }
 
@@ -64,6 +65,11 @@ namespace Lindon.TowerUpper.GameController.Level
             var characterSkinId = profile.GetActiveItem(ItemCategory.Skin);
             var weaponId = profile.GetActiveItem(ItemCategory.Weapon);
             GameManager.Instance.LevelInfo.SpawnCharacter(characterSkinId, weaponId);
+        }
+
+        private void LoadTower(GameInfo gameInfo)
+        {
+            GameManager.Instance.Tower.Components.SpawnPointCreator.CreatePoints(gameInfo.SpawnPointCount);
         }
 
         private void LoadEnemyManager(GameInfo gameInfo)
