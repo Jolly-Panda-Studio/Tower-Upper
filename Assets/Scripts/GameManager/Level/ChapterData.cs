@@ -6,16 +6,16 @@ namespace Lindon.TowerUpper.GameController.Level
     public class ChapterData: ScriptableObject
     {
         [SerializeField, Min(1)] private int m_Level;
-        [SerializeField] private GameInfo m_Level1;
-        [SerializeField] private GameInfo m_Level2;
-        [SerializeField] private GameInfo m_Level3;
-        [SerializeField] private GameInfo m_Level4;
-        [SerializeField] private GameInfo m_Level5;
-        [SerializeField] private GameInfo m_Level6;
-        [SerializeField] private GameInfo m_Level7;
-        [SerializeField] private GameInfo m_Level8;
-        [SerializeField] private GameInfo m_Level9;
-        [SerializeField] private GameInfo m_Level10;
+        [SerializeField, AssetPopup(typeof(GameInfo))] private GameInfo m_Level1;
+        [SerializeField, AssetPopup(typeof(GameInfo))] private GameInfo m_Level2;
+        [SerializeField, AssetPopup(typeof(GameInfo))] private GameInfo m_Level3;
+        [SerializeField, AssetPopup(typeof(GameInfo))] private GameInfo m_Level4;
+        [SerializeField, AssetPopup(typeof(GameInfo))] private GameInfo m_Level5;
+        [SerializeField, AssetPopup(typeof(GameInfo))] private GameInfo m_Level6;
+        [SerializeField, AssetPopup(typeof(GameInfo))] private GameInfo m_Level7;
+        [SerializeField, AssetPopup(typeof(GameInfo))] private GameInfo m_Level8;
+        [SerializeField, AssetPopup(typeof(GameInfo))] private GameInfo m_Level9;
+        [SerializeField, AssetPopup(typeof(GameInfo))] private GameInfo m_Level10;
 
         public GameInfo GetGame(int level)
         {
