@@ -41,16 +41,16 @@ namespace Lindon.TowerUpper.Profile
         public int GoldAmount { get => GoldCalculator.GoldAmount; private set => GoldCalculator.GoldAmount = value; }
         private readonly List<int> m_ItemsId;
 
-        private Dictionary<ItemCategory, int> m_ActiveItemsId;
+        private readonly Dictionary<ItemCategory, int> m_ActiveItemsId;
 
         public event Action<int> OnAddItem;
         public event Action<int, ItemCategory> OnActiveItem;
 
-        public Profile(string token, int level, int goldAmount)
+        public Profile()
         {
-            Token = token;
-            Level = level;
-            GoldAmount = goldAmount;
+            Token = SystemInfo.deviceUniqueIdentifier;
+            Level = -1;
+            GoldAmount = -1;
 
             m_ItemsId = new List<int>();
             m_ActiveItemsId = new Dictionary<ItemCategory, int>();
@@ -59,6 +59,60 @@ namespace Lindon.TowerUpper.Profile
                 m_ActiveItemsId.Add((ItemCategory)key, -1);
             }
         }
+
+        public Profile(int level, int goldAmount) : this()
+        {
+            Level = level;
+            GoldAmount = goldAmount;
+        }
+
+        public JSONObject Save()
+        {
+            JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
+
+            json.AddField(nameof(Level), Level);
+            json.AddField(nameof(GoldAmount), GoldAmount);
+
+            JSONObject itemJSON = new JSONObject(JSONObject.Type.ARRAY);
+            foreach (var id in m_ItemsId)
+            {
+                itemJSON.Add(id);
+            }
+            json.AddField("Items", itemJSON);
+
+            JSONObject activeItemJSON = new JSONObject(JSONObject.Type.ARRAY);
+            foreach (var item in m_ActiveItemsId)
+            {
+                activeItemJSON.AddField(item.Key.ToString(), item.Value);
+            }
+            json.AddField("ActiveItems", activeItemJSON);
+
+            Debug.Log(json);
+
+            return json;
+        }
+
+        public void Load(JSONObject json)
+        {
+            Level = (int)json[nameof(Level)].f;
+            GoldAmount = (int)json[nameof(GoldAmount)].f;
+
+            JSONObject itemJSON = json["Items"];
+            for (var i = 0; i < itemJSON.Count; i++)
+            {
+                var id = (int)itemJSON[i].f;
+                m_ItemsId.Add(id);
+            }
+
+            JSONObject activeItemJSON = json["ActiveItems"];
+            foreach (var key in System.Enum.GetValues(typeof(ItemCategory)))
+            {
+                ItemCategory category = (ItemCategory)key;
+                int id = (int)activeItemJSON[category.ToString()].f;
+                m_ActiveItemsId[category] = id;
+            }
+        }
+
 
         public void SetActiveItem(int itemId, ItemCategory category)
         {

@@ -36,6 +36,6 @@ namespace Lindon.TowerUpper.GameController.Level
             };
         }
 
-        public bool Equals(int Level) => m_Level == Level;
+        public bool Equals(int Level) => m_Level == ++Level;
     }
 }
