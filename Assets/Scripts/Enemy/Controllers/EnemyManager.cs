@@ -37,21 +37,5 @@ namespace Lindon.TowerUpper.Manager.Enemies
         {
             m_EnemyGenerator.StartSpawn();
         }
-
-        public void AddEnemy(Enemy enemy, Transform moveTarget, Transform lookAtTarget)
-        {
-            EnemyCounter.SpawnEnemy();
-
-            enemy.SetTargetMove(moveTarget).SetLookAt(lookAtTarget).Climb();
-
-            enemy.onDie += OnKill;
-        }
-
-        private void OnKill(Enemy enemy)
-        {
-            EnemyCounter.KillEnemy();
-
-            enemy.onDie -= OnKill;
-        }
     }
 }

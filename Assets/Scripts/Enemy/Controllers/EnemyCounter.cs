@@ -11,9 +11,9 @@ namespace Lindon.TowerUpper.Manager.Enemies
         /// <summary>
         /// Number of living enemies
         /// </summary>
-        public static int AliveEnemy { get; private set; }
+        public static int SpawnedEnemy { get; private set; }
 
-        public static int TotalEnemy { get; private set; } = 10;
+        public static int TotalEnemy { get; set; } = 10;
 
         /// <summary>
         /// Increase the number of enemies killed
@@ -25,10 +25,15 @@ namespace Lindon.TowerUpper.Manager.Enemies
             OnKillEnemy?.Invoke();
         }
 
+        public static bool CanSpawnEnemy()
+        {
+            return TotalEnemy > SpawnedEnemy;
+        }
+
         /// <summary>
         /// Increasing the number of active enemies
         /// </summary>
-        public static void SpawnEnemy() => AliveEnemy++;
+        public static void SpawnEnemy() => SpawnedEnemy++;
 
         public static event Action OnKillEnemy;
     }

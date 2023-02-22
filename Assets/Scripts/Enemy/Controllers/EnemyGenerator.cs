@@ -40,13 +40,16 @@ namespace Lindon.TowerUpper.Manager.Enemies
 
         private void Spawn()
         {
+            bool canSpawnNewEnemy = EnemyCounter.CanSpawnEnemy();
+            if (!canSpawnNewEnemy) return;
+
             var prefab = GetEnemyPrefab();
             var point = GetPoint();
 
             var enemyIns = Object.Instantiate(prefab, point.StartPoint);
             enemyIns.transform.localPosition = Vector3.zero;
 
-            m_EnemyManager.AddEnemy(enemyIns, point.FinishPoint, point.CenterPoint);
+            AddEnemy(enemyIns, point.FinishPoint, point.CenterPoint);
         }
 
         private Point GetPoint()
@@ -68,6 +71,22 @@ namespace Lindon.TowerUpper.Manager.Enemies
         internal void AddBossPrefab(Enemy enemyPrefab)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void AddEnemy(Enemy enemy, Transform moveTarget, Transform lookAtTarget)
+        {
+            EnemyCounter.SpawnEnemy();
+
+            enemy.SetTargetMove(moveTarget).SetLookAt(lookAtTarget).Climb();
+
+            enemy.onDie += OnKill;
+        }
+
+        private void OnKill(Enemy enemy)
+        {
+            EnemyCounter.KillEnemy();
+
+            enemy.onDie -= OnKill;
         }
     }
 }

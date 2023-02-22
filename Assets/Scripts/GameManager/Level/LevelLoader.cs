@@ -74,6 +74,8 @@ namespace Lindon.TowerUpper.GameController.Level
 
         private void LoadEnemyManager(GameInfo gameInfo)
         {
+            EnemyCounter.TotalEnemy = gameInfo.MaxEnemyCount;
+
             foreach (var id in gameInfo.EnemiesId)
             {
                 var prefab = GameData.Instance.GetEnemyModel(id);
