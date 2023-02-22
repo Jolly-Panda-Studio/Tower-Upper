@@ -1,5 +1,7 @@
 using Lindon.TowerUpper.GameController;
+using Lindon.UserManager;
 using Lindon.UserManager.Base.Page;
+using System.Security.Claims;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

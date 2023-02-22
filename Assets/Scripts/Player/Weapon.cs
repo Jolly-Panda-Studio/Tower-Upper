@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Lindon.TowerUpper.GameController.Events;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -24,6 +26,7 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
+        if (!GameRunnig.IsRunning) return;
         var muzzle = muzzles[(muzzleIndex++) % muzzles.Count];
         attackPoint = muzzle;
 

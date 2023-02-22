@@ -34,8 +34,7 @@ public class HUDPage : UIPage
         m_PauseButton.onClick.RemoveAllListeners();
         m_PauseButton.onClick.AddListener(() =>
         {
-            /*PAUSE PAGE*/
-            UserInterfaceManager.OnBackPressed();
+            UserInterfaceManager.Open<PausePopup>();
         });
 
         EventTrigger.Entry dragEntry = new EventTrigger.Entry();
