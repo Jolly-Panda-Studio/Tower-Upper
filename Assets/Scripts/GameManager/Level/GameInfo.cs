@@ -13,17 +13,11 @@ namespace Lindon.TowerUpper.GameController.Level
 
         [Header("Enemy")]
         [SerializeField] private int m_MaxEnemyCount = 10;
-        private List<int> m_Ids;
         [SerializeField, AssetPopup(typeof(GameModelData))] private List<GameModelData> m_Enemies;
         [SerializeField, AssetPopup(typeof(GameModelData))] private GameModelData m_BossEnemy;
 
-        private void OnValidate()
-        {
-            m_Ids = m_Enemies.Select(x => x.Id).ToList();
-        }
-
         public int Level => m_Level;
-        public List<int> EnemiesId  => m_Ids;
+        public List<int> EnemiesId  => m_Enemies.Select(x => x.Id).ToList();
         public bool HasBossFight => m_Level == 10;
         public int MaxEnemyCount => m_MaxEnemyCount;
         public int BossEnemyId => m_BossEnemy.Id;
