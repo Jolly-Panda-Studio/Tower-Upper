@@ -1,4 +1,5 @@
-﻿using Lindon.TowerUpper.GameController.Events;
+﻿using Lindon.TowerUpper.EnemyUtility;
+using Lindon.TowerUpper.GameController.Events;
 using System;
 using UnityEngine;
 
@@ -52,8 +53,8 @@ public class Ammo : MonoBehaviour
         if (other.TryGetComponent(out Enemy enemy))
         {
             Destroy(gameObject);
-            enemy.Kill();
-            enemy.FallDown(force);
+            enemy.Health.TakeDamage();
+            enemy.Falling.FallDown(force);
         }
     }
 }

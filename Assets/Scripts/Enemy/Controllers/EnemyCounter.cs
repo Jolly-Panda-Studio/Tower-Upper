@@ -1,6 +1,6 @@
 using System;
 
-namespace Lindon.TowerUpper.Manager.Enemies
+namespace Lindon.TowerUpper.EnemyUtility.Controller
 {
     public static class EnemyCounter
     {

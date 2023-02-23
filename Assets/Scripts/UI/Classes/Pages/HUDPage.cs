@@ -1,6 +1,6 @@
+using Lindon.TowerUpper.EnemyUtility.Controller;
 using Lindon.TowerUpper.GameController;
 using Lindon.TowerUpper.GameController.Events;
-using Lindon.TowerUpper.Manager.Enemies;
 using Lindon.UserManager;
 using Lindon.UserManager.Base.Page;
 using System;

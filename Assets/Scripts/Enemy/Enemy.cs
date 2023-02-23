@@ -1,102 +1,73 @@
-﻿using UnityEngine;
-using DG.Tweening;
-using System;
+﻿using Lindon.TowerUpper.EnemyUtility.Ability;
 using Lindon.TowerUpper.GameController.Events;
+using System;
+using UnityEngine;
 
-public class Enemy : MonoBehaviour
+namespace Lindon.TowerUpper.EnemyUtility
 {
-    [SerializeField] private float m_Speed = 10;
-    private Vector3 m_Destination;
-    DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> m_DoClimbing;
-
-    public float Speed => m_Speed;
-
-    public event Action<Enemy> OnDie;
-    public event Action<Enemy> OnFinishClimb;
-
-    private void OnEnable()
+    public class Enemy : MonoBehaviour
     {
-        GameRunnig.OnChange += OnChangeRunnig;
-        GameFinisher.OnFinishGame += GameFinished;
-        GameRestarter.OnRestartGame += GameFinished;
-        ReturnHome.OnReturnHome += OnReturnHome;
-    }
+        [SerializeField, AssetPopup(typeof(EnemyData))] private EnemyData m_Data;
 
-    private void OnDisable()
-    {
-        GameRunnig.OnChange -= OnChangeRunnig;
-        GameFinisher.OnFinishGame -= GameFinished;
-        GameRestarter.OnRestartGame -= GameFinished;
-        ReturnHome.OnReturnHome -= OnReturnHome;
-    }
+        public Health Health { get; private set; }
+        public EnemyClimbing Climbing { get; private set; }
+        public EnemyFalling Falling { get; private set; }
+        public EnemyData Data => m_Data;
 
-    private void OnChangeRunnig(bool state)
-    {
-        if (m_DoClimbing != null)
+        public event Action<Enemy> OnDie
         {
-            if (state)
-            {
-                m_DoClimbing.Play();
-            }
-            else
-            {
-                m_DoClimbing.Pause();
-            }
+            add => Health.OnDie += () => value?.Invoke(this);
+            remove => Health.OnDie -= () => value?.Invoke(this);
         }
-    }
 
-    private void GameFinished()
-    {
-        m_DoClimbing.Kill();
-    }
-
-    private void OnReturnHome()
-    {
-        Destroy(gameObject);
-    }
-
-    public Enemy SetTargetMove(Transform destination)
-    {
-        m_Destination = destination.position;
-        m_Destination.y -= GetComponent<CapsuleCollider>().height;
-        return this;
-    }
-
-    public Enemy SetLookAt(Transform lookAtTarget)
-    {
-        transform.LookAt(lookAtTarget);
-        return this;
-    }
-
-    public void Climb()
-    {
-        m_DoClimbing = transform.DOMoveY(m_Destination.y, GetMoveTime(m_Destination))
-            .SetEase(Ease.Linear)
-            .OnComplete(() =>
+        public event Action<Enemy> OnFinishClimb
         {
-            OnFinishClimb?.Invoke(this);
-        });
-    }
-
-    public float GetMoveTime(Vector3 position)
-    {
-        return Vector3.Distance(transform.position, position) / m_Speed;
-    }
-
-    public void Kill()
-    {
-        if(m_DoClimbing != null)
-        {
-            m_DoClimbing.Kill();
-
-            OnDie?.Invoke(this);
+            add => Climbing.OnFinishClimb += () => value?.Invoke(this);
+            remove => Climbing.OnFinishClimb -= () => value?.Invoke(this);
         }
-    }
 
-    public void FallDown(float force)
-    {
-        var rigidbody = gameObject.GetOrAddComponent<Rigidbody>();
-        var forceVector = -(transform.forward / 4) + Vector3.down;
-        rigidbody.AddForce(forceVector * force, ForceMode.Impulse);
+        public event Action<Enemy> OnFalling
+        {
+            add => Falling.OnFalling += () => value?.Invoke(this);
+            remove => Falling.OnFalling -= () => value?.Invoke(this);
+        }
+
+        private void Awake()
+        {
+            Health = new Health(Data.Health);
+            Climbing = new EnemyClimbing(this, Data.Speed);
+            Falling = new EnemyFalling(this);
+        }
+
+        private void OnEnable()
+        {
+            GameRunnig.OnChange += OnChangeRunnig;
+            GameFinisher.OnFinishGame += GameFinished;
+            GameRestarter.OnRestartGame += GameFinished;
+            ReturnHome.OnReturnHome += OnReturnHome;
+        }
+
+        private void OnDisable()
+        {
+            GameRunnig.OnChange -= OnChangeRunnig;
+            GameFinisher.OnFinishGame -= GameFinished;
+            GameRestarter.OnRestartGame -= GameFinished;
+            ReturnHome.OnReturnHome -= OnReturnHome;
+        }
+
+        private void OnChangeRunnig(bool state)
+        {
+            Climbing.ChangeClimbingRunnig(state);
+        }
+
+        private void GameFinished()
+        {
+            Climbing.StopClimbing();
+        }
+
+        private void OnReturnHome()
+        {
+            Destroy(gameObject);
+        }
     }
 }

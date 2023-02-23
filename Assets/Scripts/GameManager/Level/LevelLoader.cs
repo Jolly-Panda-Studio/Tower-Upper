@@ -1,7 +1,8 @@
 using Lindon.TowerUpper.Data;
+using Lindon.TowerUpper.EnemyUtility;
+using Lindon.TowerUpper.EnemyUtility.Controller;
 using Lindon.TowerUpper.GameController.Events;
 using Lindon.TowerUpper.Initilizer;
-using Lindon.TowerUpper.Manager.Enemies;
 using Lindon.TowerUpper.Profile;
 using System;
 using Unity.VisualScripting;

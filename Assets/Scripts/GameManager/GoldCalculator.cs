@@ -1,4 +1,4 @@
-using Lindon.TowerUpper.Manager.Enemies;
+using Lindon.TowerUpper.EnemyUtility.Controller;
 using Lindon.TowerUpper.Profile;
 using System;
 

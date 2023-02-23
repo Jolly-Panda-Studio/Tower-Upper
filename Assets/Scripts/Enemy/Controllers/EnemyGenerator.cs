@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Lindon.TowerUpper.Manager.Enemies
+namespace Lindon.TowerUpper.EnemyUtility.Controller
 {
     public class EnemyGenerator
     {
@@ -84,7 +84,9 @@ namespace Lindon.TowerUpper.Manager.Enemies
         {
             EnemyCounter.SpawnEnemy();
 
-            enemy.SetTargetMove(moveTarget).SetLookAt(lookAtTarget).Climb();
+            enemy.Climbing.SetTargetMove(moveTarget);
+            enemy.Climbing.SetLookAt(lookAtTarget);
+            enemy.Climbing.Climbimg();
 
             enemy.OnDie += OnKill;
             enemy.OnFinishClimb += FinishClimbing;

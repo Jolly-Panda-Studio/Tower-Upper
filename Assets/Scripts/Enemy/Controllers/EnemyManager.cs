@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Lindon.TowerUpper.Manager.Enemies
+namespace Lindon.TowerUpper.EnemyUtility.Controller
 {
     public class EnemyManager : MonoBehaviour
     {

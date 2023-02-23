@@ -1,56 +1,59 @@
 using Lindon.TowerUpper.GameController.Events;
 using UnityEngine;
 
-public class EnemyAnimation : MonoBehaviour
+namespace Lindon.TowerUpper.EnemyUtility.Controller
 {
-    [SerializeField] private Animator m_animator;
-    [SerializeField] private Enemy m_enemy;
-
-    [Header("Parameter")]
-    [SerializeField] private string m_fallParameter;
-    [SerializeField] private string m_victoryParameter;
-    [SerializeField] private string m_idleParameter;
-
-    private bool m_isVictory;
-
-    private void Start()
+    public class EnemyAnimation : MonoBehaviour
     {
-        m_animator.speed = m_enemy.Speed / 2;
-    }
+        [SerializeField] private Animator m_animator;
+        [SerializeField] private Enemy m_enemy;
 
-    private void OnEnable()
-    {
-        m_enemy.OnDie += DieAnimation;
-        m_enemy.OnFinishClimb += VictoryAnimation;
+        [Header("Parameter")]
+        [SerializeField] private string m_fallParameter;
+        [SerializeField] private string m_victoryParameter;
+        [SerializeField] private string m_idleParameter;
 
-        GameFinisher.OnFinishGame += DisableAnimator;
-    }
+        private bool m_isVictory;
 
-    private void OnDisable()
-    {
-        m_enemy.OnDie -= DieAnimation;
-        m_enemy.OnFinishClimb -= VictoryAnimation;
+        private void Start()
+        {
+            m_animator.speed = m_enemy.Data.Speed / 2;
+        }
 
-        GameFinisher.OnFinishGame -= DisableAnimator;
-    }
+        private void OnEnable()
+        {
+            m_enemy.OnDie += DieAnimation;
+            m_enemy.OnFinishClimb += VictoryAnimation;
 
-    private void DieAnimation(Enemy obj)
-    {
-        m_animator.speed = 1;
-        m_animator.SetTrigger(m_fallParameter);
-    }
+            GameFinisher.OnFinishGame += DisableAnimator;
+        }
 
-    private void VictoryAnimation(Enemy obj)
-    {
-        m_isVictory = true;
-        m_animator.speed = 1;
-        m_animator.SetTrigger(m_victoryParameter);
-    }
+        private void OnDisable()
+        {
+            m_enemy.OnDie -= DieAnimation;
+            m_enemy.OnFinishClimb -= VictoryAnimation;
 
-    public void DisableAnimator()
-    {
-        if (m_isVictory) return;
-        m_animator.speed = 1;
-        m_animator.SetTrigger(m_idleParameter);
+            GameFinisher.OnFinishGame -= DisableAnimator;
+        }
+
+        private void DieAnimation(Enemy obj)
+        {
+            m_animator.speed = 1;
+            m_animator.SetTrigger(m_fallParameter);
+        }
+
+        private void VictoryAnimation(Enemy obj)
+        {
+            m_isVictory = true;
+            m_animator.speed = 1;
+            m_animator.SetTrigger(m_victoryParameter);
+        }
+
+        public void DisableAnimator()
+        {
+            if (m_isVictory) return;
+            m_animator.speed = 1;
+            m_animator.SetTrigger(m_idleParameter);
+        }
     }
 }

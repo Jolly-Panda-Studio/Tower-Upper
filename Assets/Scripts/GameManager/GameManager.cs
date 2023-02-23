@@ -1,6 +1,6 @@
-﻿using Lindon.TowerUpper.GameController.Level;
+﻿using Lindon.TowerUpper.EnemyUtility.Controller;
+using Lindon.TowerUpper.GameController.Level;
 using Lindon.TowerUpper.Initilizer;
-using Lindon.TowerUpper.Manager.Enemies;
 using UnityEngine;
 
 namespace Lindon.TowerUpper.GameController
