@@ -8,6 +8,7 @@ using UnityEngine;
 public class Ammo : MonoBehaviour
 {
     [SerializeField] private float force;
+    [SerializeField,Min(1)] private int m_Damage = 1;
     private Rigidbody m_Rigidbody;
 
     private void Start()
@@ -53,7 +54,7 @@ public class Ammo : MonoBehaviour
         if (other.TryGetComponent(out Enemy enemy))
         {
             Destroy(gameObject);
-            enemy.Health.TakeDamage();
+            enemy.Health.TakeDamage(m_Damage);
             enemy.Falling.FallDown(force);
         }
     }

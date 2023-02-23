@@ -10,5 +10,7 @@ namespace Lindon.TowerUpper.EnemyUtility.Ability
         {
             m_Enemy = enemy;
         }
+
+        public abstract void OnDestory();
     }
 }

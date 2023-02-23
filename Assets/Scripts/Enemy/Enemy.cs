@@ -1,6 +1,7 @@
 ﻿using Lindon.TowerUpper.EnemyUtility.Ability;
 using Lindon.TowerUpper.GameController.Events;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lindon.TowerUpper.EnemyUtility
@@ -9,7 +10,12 @@ namespace Lindon.TowerUpper.EnemyUtility
     {
         [SerializeField, AssetPopup(typeof(EnemyData))] private EnemyData m_Data;
 
-        public Health Health { get; private set; }
+        private List<BaseAbility> m_AbilityList;
+
+        [Header("Components")]
+        [SerializeField] private EnemyHealthBar m_HealthBar;
+
+        public EnemyHealth Health { get; private set; }
         public EnemyClimbing Climbing { get; private set; }
         public EnemyFalling Falling { get; private set; }
         public EnemyData Data => m_Data;
@@ -34,9 +40,16 @@ namespace Lindon.TowerUpper.EnemyUtility
 
         private void Awake()
         {
-            Health = new Health(Data.Health);
-            Climbing = new EnemyClimbing(this, Data.Speed);
-            Falling = new EnemyFalling(this);
+            Falling = new EnemyFalling(this); 
+            Health = new EnemyHealth(this, m_HealthBar);
+            Climbing = new EnemyClimbing(this);
+
+            m_AbilityList = new List<BaseAbility>
+            {
+                Health,
+                Climbing,
+                Falling
+            };
         }
 
         private void OnEnable()
@@ -68,6 +81,14 @@ namespace Lindon.TowerUpper.EnemyUtility
         private void OnReturnHome()
         {
             Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var ability in m_AbilityList)
+            {
+                ability.OnDestory();
+            }
         }
     }
 }

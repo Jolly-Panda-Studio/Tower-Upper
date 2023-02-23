@@ -33,8 +33,18 @@ public class Health
         m_MaxHealth = value;
     }
 
-    public void TakeDamage(int value = 1) => OnHealthChange?.Invoke(CurrrentHealth -= value, m_MaxHealth);
-    public void ImproveHealth(int value = 1) => OnHealthChange?.Invoke(CurrrentHealth += value, m_MaxHealth);
+    public void TakeDamage(int value = 1)
+    {
+        CurrrentHealth -= value;
+        OnHealthChange?.Invoke(CurrrentHealth, m_MaxHealth);
+    }
+
+    public void ImproveHealth(int value = 1)
+    {
+        CurrrentHealth += value;
+        OnHealthChange?.Invoke(CurrrentHealth, m_MaxHealth);
+    }
+
     public void Kill()
     {
         CurrrentHealth = 0;

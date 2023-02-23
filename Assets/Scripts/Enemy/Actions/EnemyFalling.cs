@@ -19,5 +19,10 @@ namespace Lindon.TowerUpper.EnemyUtility.Ability
 
             OnFalling?.Invoke();
         }
+
+        public override void OnDestory()
+        {
+
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using System;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Lindon.TowerUpper.EnemyUtility.Ability
 {
@@ -11,9 +12,11 @@ namespace Lindon.TowerUpper.EnemyUtility.Ability
         private Vector3 m_Destination;
         DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> m_DoClimbing;
 
-        public EnemyClimbing(Enemy enemy, float speed) : base(enemy)
+        public EnemyClimbing(Enemy enemy) : base(enemy)
         {
-            m_Speed = speed;
+            m_Speed = enemy.Data.Speed;
+
+            enemy.OnDie += Die;
         }
 
         public event Action OnFinishClimb;
@@ -64,6 +67,17 @@ namespace Lindon.TowerUpper.EnemyUtility.Ability
         private float GetMoveTime(Vector3 position)
         {
             return Vector3.Distance(m_Enemy.transform.position, position) / m_Speed;
+        }
+
+        public override void OnDestory()
+        {
+            m_Enemy.OnDie -= Die;
+        }
+
+        private void Die(Enemy enemy)
+        {
+            enemy.OnDie -= Die;
+            StopClimbing();
         }
     }
 }
