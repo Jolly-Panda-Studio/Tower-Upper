@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour
     public Enemy SetTargetMove(Transform destination)
     {
         m_Destination = destination.position;
+        m_Destination.y -= GetComponent<CapsuleCollider>().height;
         return this;
     }
 
@@ -69,7 +70,9 @@ public class Enemy : MonoBehaviour
 
     public void Climb()
     {
-        m_DoClimbing = transform.DOMoveY(m_Destination.y, GetMoveTime(m_Destination)).OnComplete(() =>
+        m_DoClimbing = transform.DOMoveY(m_Destination.y, GetMoveTime(m_Destination))
+            .SetEase(Ease.Linear)
+            .OnComplete(() =>
         {
             OnFinishClimb?.Invoke(this);
         });
