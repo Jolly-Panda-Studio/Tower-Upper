@@ -14,6 +14,7 @@ namespace Lindon.TowerUpper.EnemyUtility
 
         [Header("Components")]
         [SerializeField] private EnemyHealthBar m_HealthBar;
+        [SerializeField] private Collider m_Collider;
 
         public EnemyHealth Health { get; private set; }
         public EnemyClimbing Climbing { get; private set; }
@@ -58,6 +59,7 @@ namespace Lindon.TowerUpper.EnemyUtility
             GameFinisher.OnFinishGame += GameFinished;
             GameRestarter.OnRestartGame += GameFinished;
             ReturnHome.OnReturnHome += OnReturnHome;
+            Health.OnDie += Die;
         }
 
         private void OnDisable()
@@ -66,6 +68,7 @@ namespace Lindon.TowerUpper.EnemyUtility
             GameFinisher.OnFinishGame -= GameFinished;
             GameRestarter.OnRestartGame -= GameFinished;
             ReturnHome.OnReturnHome -= OnReturnHome;
+            Health.OnDie -= Die;
         }
 
         private void OnChangeRunnig(bool state)
@@ -89,6 +92,11 @@ namespace Lindon.TowerUpper.EnemyUtility
             {
                 ability.OnDestory();
             }
+        }
+
+        private void Die()
+        {
+            m_Collider.enabled = false;
         }
     }
 }

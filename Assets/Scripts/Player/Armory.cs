@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Armory : MonoBehaviour
 {
+    [SerializeField] private List<Ammo> m_ammos;
     [SerializeField] private List<WeaponModel> m_WeaponModels;
     private int m_lastId = -1;
 
@@ -22,7 +23,8 @@ public class Armory : MonoBehaviour
     private void StartGame()
     {
         if (m_lastId == -1) return;
-        ActiveWeapon(m_lastId);
+        var activatedWeapon = ActiveWeapon(m_lastId);
+        SetAmmo(activatedWeapon);
     }
 
     public bool AddWeapon(WeaponModel newModel)
@@ -38,10 +40,10 @@ public class Armory : MonoBehaviour
         return true;
     }
 
-    public Weapon ActiveWeapon()
+    private void SetAmmo(Weapon weapon)
     {
-        var weaponId = m_WeaponModels.RemoveRandom().Id;
-        return ActiveWeapon(weaponId);
+        var bullet = m_ammos.RandomItem();
+        weapon.SettBullet(bullet);
     }
 
     public Weapon ActiveWeapon(int weaponId)

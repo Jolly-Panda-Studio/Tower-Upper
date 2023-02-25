@@ -59,8 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d51291ba121d00e4daae0ca3681c80ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_timeBetweenShooting: 0.45
   bullet: {fileID: 1945845834909584036, guid: e8eadea7ccf4fb947a2bca3d492d9070, type: 3}
-  shootForce: 10
   muzzles:
   - {fileID: 0}
   - {fileID: 0}

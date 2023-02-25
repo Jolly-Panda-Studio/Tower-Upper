@@ -53,6 +53,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b58e16b17aac4395719e1c8134af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ammos:
+  - {fileID: 3984111896116621212, guid: 86d777c9e260e4c4ba696ed54c54438b, type: 3}
+  - {fileID: 3985790245601343852, guid: 30abcfc7635c76b4dabad95f84379f5b, type: 3}
+  - {fileID: 5057324196080665073, guid: 5366843932d87de4480f0d8d54cbde7e, type: 3}
+  - {fileID: 2717713774903072842, guid: 8e16ee6b0c230924b8c59aa6f74116c1, type: 3}
+  - {fileID: 337454115974006004, guid: 48fe054abfdf50b40a9360997059b8b3, type: 3}
+  - {fileID: 1894505880948442229, guid: e3425d36b89c19e41b7af7492e0c39cb, type: 3}
   m_WeaponModels:
   - {fileID: 7098055476090511772}
   - {fileID: 3399202963924391706}

@@ -1016,6 +1016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Data: {fileID: 11400000, guid: 66667f683f821864b9ddc8f386e8eebd, type: 2}
   m_HealthBar: {fileID: 8402135365987558442}
+  m_Collider: {fileID: 1982932137631947292}
 --- !u!114 &1895594800166475653
 MonoBehaviour:
   m_ObjectHideFlags: 0

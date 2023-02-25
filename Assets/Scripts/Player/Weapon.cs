@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private float m_timeBetweenShooting = 1;
+    private bool m_readyToShoot;
+
     [Header("Bullet")]
     [SerializeField] private Ammo bullet;
-
-    [Header("Bullet force")]
-    [SerializeField] private float shootForce;
 
     [Header("Muzzles")]
     [SerializeField] private List<Transform> muzzles;
@@ -24,18 +24,35 @@ public class Weapon : MonoBehaviour
 
     public Transform GetAim() => m_Aim;
 
+    private void Start()
+    {
+        m_readyToShoot = true;
+    }
+
+    public void SettBullet(Ammo ammo)
+    {
+        bullet = ammo;
+    }
+
     public void Fire()
     {
         if (!GameRunnig.IsRunning) return;
+        if (!m_readyToShoot) return;
+        m_readyToShoot = false;
         var muzzle = muzzles[(muzzleIndex++) % muzzles.Count];
         attackPoint = muzzle;
 
-        var currentBullet = Instantiate(bullet, attackPoint.position, attackPoint.rotation);
-
-        currentBullet.GetComponent<Rigidbody>().AddForce(Vector3.down * shootForce, ForceMode.Impulse);
+        Instantiate(bullet, attackPoint.position, attackPoint.rotation);
 
         if (muzzleFlash != null)
             Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
 
+        Invoke(nameof(ResetShot), m_timeBetweenShooting);
+    }
+
+    private void ResetShot()
+    {
+        //Allow shooting and invoking again
+        m_readyToShoot = true;
     }
 }
