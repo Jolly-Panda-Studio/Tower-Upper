@@ -33,6 +33,7 @@ namespace Lindon.TowerUpper.GameController.Level
         {
             GameRestarter.OnRestartGame += StartGame;
             GameStarter.OnStartGame += StartGame;
+            ProfileController.Instance.OnLoadProfile += LoadProfile;
             ProfileController.Instance.Profile.OnActiveItem += ChangeActiveItem;
         }
 
@@ -40,13 +41,17 @@ namespace Lindon.TowerUpper.GameController.Level
         {
             GameRestarter.OnRestartGame -= StartGame;
             GameStarter.OnStartGame -= StartGame;
+            ProfileController.Instance.OnLoadProfile -= LoadProfile;
             ProfileController.Instance.Profile.OnActiveItem -= ChangeActiveItem;
         }
 
-        private void Start()
+        private void LoadProfile(Profile.Profile profile)
         {
-            var profile = ProfileController.Instance.Profile;
-            LoadCharacter(profile);
+            var info = ProfileController.Instance.Profile.GetChapter();
+
+            var gameInfo = GameData.Instance.GetGameInfo(info.ChapterLevel, info.GameLevel);
+
+            Load(gameInfo, profile);
         }
 
         private void ChangeActiveItem(int id, ItemCategory category)

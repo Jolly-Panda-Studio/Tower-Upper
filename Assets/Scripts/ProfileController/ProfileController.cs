@@ -31,6 +31,12 @@ namespace Lindon.TowerUpper.Profile
             }
         }
 
+        private void Start()
+        {
+            OnLoadProfile?.Invoke(Profile);
+        }
+
+
         private void OnEnable()
         {
             Profile.OnAddItem += Profile_OnAddItem;

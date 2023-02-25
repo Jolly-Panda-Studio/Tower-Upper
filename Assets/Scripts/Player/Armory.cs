@@ -1,12 +1,13 @@
 using Lindon.TowerUpper.Data;
 using Lindon.TowerUpper.GameController.Events;
+using Lindon.TowerUpper.Profile;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Armory : MonoBehaviour
 {
     [SerializeField] private List<WeaponModel> m_WeaponModels;
-    private int m_lastId;
+    private int m_lastId = -1;
 
     private void OnEnable()
     {
@@ -20,6 +21,7 @@ public class Armory : MonoBehaviour
 
     private void StartGame()
     {
+        if (m_lastId == -1) return;
         ActiveWeapon(m_lastId);
     }
 
@@ -62,9 +64,18 @@ public class Armory : MonoBehaviour
 
     public void SetActive(bool value)
     {
+        if (m_lastId == -1)
+        {
+            m_lastId = ProfileController.Instance.Profile.GetActiveItem(ItemCategory.Weapon);
+        }
+
         foreach (var weaponModel in m_WeaponModels)
         {
-            weaponModel.gameObject.SetActive(value);
+            weaponModel.gameObject.SetActive(false);
+            if (value && weaponModel.Equals(m_lastId))
+            {
+                weaponModel.gameObject.SetActive(true);
+            }
         }
     }
 }

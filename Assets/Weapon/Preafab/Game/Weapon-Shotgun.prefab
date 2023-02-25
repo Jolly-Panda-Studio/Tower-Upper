@@ -17,15 +17,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5154803319165150268, guid: dabd69900423a22459976cde3c3e9577, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.142
       objectReference: {fileID: 0}
     - target: {fileID: 5154803319165150268, guid: dabd69900423a22459976cde3c3e9577, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.154
       objectReference: {fileID: 0}
     - target: {fileID: 5154803319165150268, guid: dabd69900423a22459976cde3c3e9577, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.007
       objectReference: {fileID: 0}
     - target: {fileID: 5154803319165150268, guid: dabd69900423a22459976cde3c3e9577, type: 3}
       propertyPath: m_LocalRotation.w
@@ -71,7 +71,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1097298551003758572, guid: 671fb49350b65ea4b87c88a7a5eb5f82, type: 3}
       propertyPath: m_Name
-      value: Weapon-1
+      value: Weapon-Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 3595809536328859818, guid: 671fb49350b65ea4b87c88a7a5eb5f82, type: 3}
       propertyPath: m_Data

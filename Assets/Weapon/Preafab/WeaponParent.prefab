@@ -74,6 +74,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon-SM_DMRA1
       objectReference: {fileID: 0}
+    - target: {fileID: 691218568385720294, guid: ee32b58d3f1e31c4887f4a432146df48, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8967061337602923496, guid: ee32b58d3f1e31c4887f4a432146df48, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -191,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon-SM_SMGA1
       objectReference: {fileID: 0}
+    - target: {fileID: 8787843515215527837, guid: d45a8e0c5d461b646963bb4fc2cde824, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d45a8e0c5d461b646963bb4fc2cde824, type: 3}
 --- !u!4 &6546585348853568203 stripped
@@ -264,6 +272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon-SM_ARA2
       objectReference: {fileID: 0}
+    - target: {fileID: 7406647677738837003, guid: 6d8d2ddb9b5ecd649b4d5ab8d599efc0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d8d2ddb9b5ecd649b4d5ab8d599efc0, type: 3}
 --- !u!114 &374586328214558421 stripped
@@ -292,6 +304,10 @@ PrefabInstance:
     - target: {fileID: 1725630164806176090, guid: 4880f86b320ad0d4a9fbc6cfd9f6a47d, type: 3}
       propertyPath: m_Name
       value: Weapon-SM_ARA1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725630164806176090, guid: 4880f86b320ad0d4a9fbc6cfd9f6a47d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8204901882476293575, guid: 4880f86b320ad0d4a9fbc6cfd9f6a47d, type: 3}
       propertyPath: m_RootOrder
@@ -365,6 +381,10 @@ PrefabInstance:
     - target: {fileID: 153672119540430305, guid: aa4a6d654fa185a4c933143266cb3063, type: 3}
       propertyPath: m_Name
       value: Weapon-SM_SHA1
+      objectReference: {fileID: 0}
+    - target: {fileID: 153672119540430305, guid: aa4a6d654fa185a4c933143266cb3063, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 153672119540430306, guid: aa4a6d654fa185a4c933143266cb3063, type: 3}
       propertyPath: m_RootOrder
@@ -483,6 +503,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon-1
       objectReference: {fileID: 0}
+    - target: {fileID: 7167198219045461767, guid: 670c82cc191825846872fd625125cf97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 670c82cc191825846872fd625125cf97, type: 3}
 --- !u!4 &1364712717477497332 stripped
@@ -511,6 +535,10 @@ PrefabInstance:
     - target: {fileID: 8613503841088781157, guid: 7fca34d725df1894ebfad6de26e5eaf1, type: 3}
       propertyPath: m_Name
       value: Weapon-SM_ARA3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613503841088781157, guid: 7fca34d725df1894ebfad6de26e5eaf1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8613503841088781158, guid: 7fca34d725df1894ebfad6de26e5eaf1, type: 3}
       propertyPath: m_RootOrder
@@ -629,6 +657,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon-SM_SRA1
       objectReference: {fileID: 0}
+    - target: {fileID: 2729186945387004685, guid: 1529b28e4e537b14ebbeb7634345178b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1529b28e4e537b14ebbeb7634345178b, type: 3}
 --- !u!114 &2942370048681201471 stripped
@@ -701,6 +733,10 @@ PrefabInstance:
     - target: {fileID: 7167198219045461767, guid: 5ef681e8fc210194daf5828cabe08fe0, type: 3}
       propertyPath: m_Name
       value: Weapon-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7167198219045461767, guid: 5ef681e8fc210194daf5828cabe08fe0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ef681e8fc210194daf5828cabe08fe0, type: 3}
