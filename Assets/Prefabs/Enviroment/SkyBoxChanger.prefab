@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6851193613662122807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6851193613662122805}
+  - component: {fileID: 6851193613662122806}
+  m_Layer: 0
+  m_Name: SkyBoxChanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6851193613662122805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6851193613662122807}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.00000023841858, y: -21.5765, z: -0.00000047683716}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6851193613662122806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6851193613662122807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fba6d8f7569db4e911eac2593497e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SkyBoxes:
+  - {fileID: 2100000, guid: 91b89776b1d1b444e8f2b27983fdd118, type: 2}
+  - {fileID: 2100000, guid: 1fe2aa3c247b463498d350383e7a10dc, type: 2}
+  - {fileID: 2100000, guid: 41df6db391b39ed42a10a4b9eedd1742, type: 2}
+  - {fileID: 2100000, guid: 7422966fc66e3084ba3c56de0992f02f, type: 2}
+  - {fileID: 2100000, guid: e8ed1d86db2826b4f80d008c7b03d053, type: 2}
+  - {fileID: 2100000, guid: 3813f9b0bfd6df745bdecd879ca603f5, type: 2}
+  - {fileID: 2100000, guid: 7a55134c0bdd95f45ac36d63fc4e2b89, type: 2}
+  - {fileID: 2100000, guid: ad7c1e064f7aa884fb1d90f932c65dfd, type: 2}
+  - {fileID: 2100000, guid: 01210524c7185c74babbd24988b46fc0, type: 2}
+  - {fileID: 2100000, guid: ff842630219f3b341a44aaa1835394f5, type: 2}
+  - {fileID: 2100000, guid: 1474982501a6ef743a225abaa1258796, type: 2}
+  - {fileID: 2100000, guid: 7a55134c0bdd95f45ac36d63fc4e2b89, type: 2}
+  - {fileID: 2100000, guid: ad7c1e064f7aa884fb1d90f932c65dfd, type: 2}
+  - {fileID: 2100000, guid: 01210524c7185c74babbd24988b46fc0, type: 2}
+  - {fileID: 2100000, guid: ff842630219f3b341a44aaa1835394f5, type: 2}
+  - {fileID: 2100000, guid: 1474982501a6ef743a225abaa1258796, type: 2}
