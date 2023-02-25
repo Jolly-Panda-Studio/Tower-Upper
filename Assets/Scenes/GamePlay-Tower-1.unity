@@ -282,6 +282,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7670132520265879277, guid: 3e8a60ca9740bc44eaf64aab34ba2e64, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7670132520548621187, guid: 3e8a60ca9740bc44eaf64aab34ba2e64, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -876,6 +880,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5459558350284184087, guid: 80fb5799ecf6a084faa18e393d4bd0f4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 45.145214
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459558350284184087, guid: 80fb5799ecf6a084faa18e393d4bd0f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -33.933
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80fb5799ecf6a084faa18e393d4bd0f4, type: 3}
 --- !u!1001 &3492162965038506604
@@ -895,11 +907,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3492162964915228440, guid: 27429aec6aadd41439593c5b5df20f16, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.8
+      value: 22.7
       objectReference: {fileID: 0}
     - target: {fileID: 3492162964915228440, guid: 27429aec6aadd41439593c5b5df20f16, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.1
+      value: -14.6
       objectReference: {fileID: 0}
     - target: {fileID: 3492162964915228440, guid: 27429aec6aadd41439593c5b5df20f16, type: 3}
       propertyPath: m_LocalRotation.w
