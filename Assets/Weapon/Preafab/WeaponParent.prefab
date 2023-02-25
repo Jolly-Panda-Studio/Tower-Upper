@@ -56,6 +56,13 @@ MonoBehaviour:
   m_WeaponModels:
   - {fileID: 7098055476090511772}
   - {fileID: 3399202963924391706}
+  - {fileID: 7740763051472688398}
+  - {fileID: 7115932984135621949}
+  - {fileID: 7036507554784835983}
+  - {fileID: 6151397225121055265}
+  - {fileID: 374586328214558421}
+  - {fileID: 6712572705628993354}
+  - {fileID: 2942370048681201471}
 --- !u!1001 &1901431072356539347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66,10 +73,6 @@ PrefabInstance:
     - target: {fileID: 691218568385720294, guid: ee32b58d3f1e31c4887f4a432146df48, type: 3}
       propertyPath: m_Name
       value: Weapon-SM_DMRA1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8693040352490161902, guid: ee32b58d3f1e31c4887f4a432146df48, type: 3}
-      propertyPath: m_Data
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8967061337602923496, guid: ee32b58d3f1e31c4887f4a432146df48, type: 3}
       propertyPath: m_RootOrder
@@ -117,6 +120,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee32b58d3f1e31c4887f4a432146df48, type: 3}
+--- !u!114 &7115932984135621949 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8693040352490161902, guid: ee32b58d3f1e31c4887f4a432146df48, type: 3}
+  m_PrefabInstance: {fileID: 1901431072356539347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6582f53e1fa24faddd1f47141445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7355041998459732027 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8967061337602923496, guid: ee32b58d3f1e31c4887f4a432146df48, type: 3}
@@ -184,6 +198,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8744950681602183023, guid: d45a8e0c5d461b646963bb4fc2cde824, type: 3}
   m_PrefabInstance: {fileID: 2559851083417836964}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7036507554784835983 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4765046623556969515, guid: d45a8e0c5d461b646963bb4fc2cde824, type: 3}
+  m_PrefabInstance: {fileID: 2559851083417836964}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6582f53e1fa24faddd1f47141445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3233477485767091695
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,10 +216,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7300630966445610952}
     m_Modifications:
-    - target: {fileID: 3021162062742860602, guid: 6d8d2ddb9b5ecd649b4d5ab8d599efc0, type: 3}
-      propertyPath: m_Data
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7406647677738837002, guid: 6d8d2ddb9b5ecd649b4d5ab8d599efc0, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -245,6 +266,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d8d2ddb9b5ecd649b4d5ab8d599efc0, type: 3}
+--- !u!114 &374586328214558421 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3021162062742860602, guid: 6d8d2ddb9b5ecd649b4d5ab8d599efc0, type: 3}
+  m_PrefabInstance: {fileID: 3233477485767091695}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6582f53e1fa24faddd1f47141445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5338503295227298277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7406647677738837002, guid: 6d8d2ddb9b5ecd649b4d5ab8d599efc0, type: 3}
@@ -260,10 +292,6 @@ PrefabInstance:
     - target: {fileID: 1725630164806176090, guid: 4880f86b320ad0d4a9fbc6cfd9f6a47d, type: 3}
       propertyPath: m_Name
       value: Weapon-SM_ARA1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6590111482627652194, guid: 4880f86b320ad0d4a9fbc6cfd9f6a47d, type: 3}
-      propertyPath: m_Data
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8204901882476293575, guid: 4880f86b320ad0d4a9fbc6cfd9f6a47d, type: 3}
       propertyPath: m_RootOrder
@@ -316,6 +344,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8204901882476293575, guid: 4880f86b320ad0d4a9fbc6cfd9f6a47d, type: 3}
   m_PrefabInstance: {fileID: 3465644715972620140}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7740763051472688398 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6590111482627652194, guid: 4880f86b320ad0d4a9fbc6cfd9f6a47d, type: 3}
+  m_PrefabInstance: {fileID: 3465644715972620140}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6582f53e1fa24faddd1f47141445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3922561446013386718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -371,10 +410,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7147665562144816639, guid: aa4a6d654fa185a4c933143266cb3063, type: 3}
-      propertyPath: m_Data
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa4a6d654fa185a4c933143266cb3063, type: 3}
 --- !u!4 &3769036940206377532 stripped
@@ -382,6 +417,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 153672119540430306, guid: aa4a6d654fa185a4c933143266cb3063, type: 3}
   m_PrefabInstance: {fileID: 3922561446013386718}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6151397225121055265 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7147665562144816639, guid: aa4a6d654fa185a4c933143266cb3063, type: 3}
+  m_PrefabInstance: {fileID: 3922561446013386718}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6582f53e1fa24faddd1f47141445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4551689622896853469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -462,10 +508,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7300630966445610952}
     m_Modifications:
-    - target: {fileID: 4419456097101511093, guid: 7fca34d725df1894ebfad6de26e5eaf1, type: 3}
-      propertyPath: m_Data
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8613503841088781157, guid: 7fca34d725df1894ebfad6de26e5eaf1, type: 3}
       propertyPath: m_Name
       value: Weapon-SM_ARA3
@@ -521,6 +563,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8613503841088781158, guid: 7fca34d725df1894ebfad6de26e5eaf1, type: 3}
   m_PrefabInstance: {fileID: 6949853192831422207}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6712572705628993354 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4419456097101511093, guid: 7fca34d725df1894ebfad6de26e5eaf1, type: 3}
+  m_PrefabInstance: {fileID: 6949853192831422207}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6582f53e1fa24faddd1f47141445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8016315170361527737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -578,6 +631,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1529b28e4e537b14ebbeb7634345178b, type: 3}
+--- !u!114 &2942370048681201471 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5182176236123521670, guid: 1529b28e4e537b14ebbeb7634345178b, type: 3}
+  m_PrefabInstance: {fileID: 8016315170361527737}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6582f53e1fa24faddd1f47141445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5395216962325597875 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2729186945387004682, guid: 1529b28e4e537b14ebbeb7634345178b, type: 3}

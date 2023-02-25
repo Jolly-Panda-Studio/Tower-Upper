@@ -7,9 +7,53 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1123220541989330574, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2941678434626427622, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
       propertyPath: m_Name
-      value: Weapon-SM_ARA1
+      value: Weapon-SM_ARA1-ShopModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165023684003949725, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.437
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165023684003949725, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.604
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165023684003949725, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.055
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165023684003949725, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.22165558
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165023684003949725, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165023684003949725, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.975125
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165023684003949725, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165023684003949725, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165023684003949725, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 205.613
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165023684003949725, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5691970781786126971, guid: baf83e574f1f0b649a5aaf231ecef138, type: 3}
       propertyPath: m_RootOrder

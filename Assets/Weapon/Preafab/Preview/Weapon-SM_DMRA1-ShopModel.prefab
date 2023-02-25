@@ -9,7 +9,47 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2819014399488432038, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
       propertyPath: m_Name
-      value: Weapon-SM_DMRA1
+      value: Weapon-SM_DMRA1-ShopModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401714136836396886, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401714136836396886, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.596
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401714136836396886, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.139
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401714136836396886, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.22933596
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401714136836396886, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401714136836396886, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.97334737
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401714136836396886, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401714136836396886, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401714136836396886, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -153.484
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401714136836396886, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5979078054419817384, guid: 0dcfd8c398dfe8b41872452be9619d4a, type: 3}
       propertyPath: m_RootOrder

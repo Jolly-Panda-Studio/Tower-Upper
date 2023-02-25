@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc6582f53e1fa24faddd1f47141445d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Data: {fileID: 11400000, guid: 0a99997cbb12f534eaa5320e1013ca6b, type: 2}
+  m_Data: {fileID: 11400000, guid: f0dcd1b04f774f9469f91d7c98920dc3, type: 2}
   m_ShopModel: {fileID: 2009467337, guid: eab7266f08ea2d848a8aaf50e32e3412, type: 3}
 --- !u!4 &7628952807618748800 stripped
 Transform:

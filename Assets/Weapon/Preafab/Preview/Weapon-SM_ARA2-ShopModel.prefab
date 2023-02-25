@@ -7,9 +7,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 319528137633183902, guid: 9e0b06f161401ac49b97b12f1efc0da9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.307
+      objectReference: {fileID: 0}
+    - target: {fileID: 319528137633183902, guid: 9e0b06f161401ac49b97b12f1efc0da9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.648
+      objectReference: {fileID: 0}
+    - target: {fileID: 319528137633183902, guid: 9e0b06f161401ac49b97b12f1efc0da9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.011
+      objectReference: {fileID: 0}
+    - target: {fileID: 319528137633183902, guid: 9e0b06f161401ac49b97b12f1efc0da9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.22124098
+      objectReference: {fileID: 0}
+    - target: {fileID: 319528137633183902, guid: 9e0b06f161401ac49b97b12f1efc0da9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000005042701
+      objectReference: {fileID: 0}
+    - target: {fileID: 319528137633183902, guid: 9e0b06f161401ac49b97b12f1efc0da9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.97521913
+      objectReference: {fileID: 0}
+    - target: {fileID: 319528137633183902, guid: 9e0b06f161401ac49b97b12f1efc0da9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.000000031777788
+      objectReference: {fileID: 0}
+    - target: {fileID: 319528137633183902, guid: 9e0b06f161401ac49b97b12f1efc0da9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -154.436
+      objectReference: {fileID: 0}
     - target: {fileID: 5983609432158692828, guid: 9e0b06f161401ac49b97b12f1efc0da9, type: 3}
       propertyPath: m_Name
-      value: Weapon-SM_ARA2
+      value: Weapon-SM_ARA2-ShopModel
       objectReference: {fileID: 0}
     - target: {fileID: 5983609432158692829, guid: 9e0b06f161401ac49b97b12f1efc0da9, type: 3}
       propertyPath: m_RootOrder
