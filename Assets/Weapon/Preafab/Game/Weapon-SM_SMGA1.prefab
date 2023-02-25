@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4301012128011761108
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4775208290486159945, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_Name
+      value: Weapon-SM_SMGA1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775208290486159945, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822244633167592123, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+--- !u!4 &94846128778644642 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4242590629770934646, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+  m_PrefabInstance: {fileID: 4301012128011761108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8787843515215527837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4775208290486159945, guid: 8b03cf14d6977b048914955c3085ba9c, type: 3}
+  m_PrefabInstance: {fileID: 4301012128011761108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4765046623556969515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8787843515215527837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc6582f53e1fa24faddd1f47141445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Data: {fileID: 11400000, guid: 0a99997cbb12f534eaa5320e1013ca6b, type: 2}
+  m_ShopModel: {fileID: 355013948, guid: aea300f3fc134814cb31a57e7924bfec, type: 3}
+--- !u!114 &5305006325021234451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8787843515215527837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51291ba121d00e4daae0ca3681c80ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1945845834909584036, guid: e8eadea7ccf4fb947a2bca3d492d9070, type: 3}
+  shootForce: 0
+  muzzles:
+  - {fileID: 94846128778644642}
+  muzzleFlash: {fileID: 0}
+  m_Aim: {fileID: 94846128778644642}

@@ -6,7 +6,7 @@ namespace Lindon.TowerUpper.Data
 {
     public class ShopModel : MonoBehaviour
     {
-        [SerializeField] private ItemData m_Data;
+        [SerializeField,AssetPopup(typeof(ItemData))] private ItemData m_Data;
 
         public int Id => m_Data.Id;
 

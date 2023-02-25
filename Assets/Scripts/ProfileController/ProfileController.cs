@@ -68,10 +68,10 @@ namespace Lindon.TowerUpper.Profile
         {
             Debug.Log("Sample Profile Created!");
             var sampleProfile = new Profile(0, 1000);
-            sampleProfile.SetActiveItem(8001, Data.ItemCategory.Weapon);
+            sampleProfile.SetActiveItem(11, Data.ItemCategory.Weapon);
             sampleProfile.SetActiveItem(5001, Data.ItemCategory.Skin);
 
-            sampleProfile.BuyItem(8001, 0);
+            sampleProfile.BuyItem(11, 0);
             sampleProfile.BuyItem(5001, 0);
             return sampleProfile;
         }
