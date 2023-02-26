@@ -16,6 +16,11 @@ namespace Lindon.TowerUpper.GameController.Level
             m_CurrentModels = new List<PlayerModel>();
         }
 
+        private void Start()
+        {
+            m_CharacterParent = GameManager.Instance.Tower.Components.PlayerPosition;
+        }
+
         public void ChangeItems(int skinId, int weaponId)
         {
             var model = GetFromCurrentModels(skinId);
