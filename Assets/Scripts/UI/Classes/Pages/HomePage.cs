@@ -29,10 +29,12 @@ public class HomePage : UIPage
         m_ShopButton.onClick.AddListener(() => { UserInterfaceManager.Open<ShopPage>(); });
 
         m_SettingButton.onClick.RemoveAllListeners();
-        m_SettingButton.onClick.AddListener(() => { /*SETTING PAGE*/ });
+        m_SettingButton.onClick.AddListener(() => { UserInterfaceManager.Open<SettingPopup>(); });
 
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerDown;
+        EventTrigger.Entry entry = new EventTrigger.Entry
+        {
+            eventID = EventTriggerType.PointerDown
+        };
         entry.callback.AddListener((data) => { OnPointerDownDelegate((PointerEventData)data); });
         m_Trigger.triggers.Add(entry);
     }

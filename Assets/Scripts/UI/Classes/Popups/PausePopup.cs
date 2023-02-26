@@ -35,7 +35,7 @@ public class PausePopup : UIPopup
 
     private void OnSetting()
     {
-        Debug.Log("Not yet!!");
+        UserInterfaceManager.Open<SettingPopup>();
     }
 
     private void OnContinue()
