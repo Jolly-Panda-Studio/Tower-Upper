@@ -190,13 +190,18 @@ MonoBehaviour:
   m_button: {fileID: 4141249191083614840}
   m_toggleImage: {fileID: 8373136239157756631}
   m_holderImage: {fileID: 2397891512733169482}
+  m_iconImage: {fileID: 7563563056238867022}
   m_onSkin:
     toggle: {fileID: 21300000, guid: 0363d21a84dc6491e831bae874edc6ad, type: 3}
     holder: {fileID: 21300000, guid: c426b035919094016adb99e1349aa315, type: 3}
+    icon: {fileID: 0}
   m_offSkin:
     toggle: {fileID: 21300000, guid: a1e436d26683241d787e58854a040e63, type: 3}
     holder: {fileID: 21300000, guid: d1b1739b99fa046a78d969b1957e55bb, type: 3}
+    icon: {fileID: 0}
   isOn: 0
+  m_onPosX: 43.1
+  m_offPosX: -43.1
 --- !u!1 &2592856753843529479
 GameObject:
   m_ObjectHideFlags: 0
