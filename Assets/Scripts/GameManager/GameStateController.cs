@@ -14,8 +14,6 @@ namespace Lindon.TowerUpper.GameController
             EnemyCounter.OnKillEnemy += KillEnemy;
             EnemyCounter.OnEnemyReached += EnemyReached;
             GameStarter.OnStartGame += StartGame;
-            GameResault.OnLose += OnLose;
-            GameResault.OnWin += OnWin;
         }
 
         private void OnDisable()
@@ -23,8 +21,6 @@ namespace Lindon.TowerUpper.GameController
             EnemyCounter.OnKillEnemy -= KillEnemy;
             EnemyCounter.OnEnemyReached -= EnemyReached;
             GameStarter.OnStartGame -= StartGame;
-            GameResault.OnLose -= OnLose;
-            GameResault.OnWin -= OnWin;
         }
 
         private void KillEnemy(int killedCount,int totalCount)
@@ -54,6 +50,7 @@ namespace Lindon.TowerUpper.GameController
             {
                 OnWin();
                 FinishGame();
+                GameResault.Win();
             }
         }
 
@@ -63,6 +60,7 @@ namespace Lindon.TowerUpper.GameController
             {
                 OnLose();
                 FinishGame();
+                GameResault.Lose();
             }
         }
 
