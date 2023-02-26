@@ -23,6 +23,11 @@ namespace Lindon.TowerUpper.GameController
             GameStarter.OnStartGame -= StartGame;
         }
 
+        private void OnApplicationQuit()
+        {
+            GameSaver.Save();
+        }
+
         private void KillEnemy(int killedCount,int totalCount)
         {
             CheckWin(killedCount, totalCount);
