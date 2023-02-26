@@ -1,4 +1,5 @@
 ﻿using Lindon.TowerUpper.EnemyUtility.Ability;
+using Lindon.TowerUpper.EnemyUtility.Component;
 using Lindon.TowerUpper.GameController.Events;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,16 @@ namespace Lindon.TowerUpper.EnemyUtility
         [SerializeField, AssetPopup(typeof(EnemyData))] private EnemyData m_Data;
 
         private List<BaseAbility> m_AbilityList;
+        private bool m_Created;
 
         [Header("Components")]
         [SerializeField] private EnemyHealthBar m_HealthBar;
-        [SerializeField] private Collider m_Collider;
+        [SerializeField] private EnemyVoice m_Voice;
+        [SerializeField] private EnemyCollider m_Collider;
+        [SerializeField] private EnemyAnimation m_Animation;
+        [SerializeField] private EnemyEvent m_Event;
+
+        private List<BaseComponent> m_Components;
 
         public EnemyHealth Health { get; private set; }
         public EnemyClimbing Climbing { get; private set; }
@@ -25,6 +32,12 @@ namespace Lindon.TowerUpper.EnemyUtility
         {
             add => Health.OnDie += () => value?.Invoke(this);
             remove => Health.OnDie -= () => value?.Invoke(this);
+        }
+
+        public event Action<Enemy> OnStartClimbing
+        {
+            add => Climbing.OnStart += () => value?.Invoke(this);
+            remove => Climbing.OnStart -= () => value?.Invoke(this);
         }
 
         public event Action<Enemy> OnFinishClimb
@@ -41,8 +54,51 @@ namespace Lindon.TowerUpper.EnemyUtility
 
         private void Awake()
         {
-            Falling = new EnemyFalling(this); 
-            Health = new EnemyHealth(this, m_HealthBar);
+            CreateComponents();
+
+            CreateAbilities();
+        }
+
+        private void CreateComponents()
+        {
+            m_Components = new List<BaseComponent>
+            {
+                m_HealthBar,
+                m_Voice,
+                m_Collider,
+                m_Animation,
+                m_Event
+            };
+
+            foreach (var component in m_Components)
+            {
+                component.Create(this);
+            }
+        }
+
+        private void OnEnable()
+        {
+            foreach (var component in m_Components)
+            {
+                component.RegisterEvents();
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (var component in m_Components)
+            {
+                component.UnregisterEvents();
+            }
+        }
+
+        private void CreateAbilities()
+        {
+            if (m_Created) return;
+            m_Created = true;
+
+            Falling = new EnemyFalling(this);
+            Health = new EnemyHealth(this);
             Climbing = new EnemyClimbing(this);
 
             m_AbilityList = new List<BaseAbility>
@@ -53,50 +109,12 @@ namespace Lindon.TowerUpper.EnemyUtility
             };
         }
 
-        private void OnEnable()
-        {
-            GameRunnig.OnChange += OnChangeRunnig;
-            GameFinisher.OnFinishGame += GameFinished;
-            GameRestarter.OnRestartGame += GameFinished;
-            ReturnHome.OnReturnHome += OnReturnHome;
-            Health.OnDie += Die;
-        }
-
-        private void OnDisable()
-        {
-            GameRunnig.OnChange -= OnChangeRunnig;
-            GameFinisher.OnFinishGame -= GameFinished;
-            GameRestarter.OnRestartGame -= GameFinished;
-            ReturnHome.OnReturnHome -= OnReturnHome;
-            Health.OnDie -= Die;
-        }
-
-        private void OnChangeRunnig(bool state)
-        {
-            Climbing.ChangeClimbingRunnig(state);
-        }
-
-        private void GameFinished()
-        {
-            Climbing.StopClimbing();
-        }
-
-        private void OnReturnHome()
-        {
-            Destroy(gameObject);
-        }
-
         private void OnDestroy()
         {
             foreach (var ability in m_AbilityList)
             {
                 ability.OnDestory();
             }
-        }
-
-        private void Die()
-        {
-            m_Collider.enabled = false;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Lindon.TowerUpper.EnemyUtility.Ability
             enemy.OnDie += Die;
         }
 
+        public event Action OnStart;
         public event Action OnFinishClimb;
 
         public void SetTargetMove(Transform destination)
@@ -39,6 +40,10 @@ namespace Lindon.TowerUpper.EnemyUtility.Ability
                 .OnComplete(() =>
                 {
                     OnFinishClimb?.Invoke();
+                })
+                .OnStart(() =>
+                {
+                    OnStart?.Invoke();
                 });
         }
 

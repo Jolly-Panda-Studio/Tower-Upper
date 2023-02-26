@@ -1,12 +1,12 @@
 using Lindon.TowerUpper.GameController.Events;
 using UnityEngine;
 
-namespace Lindon.TowerUpper.EnemyUtility.Controller
+namespace Lindon.TowerUpper.EnemyUtility.Component
 {
-    public class EnemyAnimation : MonoBehaviour
+
+    public class EnemyAnimation : BaseComponent
     {
         [SerializeField] private Animator m_animator;
-        [SerializeField] private Enemy m_enemy;
 
         [Header("Parameter")]
         [SerializeField] private string m_fallParameter;
@@ -16,25 +16,25 @@ namespace Lindon.TowerUpper.EnemyUtility.Controller
         private bool m_isVictory;
         private float m_speed;
 
-        private void Start()
+        protected override void OnCreate()
         {
-            m_speed = m_enemy.Data.Speed / 2;
+            m_speed = m_Enemy.Data.Speed / 2;
             m_animator.speed = m_speed;
         }
 
-        private void OnEnable()
+        public override void RegisterEvents()
         {
-            m_enemy.OnDie += DieAnimation;
-            m_enemy.OnFinishClimb += VictoryAnimation;
+            m_Enemy.OnDie += DieAnimation;
+            m_Enemy.OnFinishClimb += VictoryAnimation;
 
             GameFinisher.OnFinishGame += DisableAnimator;
             GameRunnig.OnChange += SetAnimatorActive;
         }
 
-        private void OnDisable()
+        public override void UnregisterEvents()
         {
-            m_enemy.OnDie -= DieAnimation;
-            m_enemy.OnFinishClimb -= VictoryAnimation;
+            m_Enemy.OnDie -= DieAnimation;
+            m_Enemy.OnFinishClimb -= VictoryAnimation;
 
             GameFinisher.OnFinishGame -= DisableAnimator;
             GameRunnig.OnChange -= SetAnimatorActive;
@@ -53,14 +53,14 @@ namespace Lindon.TowerUpper.EnemyUtility.Controller
             m_animator.SetTrigger(m_victoryParameter);
         }
 
-        public void DisableAnimator()
+        private void DisableAnimator()
         {
             if (m_isVictory) return;
             m_animator.speed = 1;
             m_animator.SetTrigger(m_idleParameter);
         }
 
-        public void SetAnimatorActive(bool value)
+        private void SetAnimatorActive(bool value)
         {
             if (value)
             {
