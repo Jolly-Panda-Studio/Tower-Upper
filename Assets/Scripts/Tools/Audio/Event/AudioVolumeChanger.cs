@@ -11,7 +11,7 @@ namespace Lindon.Framwork.Audio.Event
     public static class AudioVolumeChanger
     {
         public const float MinVolume = 0;
-        public const float MaxVolume = 100;
+        public const float MaxVolume = 1;
 
         /// <summary>
         /// 
@@ -33,15 +33,16 @@ namespace Lindon.Framwork.Audio.Event
         /// <param name="value"></param>
         public static void ChangeVolume(AudioSourceType type, float value)
         {
+            var volume = Mathf.Clamp(value, MinVolume, MaxVolume);
             if (m_VolumeState.ContainsKey(type))
             {
-                m_VolumeState[type] = value;
+                m_VolumeState[type] = volume;
             }
             else
             {
-                m_VolumeState.Add(type, value);
+                m_VolumeState.Add(type, volume);
             }
-            OnChange?.Invoke(type, value);
+            OnChange?.Invoke(type, volume);
         }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace Lindon.Framwork.Audio.Event
             }
             else
             {
-                m_VolumeState.Add(type, MinVolume);
+                m_VolumeState.Add(type, MaxVolume);
                 return MinVolume;
             }
         }
