@@ -1,5 +1,6 @@
 using Lindon.TowerUpper.Data;
 using Lindon.TowerUpper.GameController;
+using Lindon.TowerUpper.GameController.Events;
 using Lindon.TowerUpper.Profile;
 using Lindon.UserManager;
 using System.Collections.Generic;
@@ -16,7 +17,6 @@ namespace Lindon.TowerUpper.Initilizer
     {
         private static List<IInitilizer> _initilizers;
 
-
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Reset()
         {
@@ -31,6 +31,8 @@ namespace Lindon.TowerUpper.Initilizer
                 }
                 initilizer.Init();
             }
+
+            GameLoader.Load();
         }
 
         private static void FindController()
