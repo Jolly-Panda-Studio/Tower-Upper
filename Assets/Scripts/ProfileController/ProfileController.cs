@@ -1,4 +1,5 @@
-﻿using Lindon.TowerUpper.Data;
+﻿using Lindon.Framwork.Database;
+using Lindon.TowerUpper.Data;
 using Lindon.TowerUpper.Initilizer;
 using System;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Lindon.TowerUpper.Profile
 
         public event Action<Profile> OnLoadProfile;
 
-        private const string Key = "profile.txt?tag=PROFILE";
+        private const string ProfileTag = "PROFILE";
 
         public void Init()
         {
@@ -55,10 +56,10 @@ namespace Lindon.TowerUpper.Profile
 
         public void LoadProfile()
         {
-            if (ES3.KeyExists(Key))
+            if (DatabaseHandler.HasKey(ProfileTag))
             {
                 Profile = new Profile();
-                var jsonString = ES3.Load<string>(Key);
+                var jsonString = DatabaseHandler.GetString(ProfileTag);
                 JSONObject json = new JSONObject(jsonString);
                 Profile.Load(json);
             }
@@ -84,8 +85,8 @@ namespace Lindon.TowerUpper.Profile
 
         private void OnApplicationQuit()
         {
-            var json = Profile.Save();
-            ES3.Save(Key, json.ToString());
+            var json = Profile.Save().ToString();
+            DatabaseHandler.SetString(ProfileTag, json);
         }
     }
 }
