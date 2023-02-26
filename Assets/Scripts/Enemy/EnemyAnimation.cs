@@ -14,10 +14,12 @@ namespace Lindon.TowerUpper.EnemyUtility.Controller
         [SerializeField] private string m_idleParameter;
 
         private bool m_isVictory;
+        private float m_speed;
 
         private void Start()
         {
-            m_animator.speed = m_enemy.Data.Speed / 2;
+            m_speed = m_enemy.Data.Speed / 2;
+            m_animator.speed = m_speed;
         }
 
         private void OnEnable()
@@ -26,6 +28,7 @@ namespace Lindon.TowerUpper.EnemyUtility.Controller
             m_enemy.OnFinishClimb += VictoryAnimation;
 
             GameFinisher.OnFinishGame += DisableAnimator;
+            GameRunnig.OnChange += SetAnimatorActive;
         }
 
         private void OnDisable()
@@ -34,6 +37,7 @@ namespace Lindon.TowerUpper.EnemyUtility.Controller
             m_enemy.OnFinishClimb -= VictoryAnimation;
 
             GameFinisher.OnFinishGame -= DisableAnimator;
+            GameRunnig.OnChange -= SetAnimatorActive;
         }
 
         private void DieAnimation(Enemy obj)
@@ -54,6 +58,18 @@ namespace Lindon.TowerUpper.EnemyUtility.Controller
             if (m_isVictory) return;
             m_animator.speed = 1;
             m_animator.SetTrigger(m_idleParameter);
+        }
+
+        public void SetAnimatorActive(bool value)
+        {
+            if (value)
+            {
+                m_animator.speed = m_speed;
+            }
+            else
+            {
+                m_animator.speed = 0;
+            }
         }
     }
 }

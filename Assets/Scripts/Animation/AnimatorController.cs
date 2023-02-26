@@ -32,12 +32,14 @@ namespace Lindon.TowerUpper.AnimatorController
         {
             GameStarter.OnStartGame += StartGame;
             GameFinisher.OnFinishGame += FinishGame;
+            GameRunnig.OnChange += SetAnimatorActive;
         }
 
         private void OnDisable()
         {
             GameStarter.OnStartGame -= StartGame;
             GameFinisher.OnFinishGame -= FinishGame;
+            GameRunnig.OnChange -= SetAnimatorActive;
         }
 
         protected virtual void FinishGame()
@@ -56,6 +58,18 @@ namespace Lindon.TowerUpper.AnimatorController
             animatorOverrideController[m_IdleName] = idle.Clip;
 
             m_Armory.SetActive(idle.ShowWeapon);
+        }
+
+        public void SetAnimatorActive(bool value)
+        {
+            if (value)
+            {
+                m_animator.speed = 1;
+            }
+            else
+            {
+                m_animator.speed = 0;
+            }
         }
 
         [System.Serializable]

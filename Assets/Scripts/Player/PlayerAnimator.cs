@@ -8,18 +8,6 @@ public class PlayerAnimator : AnimatorController
     [Header("Parameters")]
     [SerializeField] private string m_FireParameter;
 
-    private void OnEnable()
-    {
-        GameStarter.OnStartGame += StartGame;
-        GameFinisher.OnFinishGame += FinishGame;
-    }
-
-    private void OnDisable()
-    {
-        GameStarter.OnStartGame -= StartGame;
-        GameFinisher.OnFinishGame -= FinishGame;
-    }
-
     protected override void FinishGame()
     {
         PlayGunFire(false);

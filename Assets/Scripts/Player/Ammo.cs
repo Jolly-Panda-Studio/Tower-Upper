@@ -43,11 +43,11 @@ public class Ammo : MonoBehaviour
     {
         if (state)
         {
-            m_Rigidbody.constraints = RigidbodyConstraints.None;
+
         }
         else
         {
-            m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
         }
     }
 
@@ -58,6 +58,8 @@ public class Ammo : MonoBehaviour
 
     private void Update()
     {
+        if (!GameRunnig.IsRunning) return;
+
         transform.position += m_Speed * Time.deltaTime * Vector3.down;
 
         if (transform.position.y <= m_floor)

@@ -1,4 +1,5 @@
 using Lindon.TowerUpper.GameController;
+using Lindon.TowerUpper.GameController.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace Lindon.TowerUpper.EnemyUtility.Controller
 
         Transform lastPoint;
         private Coroutine m_coroutine;
+        private float m_LastSpawnTime;
 
         public EnemyGenerator(EnemyManager enemyManager)
         {
@@ -39,10 +41,22 @@ namespace Lindon.TowerUpper.EnemyUtility.Controller
 
         private IEnumerator SpawnEnemy()
         {
-            yield return new WaitForSeconds(2);
+            WaitForFixedUpdate waitFixedUpdate = new WaitForFixedUpdate();
+            WaitForSeconds waitTime = new WaitForSeconds(2);
+            while (true)
+            {
+                yield return waitFixedUpdate;
 
-            Spawn();
-            m_EnemyManager.StartCoroutine(SpawnEnemy());
+                if (!GameRunnig.IsRunning) continue;
+
+                Spawn();
+                yield return waitTime;
+            }
+
+            //if (!GameRunnig.IsRunning) return null;
+            //yield return new WaitForSeconds(2);
+
+            //m_EnemyManager.StartCoroutine(SpawnEnemy());
         }
 
         private void Spawn()
