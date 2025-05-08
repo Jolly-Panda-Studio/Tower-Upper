@@ -1,11 +1,12 @@
 using JollyPanda.LastFlag.Handlers;
-using JollyPanda.LastFlag.PlayerModule;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace JollyPanda.LastFlag.EnemyModule
 {
+    public delegate void WaveEventHandler(int waveIndex, string waveName);
+
     /// <summary>
     /// Manages spawning of enemy GameObjects around a cylindrical area using an object pooling system.
     /// </summary>
@@ -24,15 +25,6 @@ namespace JollyPanda.LastFlag.EnemyModule
         [Tooltip("Reference to the cylinder renderer (optional, not used in logic).")]
         public Renderer cylinderRenderer;
 
-        [Tooltip("List of enemy prefabs to spawn.")]
-        public GameObject[] enemyPrefabs;
-
-        [Tooltip("Time interval between enemy spawns (in seconds).")]
-        public float spawnInterval = 2f;
-
-        [Tooltip("Initial pool size per enemy type. (Used only at first spawn)")]
-        public int poolSizePerEnemyType = 10;
-
         [Header("Hierarchy")]
         [Tooltip("Parent transform under which all spawned enemies will be organized.")]
         public Transform enemyParent;
@@ -40,30 +32,33 @@ namespace JollyPanda.LastFlag.EnemyModule
         // Array holding spawn point transforms positioned around the cylinder
         private Transform[] spawnPoints;
 
+        [Header("Wave Settings")]
+        public WaveData[] waves;
+        private int currentWaveIndex = 0;
+        private int spawnedInWave = 0;
+        private bool waveInProgress = false;
+
+        private int aliveEnemies = 0;
+
+        public event WaveEventHandler OnWaveStart;
+        public event WaveEventHandler OnWaveEnd;
+
         // Dictionary mapping each prefab to its pool of reusable GameObjects
-        private Dictionary<GameObject, Queue<GameObject>> enemyPools = new();
+        private Dictionary<Enemy, Queue<Enemy>> enemyPools = new();
+
+        // Array to track cooldowns for each spawn point
+        private float[] spawnCooldowns;
 
         private void OnEnable()
         {
             Informant.OnLose += StopSpawning;
-            Informant.OnStart += StartSpawning;
+            Informant.OnStart += StartSpawningWave;
         }
 
         private void OnDisable()
         {
             Informant.OnLose -= StopSpawning;
-            Informant.OnStart -= StartSpawning;
-        }
-
-        private void StopSpawning()
-        {
-            CancelInvoke(nameof(SpawnEnemy));
-        }
-
-        public void StartSpawning()
-        {
-            CancelInvoke(nameof(SpawnEnemy));
-            InvokeRepeating(nameof(SpawnEnemy), 1f, spawnInterval);
+            Informant.OnStart -= StartSpawningWave;
         }
 
         /// <summary>
@@ -72,7 +67,8 @@ namespace JollyPanda.LastFlag.EnemyModule
         void Start()
         {
             GenerateSpawnPoints();
-            InvokeRepeating(nameof(SpawnEnemy), 1f, spawnInterval); // Spawning enemies at regular intervals
+            spawnCooldowns = new float[numberOfSpawnPoints];
+            StartSpawningWave();
         }
 
         /// <summary>
@@ -97,58 +93,164 @@ namespace JollyPanda.LastFlag.EnemyModule
             }
         }
 
-        /// <summary>
-        /// Spawns an enemy at a random spawn point using the pooling system.
-        /// </summary>
+        #region Spawn Enemy
+
         void SpawnEnemy()
         {
-            int spawnIndex = Random.Range(0, spawnPoints.Length);
-            GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            if (currentWaveIndex >= waves.Length || spawnedInWave >= waves[currentWaveIndex].EnemyCount)
+                return;
 
-            GameObject enemy = GetFromPool(prefab);
-            if (enemy != null)
+            int spawnIndex = GetValidSpawnPointIndex();
+            if (spawnIndex == -1)
             {
-                enemy.transform.position = spawnPoints[spawnIndex].position;
-                Vector3 directionToCenter = transform.position - enemy.transform.position;
-                directionToCenter.y = 0;
-
-                if (directionToCenter != Vector3.zero)
-                {
-                    Quaternion targetRotation = Quaternion.LookRotation(directionToCenter);
-                    Vector3 euler = targetRotation.eulerAngles;
-                    enemy.transform.rotation = Quaternion.Euler(0, euler.y, 0);
-                }
-                enemy.SetActive(true); // Activate the enemy
+                Debug.Log("No valid spawn point available.");
+                return;
             }
+
+            SpawnEnemyAtPoint(spawnIndex);
+        }
+
+        int GetValidSpawnPointIndex()
+        {
+            int attempts = 0;
+            int spawnIndex = -1;
+            int maxAttempts = spawnPoints.Length * 2; // Try to avoid infinite loop
+
+            while (attempts < maxAttempts)
+            {
+                spawnIndex = Random.Range(0, spawnPoints.Length); // Randomly select a spawn point
+                if (spawnCooldowns[spawnIndex] <= 0) // Check if cooldown is over
+                {
+                    return spawnIndex; // Found a valid point
+                }
+                attempts++;
+            }
+
+            return -1; // No valid spawn point found after max attempts
+        }
+
+        void SpawnEnemyAtPoint(int spawnIndex)
+        {
+            var wave = waves[currentWaveIndex];
+            var prefab = wave.EnemyPrefabs[Random.Range(0, wave.EnemyPrefabs.Length)];
+            var enemy = GetFromPool(prefab);
+
+            if (enemy == null) return;
+
+            PositionEnemyAtSpawnPoint(enemy, spawnIndex);
+            SetEnemyBehavior(enemy, wave);
+
+            spawnCooldowns[spawnIndex] = 0.9f; // Reset cooldown for this spawn point
+
+            spawnedInWave++;
+            aliveEnemies++;
+        }
+
+        void PositionEnemyAtSpawnPoint(Enemy enemy, int spawnIndex)
+        {
+            enemy.transform.position = spawnPoints[spawnIndex].position;
+
+            Vector3 directionToCenter = transform.position - enemy.transform.position;
+            directionToCenter.y = 0;
+            if (directionToCenter != Vector3.zero)
+            {
+                Quaternion rotation = Quaternion.LookRotation(directionToCenter);
+                enemy.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+            }
+        }
+
+        void SetEnemyBehavior(Enemy enemy, WaveData wave)
+        {
+            enemy.SetClimbSpeed(Random.Range(wave.MinSpeed, wave.MaxSpeed));
+            enemy.SetDeadAction((killedEnemy) =>
+            {
+                aliveEnemies--;
+                if (aliveEnemies <= 0 && waveInProgress)
+                {
+                    EndCurrentWave();
+                }
+            });
         }
 
         /// <summary>
         /// Retrieves an enemy from the pool, or instantiates a new one if none are available.
         /// </summary>
-        GameObject GetFromPool(GameObject prefab)
+        Enemy GetFromPool(Enemy prefab)
         {
             if (!enemyPools.ContainsKey(prefab))
             {
-                enemyPools[prefab] = new Queue<GameObject>();
+                enemyPools[prefab] = new Queue<Enemy>();
             }
 
-            Queue<GameObject> pool = enemyPools[prefab];
+            Queue<Enemy> pool = enemyPools[prefab];
 
             // Search for an inactive object in the pool
-            foreach (GameObject enemy in pool)
+            foreach (var enemy in pool)
             {
-                if (!enemy.activeInHierarchy)
+                if (!enemy.gameObject.activeInHierarchy)
                 {
-                    enemy.SetActive(true); // Reactivate it
+                    enemy.gameObject.SetActive(true); // Reactivate it
                     return enemy;
                 }
             }
 
             // If no inactive object was found, create a new one
-            GameObject newEnemy = Instantiate(prefab, enemyParent);
+            Enemy newEnemy = Instantiate(prefab, enemyParent);
             pool.Enqueue(newEnemy);
             return newEnemy;
         }
+
+        #endregion
+
+        private void StartSpawningWave()
+        {
+            if (currentWaveIndex >= waves.Length) return;
+
+            var wave = waves[currentWaveIndex];
+
+            if (wave.EnemyPrefabs == null || wave.EnemyPrefabs.Length == 0)
+            {
+                Debug.LogError($"Wave {currentWaveIndex} has no enemy prefabs!");
+                return;
+            }
+
+            spawnedInWave = 0;
+            waveInProgress = true;
+
+            aliveEnemies = 0;
+
+            OnWaveStart?.Invoke(currentWaveIndex, wave.WaveName);
+
+            CancelInvoke(nameof(SpawnEnemy));
+            InvokeRepeating(nameof(SpawnEnemy), 0f, wave.SpawnInterval);
+        }
+
+
+        private void EndCurrentWave()
+        {
+            CancelInvoke(nameof(SpawnEnemy));
+            waveInProgress = false;
+
+            var wave = waves[currentWaveIndex];
+            OnWaveEnd?.Invoke(currentWaveIndex, wave.WaveName);
+
+            currentWaveIndex++;
+            if (currentWaveIndex < waves.Length)
+            {
+                Invoke(nameof(StartSpawningWave), waves[currentWaveIndex - 1].DelayAfterWave);
+            }
+            else
+            {
+                Debug.LogWarning("All waves completed. No more enemies will spawn.");
+            }
+        }
+
+        private void StopSpawning()
+        {
+            CancelInvoke(nameof(SpawnEnemy));
+            waveInProgress = false;
+        }
+
 
         /// <summary>
         /// Draws gizmos in the editor to visualize spawn points and their vertical range.
@@ -168,5 +270,24 @@ namespace JollyPanda.LastFlag.EnemyModule
                 Gizmos.DrawLine(basePos, topPos);
             }
         }
+
+#if UNITY_EDITOR
+        [ContextMenu("Force Skip To Next Wave")]
+        public void ForceSkipToNextWave()
+        {
+            if (!waveInProgress) return;
+
+            Debug.LogWarning($"[Debug] Force skipping wave {currentWaveIndex}: {waves[currentWaveIndex].WaveName}");
+
+            // Deactivate all alive enemies (optional, if you want to force-clear)
+            foreach (Transform child in enemyParent)
+            {
+                child.gameObject.SetActive(false);
+            }
+
+            aliveEnemies = 0;
+            EndCurrentWave();
+        }
+#endif
     }
 }

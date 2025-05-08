@@ -1,4 +1,5 @@
 ﻿using JollyPanda.LastFlag.Handlers;
+using System;
 using UnityEngine;
 
 namespace JollyPanda.LastFlag.EnemyModule
@@ -10,6 +11,7 @@ namespace JollyPanda.LastFlag.EnemyModule
         [SerializeField] private EnemyMovement movement;
         [SerializeField] private EnemyPositionChecker positionChecker;
 
+        private Action<Enemy> OnDead;
 
         private void OnEnable()
         {
@@ -17,6 +19,7 @@ namespace JollyPanda.LastFlag.EnemyModule
             movement.OnStartClimbing += Climbing;
             movement.OnStartFalling += Falling;
             positionChecker.OnEnemyReachedTop += ReachingTop;
+            positionChecker.OnEnemyReachedGround += ReachingGround;
             Informant.OnEnemyReachedTop += OneEnemyReachedTop;
         }
 
@@ -26,6 +29,7 @@ namespace JollyPanda.LastFlag.EnemyModule
             movement.OnStartClimbing -= Climbing;
             movement.OnStartFalling -= Falling;
             positionChecker.OnEnemyReachedTop -= ReachingTop;
+            positionChecker.OnEnemyReachedGround -= ReachingGround;
             Informant.OnEnemyReachedTop -= OneEnemyReachedTop;
         }
 
@@ -34,6 +38,7 @@ namespace JollyPanda.LastFlag.EnemyModule
             if (healthValue <= 0)
             {
                 movement.Falling();
+                OnDead?.Invoke(this);
             }
             else
             {
@@ -51,6 +56,7 @@ namespace JollyPanda.LastFlag.EnemyModule
         {
             animationController.PlayFall();
             positionChecker.SetCheckState(EnemyPositionChecker.CheckState.MoveDown);
+            health.ShowHealthBar(false);
         }
 
         private void ReachingTop()
@@ -69,6 +75,21 @@ namespace JollyPanda.LastFlag.EnemyModule
             movement.StopClimbing();
             animationController.PlayHangingIdle();
             health.ShowHealthBar(false);
+        }
+
+        private void ReachingGround()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void SetClimbSpeed(float value)
+        {
+            movement.SetClimbSpeed(value);
+        }
+
+        public void SetDeadAction(Action<Enemy> action)
+        {
+            OnDead = action;
         }
     }
 }

@@ -398,6 +398,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 9.65
       objectReference: {fileID: 0}
+    - target: {fileID: 8138200823247070787, guid: 80fb5799ecf6a084faa18e393d4bd0f4, type: 3}
+      propertyPath: waves.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138200823247070787, guid: 80fb5799ecf6a084faa18e393d4bd0f4, type: 3}
+      propertyPath: waves.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 93daa36b1c719d74399a46252bd33e1c, type: 2}
+    - target: {fileID: 8138200823247070787, guid: 80fb5799ecf6a084faa18e393d4bd0f4, type: 3}
+      propertyPath: waves.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ac1e0dcb6a065543a7565f6a27b83db, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

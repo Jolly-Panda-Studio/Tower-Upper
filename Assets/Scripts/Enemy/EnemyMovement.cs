@@ -50,5 +50,10 @@ namespace JollyPanda.LastFlag.EnemyModule
             isFalling = true;
             OnStartFalling?.Invoke();
         }
+
+        public void SetClimbSpeed(float value)
+        {
+            climbSpeed = value;
+        }
     }
 }
