@@ -278,7 +278,7 @@ namespace JollyPanda.LastFlag.EnemyModule
         {
             if (!waveInProgress) return;
 
-            Debug.LogWarning($"[Debug] Force skipping wave {currentWaveIndex}: {waves[currentWaveIndex].WaveName}");
+            Debug.LogWarning($"[Debug] Force skipping wave {currentWaveIndex}");
 
             // Deactivate all alive enemies (optional, if you want to force-clear)
             foreach (Transform child in enemyParent)
