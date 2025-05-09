@@ -39,6 +39,7 @@ namespace JollyPanda.LastFlag.EnemyModule
         private bool waveInProgress = false;
 
         private int aliveEnemies = 0;
+        private int totalEnemies = 0;
 
         public event WaveEventHandler OnWaveStart;
         public event WaveEventHandler OnWaveEnd;
@@ -168,6 +169,7 @@ namespace JollyPanda.LastFlag.EnemyModule
                 if (aliveEnemies <= 0 && waveInProgress)
                 {
                     EndCurrentWave();
+                    Informant.NotifyEnemyKilled(aliveEnemies, totalEnemies);
                 }
             });
         }
@@ -218,6 +220,7 @@ namespace JollyPanda.LastFlag.EnemyModule
             waveInProgress = true;
 
             aliveEnemies = 0;
+            totalEnemies = wave.EnemyCount;
 
             OnWaveStart?.Invoke(currentWaveIndex);
             Informant.NotifyStartWave(currentWaveIndex);

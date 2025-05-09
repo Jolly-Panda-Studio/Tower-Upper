@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace JollyPanda.LastFlag.Database
 {
@@ -6,11 +7,15 @@ namespace JollyPanda.LastFlag.Database
     {
         private const string SaveKey = "PlayerData";
 
+        public static event Action<PlayerSaveData> OnApplyChange;
+
         public static void Save(PlayerSaveData data)
         {
             string json = JsonUtility.ToJson(data);
             PlayerPrefs.SetString(SaveKey, json);
             PlayerPrefs.Save();
+
+            OnApplyChange?.Invoke(data);
         }
 
         public static PlayerSaveData Load()
