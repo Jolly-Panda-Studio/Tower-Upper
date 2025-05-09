@@ -5,8 +5,6 @@ namespace JollyPanda.LastFlag.EnemyModule
     [CreateAssetMenu(fileName = "NewWaveData", menuName = "LastFlag/Wave Data", order = 0)]
     public class WaveData : ScriptableObject
     {
-        [field: SerializeField, Header("Wave Info")] public string WaveName { get; private set; } = "Wave";
-
         [Tooltip("Enemies to spawn in this wave.")]
         [field: SerializeField] public Enemy[] EnemyPrefabs { get; private set; }
 

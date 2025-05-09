@@ -8,11 +8,28 @@ namespace JollyPanda.LastFlag.Handlers
         public static event Action<Enemy> OnEnemyReachedTop;
         public static event Action OnLose;
         public static event Action OnStart;
+        public static event Action<int> OnWaveStart;
+        public static event Action<int,int> OnWaveEnd;
 
         public static void NotifyEnemyReachedTop(Enemy enemy)
         {
             OnEnemyReachedTop?.Invoke(enemy);
             OnLose?.Invoke();
+        }
+
+        public static void NotifyStart()
+        {
+            OnStart?.Invoke();
+        }
+
+        public static void NotifyStartWave(int waveIndex)
+        {
+            OnWaveStart?.Invoke(waveIndex);
+        }
+
+        public static void NotifyFinishWave(int waveIndex, int killedEnemy)
+        {
+            OnWaveEnd?.Invoke(waveIndex, killedEnemy);
         }
     }
 }

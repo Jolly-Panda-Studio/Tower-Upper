@@ -545,5 +545,85 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 1130682136793776487, guid: 94a564bd864edd94f979d9c9d8b0fa16, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3875218952126404115, guid: 94a564bd864edd94f979d9c9d8b0fa16, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6429104623760874809}
   m_SourcePrefab: {fileID: 100100000, guid: 94a564bd864edd94f979d9c9d8b0fa16, type: 3}
+--- !u!114 &2094671494145851412 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6554523648567342710, guid: 94a564bd864edd94f979d9c9d8b0fa16, type: 3}
+  m_PrefabInstance: {fileID: 5181281591010506338}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61c3f3dba921894c95e0bd466e390e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8223598470962389105 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3875218952126404115, guid: 94a564bd864edd94f979d9c9d8b0fa16, type: 3}
+  m_PrefabInstance: {fileID: 5181281591010506338}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6429104623760874809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223598470962389105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a29ed78795ac74aaa5588afc14773b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunSelector: {fileID: 2094671494145851412}
+  fireRateUpgrade:
+    <Values>k__BackingField:
+    - cost: 0
+      value: 2
+    - cost: 100
+      value: 4
+    - cost: 200
+      value: 6
+    - cost: 300
+      value: 8
+    - cost: 400
+      value: 10
+  damageUpgrade:
+    <Values>k__BackingField:
+    - cost: 0
+      value: 1
+    - cost: 100
+      value: 5
+    - cost: 200
+      value: 10
+    - cost: 300
+      value: 15
+    - cost: 400
+      value: 20
+  bulletSizeUpgrade:
+    <Values>k__BackingField:
+    - cost: 0
+      value: 0.1362588
+    - cost: 100
+      value: 0.18
+    - cost: 200
+      value: 0.23
+    - cost: 600
+      value: 0.3
+    - cost: 1000
+      value: 0.4
+  bulletSpeedUpgrade:
+    <Values>k__BackingField:
+    - cost: 0
+      value: 5
+    - cost: 125
+      value: 10
+    - cost: 200
+      value: 25
+    - cost: 250
+      value: 50
+    - cost: 600
+      value: 100

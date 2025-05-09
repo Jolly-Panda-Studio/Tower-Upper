@@ -41,5 +41,12 @@ namespace JollyPanda.LastFlag.PlayerModule
                 gameObject.SetActive(false);
             }
         }
+
+        public void Initialize(int damage, float scale, float speed)
+        {
+            this.damage = damage;
+            transform.localScale = Vector3.one * scale;
+            this.speed = speed;
+        }
     }
 }

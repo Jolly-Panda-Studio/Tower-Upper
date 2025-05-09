@@ -13,7 +13,10 @@ namespace JollyPanda.LastFlag.PlayerModule
 
         [SerializeField] private BulletPool BulletPool;
 
-        public float fireRate = 0.5f;
+        private float fireRate = 0.5f;
+        private int bulletDamage;
+        private float bulletSize;
+        private float bulletSpeed;
 
         private float timer;
 
@@ -34,7 +37,7 @@ namespace JollyPanda.LastFlag.PlayerModule
 
         void Fire()
         {
-            var bullet = BulletPool.GetBullet();
+            var bullet = BulletPool.GetBullet(bulletDamage, bulletSize, bulletSpeed);
             bullet.transform.position = FirePoint.position;
             bullet.transform.rotation = FirePoint.rotation;
         }
@@ -42,6 +45,26 @@ namespace JollyPanda.LastFlag.PlayerModule
         internal void SetActive(bool isActive)
         {
             this.isActive = isActive;
+        }
+
+        public void SetFireRate(float fireRate)
+        {
+            this.fireRate = fireRate;
+        }
+
+        public void SetDamage(float damage)
+        {
+            bulletDamage = (int)damage;
+        }
+
+        public void SetBulletSize(float scale)
+        {
+            bulletSize= scale;
+        }
+
+        public void SetBulletSpeed(float speed)
+        {
+            bulletSpeed = speed;
         }
     }
 }

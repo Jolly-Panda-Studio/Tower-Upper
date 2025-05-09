@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace JollyPanda.LastFlag.EnemyModule
 {
-    public delegate void WaveEventHandler(int waveIndex, string waveName);
+    public delegate void WaveEventHandler(int waveIndex);
 
     /// <summary>
     /// Manages spawning of enemy GameObjects around a cylindrical area using an object pooling system.
@@ -219,12 +219,12 @@ namespace JollyPanda.LastFlag.EnemyModule
 
             aliveEnemies = 0;
 
-            OnWaveStart?.Invoke(currentWaveIndex, wave.WaveName);
+            OnWaveStart?.Invoke(currentWaveIndex);
+            Informant.NotifyStartWave(currentWaveIndex);
 
             CancelInvoke(nameof(SpawnEnemy));
             InvokeRepeating(nameof(SpawnEnemy), 0f, wave.SpawnInterval);
         }
-
 
         private void EndCurrentWave()
         {
@@ -232,7 +232,8 @@ namespace JollyPanda.LastFlag.EnemyModule
             waveInProgress = false;
 
             var wave = waves[currentWaveIndex];
-            OnWaveEnd?.Invoke(currentWaveIndex, wave.WaveName);
+            OnWaveEnd?.Invoke(currentWaveIndex);
+            Informant.NotifyFinishWave(currentWaveIndex, Mathf.Abs(spawnedInWave - aliveEnemies));
 
             currentWaveIndex++;
             if (currentWaveIndex < waves.Length)
