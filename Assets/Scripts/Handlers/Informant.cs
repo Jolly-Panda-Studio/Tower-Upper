@@ -1,6 +1,7 @@
 using JollyPanda.LastFlag.Database;
 using JollyPanda.LastFlag.EnemyModule;
 using System;
+using UnityEngine;
 
 namespace JollyPanda.LastFlag.Handlers
 {
@@ -46,6 +47,7 @@ namespace JollyPanda.LastFlag.Handlers
 
         public static void NotifyEnemyKilled(int alivedEnemyCount, int totalEnemy)
         {
+            Debug.Log("NotifyEnemyKilled");
             OnEnemyKilled?.Invoke(alivedEnemyCount, totalEnemy);
         }
     }

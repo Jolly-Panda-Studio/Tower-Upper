@@ -6,7 +6,7 @@ namespace JollyPanda.LastFlag.PlayerModule
 {
     public class GunUpgradeManager : MonoBehaviour
     {
-        private static GunUpgradeManager instance;
+        public static GunUpgradeManager instance;
 
         [SerializeField] private GunSelector gunSelector;
 
@@ -15,10 +15,15 @@ namespace JollyPanda.LastFlag.PlayerModule
         [SerializeField] private UpgradeData damageUpgrade;
         [SerializeField] private UpgradeData bulletSizeUpgrade;
         [SerializeField] private UpgradeData bulletSpeedUpgrade;
-
+        
         private Gun activeGun;
         private PlayerSaveData saveData;
 
+
+        public UpgradeData GetBulletSizeUpgradeData()
+        {
+            return bulletSizeUpgrade;
+        }
         private void Awake()
         {
             if (instance != null && instance != this)
