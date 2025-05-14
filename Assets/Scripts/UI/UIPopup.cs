@@ -16,7 +16,8 @@ namespace MJUtilities.UI
 
         public void CloseThisPopup()
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            UIManager.instance.ClosePopup(this);
         }
         
 

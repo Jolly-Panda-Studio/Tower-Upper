@@ -31,6 +31,7 @@ public class PausePopup : UIPopup
     {
         GameManager.instance.UnPauseGame();
         GameManager.instance.RestartGame();
+        UIManager.instance.OpenPage(PageType.Home);
     }
     private void ResumeButtonClicked()
     {
@@ -39,6 +40,8 @@ public class PausePopup : UIPopup
     }
     private void RestartButtonClicked()
     {
-        
+        GameManager.instance.UnPauseGame();
+        GameManager.instance.RestartGame();
+        UIManager.instance.OpenPage(PageType.Home);
     }
 }

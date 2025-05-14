@@ -20,10 +20,10 @@ namespace MJUtilities.UI
         [SerializeField] private Button bulletSizeUpgradeButton;
         
         [Header("BuyCostText")] 
-        [SerializeField] private TMP_Text fireRateUpgradeCostText;
-        [SerializeField] private TMP_Text damageUpgradeCostText;
-        [SerializeField] private TMP_Text bulletSpeedUpgradeCostText;
-        [SerializeField] private TMP_Text bulletSizeUpgradeCostText;
+        [SerializeField] private UpgradeProgressConfig fireRateUpgradeProgress;
+        [SerializeField] private UpgradeProgressConfig damageUpgradeProgress;
+        [SerializeField] private UpgradeProgressConfig bulletSpeedUpgradProgress;
+        [SerializeField] private UpgradeProgressConfig bulletSizeUpgradeProgress;
 
         private void OnEnable()
         {
@@ -40,33 +40,77 @@ namespace MJUtilities.UI
             
             fireRateUpgradeButton.onClick.RemoveAllListeners();
             fireRateUpgradeButton.onClick.AddListener(FireRateUpgradeButtonClicked);
+            
             damageUpgradeButton.onClick.RemoveAllListeners();
             damageUpgradeButton.onClick.AddListener(DamageUpgradeButtonClicked);
+            
             bulletSpeedUpgradeButton.onClick.RemoveAllListeners();
             bulletSpeedUpgradeButton.onClick.AddListener(BulletSpeedUpgradeButtonClicked);
+            
             bulletSizeUpgradeButton.onClick.RemoveAllListeners();
             bulletSizeUpgradeButton.onClick.AddListener(BulletSizeUpgradeButtonClicked);
+
+            LoadCurrentUpgradeStatus();
+            Informant.GetUpdatedData();
         }
 
         private void BulletSizeUpgradeButtonClicked()
         {
-            var tmpUpgradeData = GunUpgradeManager.instance.GetBulletSizeUpgradeData();
-            Debug.Log("CurrentCost=" + tmpUpgradeData.CurrentCost + "  Level=" + tmpUpgradeData.Level);
-            
             var canUpgrade = GunUpgradeManager.TryUpgradeBulletSize();
-            Debug.Log("canUpgrade=" + canUpgrade);
-            Debug.Log("AFTER CurrentCost=" + tmpUpgradeData.CurrentCost + "  Level=" + tmpUpgradeData.Level);
-            
             if (canUpgrade)
             {
                 var upgradeData = GunUpgradeManager.instance.GetBulletSizeUpgradeData();
-                bulletSizeUpgradeCostText.text = upgradeData.CurrentCost.ToString();
+                bulletSizeUpgradeProgress.HandleUpgrade(upgradeData);
             }
         }
 
-        private void BulletSpeedUpgradeButtonClicked() => GunUpgradeManager.TryUpgradeBulletSpeed();
-        private void DamageUpgradeButtonClicked() => GunUpgradeManager.TryUpgradeDamage();
-        private void FireRateUpgradeButtonClicked() => GunUpgradeManager.TryUpgradeFireRate();
+        private void BulletSpeedUpgradeButtonClicked()
+        {
+            var canUpgrade = GunUpgradeManager.TryUpgradeBulletSpeed();
+            if (canUpgrade)
+            {
+                var upgradeData = GunUpgradeManager.instance.GetBulletSpeedUpgradeData();
+                bulletSpeedUpgradProgress.HandleUpgrade(upgradeData);
+            }
+        }
+
+        private void DamageUpgradeButtonClicked()
+        {
+            var canUpgrade = GunUpgradeManager.TryUpgradeDamage();
+            if (canUpgrade)
+            {
+                var upgradeData = GunUpgradeManager.instance.GetDamageUpgradeData();
+                damageUpgradeProgress.HandleUpgrade(upgradeData);
+            }
+        }
+
+        private void FireRateUpgradeButtonClicked()
+        {
+            var canUpgrade = GunUpgradeManager.TryUpgradeFireRate();
+            if (canUpgrade)
+            {
+                var upgradeData = GunUpgradeManager.instance.GetFireRateUpgradeData();
+                fireRateUpgradeProgress.HandleUpgrade(upgradeData);
+            }
+        }
+
+        private void LoadCurrentUpgradeStatus()
+        {
+            var gunUpgradeManager = GunUpgradeManager.instance;
+            
+            var upgradeData = gunUpgradeManager.GetFireRateUpgradeData();
+            fireRateUpgradeProgress.HandleUpgrade(upgradeData);
+            
+            upgradeData = gunUpgradeManager.GetDamageUpgradeData();
+            damageUpgradeProgress.HandleUpgrade(upgradeData);
+            
+            upgradeData = gunUpgradeManager.GetBulletSpeedUpgradeData();
+            bulletSpeedUpgradProgress.HandleUpgrade(upgradeData);
+            
+            upgradeData = gunUpgradeManager.GetBulletSizeUpgradeData();
+            bulletSizeUpgradeProgress.HandleUpgrade(upgradeData);
+            
+        }
 
         public override void OnAwake()
         {

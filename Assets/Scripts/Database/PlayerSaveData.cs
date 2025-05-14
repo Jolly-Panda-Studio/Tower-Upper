@@ -10,7 +10,7 @@
         public int BulletSizeLevel = 0;
         public int BulletSpeedLevel = 0;
 
-        public static PlayerSaveData Default => new(1000, 0, 0, 0, 0);
+        public static PlayerSaveData Default => new(20000, 0, 0, 0, 0);
 
         public PlayerSaveData(int money, int fireRateLevel, int damageLevel, int bulletSizeLevel, int bulletSpeedLevel)
         {

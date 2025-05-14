@@ -67,6 +67,8 @@ namespace MJUtilities.UI
             {
                 page.gameObject.SetActive(false);
             }
+            
+            hasActivePopup = false;
         }
 
         public void ClosePopups()
@@ -109,7 +111,7 @@ namespace MJUtilities.UI
 
         public void OpenPage(PageType pageType)
         {
-            Debug.Log("OpenPage: " + pageType);
+            //Debug.Log("OpenPage: " + pageType);
 
             foreach (var page in pageList)
             {
@@ -170,6 +172,12 @@ namespace MJUtilities.UI
                 hasActivePopup = false;
                 popup.gameObject.SetActive(false);
             }
+        }
+        
+        public void ClosePopup(UIPopup popup)
+        {
+            hasActivePopup = false;
+            popup.gameObject.SetActive(false);
         }
     }
 }

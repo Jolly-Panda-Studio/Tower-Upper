@@ -42,6 +42,8 @@ public class HUDPage : UIPage
         pauseButton.onClick.RemoveAllListeners();
         pauseButton.onClick.AddListener(PauseButtonClicked);
         
+        Informant.GetUpdatedData();
+        
     }
 
     private void Start()

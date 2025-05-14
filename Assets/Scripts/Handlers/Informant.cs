@@ -50,5 +50,13 @@ namespace JollyPanda.LastFlag.Handlers
             Debug.Log("NotifyEnemyKilled");
             OnEnemyKilled?.Invoke(alivedEnemyCount, totalEnemy);
         }
+        public static void GetUpdatedData()
+        {
+            //Debug.Log("NotifyProfileChange");
+            var data = SaveSystem.Load();
+            SaveSystem.Save(data);
+        }
+        
+        
     }
 }

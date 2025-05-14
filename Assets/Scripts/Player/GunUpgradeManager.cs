@@ -20,10 +20,11 @@ namespace JollyPanda.LastFlag.PlayerModule
         private PlayerSaveData saveData;
 
 
-        public UpgradeData GetBulletSizeUpgradeData()
-        {
-            return bulletSizeUpgrade;
-        }
+        public UpgradeData GetBulletSizeUpgradeData() => bulletSizeUpgrade;
+        public UpgradeData GetBulletSpeedUpgradeData() => bulletSpeedUpgrade;
+        public UpgradeData GetDamageUpgradeData() => damageUpgrade;
+        public UpgradeData GetFireRateUpgradeData() => fireRateUpgrade;
+
         private void Awake()
         {
             if (instance != null && instance != this)
@@ -59,7 +60,7 @@ namespace JollyPanda.LastFlag.PlayerModule
         private void LoadPlayerData()
         {
             saveData = SaveSystem.Load();
-
+            
             fireRateUpgrade.Level = saveData.FireRateLevel;
             damageUpgrade.Level = saveData.DamageLevel;
             bulletSizeUpgrade.Level = saveData.BulletSizeLevel;
@@ -104,14 +105,14 @@ namespace JollyPanda.LastFlag.PlayerModule
 
         private bool TryUpgrade(UpgradeData upgrade, Action<int> onLevelSaved, ref int playerMoney)
         {
-            if (!upgrade.CanUpgrade || playerMoney < upgrade.CurrentCost)
+            if (!upgrade.CanUpgrade || playerMoney < upgrade.NextLevelCost)
                 return false;
 
-            playerMoney -= upgrade.CurrentCost;
+            playerMoney -= upgrade.NextLevelCost;
             upgrade.Level++;
             onLevelSaved(upgrade.Level);
-            ApplyUpgrades();
             SaveSystem.Save(saveData);
+            ApplyUpgrades();
             return true;
         }
     }

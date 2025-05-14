@@ -14,10 +14,11 @@ public class HomePage : UIPage
     [SerializeField] private Button settingButton;
     [SerializeField] private Button upgradeButton;
 
-    [Header("Dragging")] private bool isGameStarted;
+    [Header("Dragging")] 
+    //private bool isGameStarted;
     private Vector2 startTouchPosition;
     private bool isDragging;
-    public float dragThreshold = 20f;
+    public float dragThreshold;
 
     [Header("Money")] 
     [SerializeField] private TMP_Text moneyText;
@@ -39,6 +40,8 @@ public class HomePage : UIPage
 
         upgradeButton.onClick.RemoveAllListeners();
         upgradeButton.onClick.AddListener(UpgradeButtonClicked);
+        
+        Informant.GetUpdatedData();
     }
 
     public override void OnAwake()
@@ -49,8 +52,12 @@ public class HomePage : UIPage
 
     private void Update()
     {
-        if (isGameStarted) return;
-        if (UIManager.instance.HasActivePopup()) return;
+        //if (isGameStarted) return;
+        if (UIManager.instance.HasActivePopup())
+        {
+            isDragging = false;
+            return;
+        }
 
         Dragging();
     }
@@ -69,6 +76,7 @@ public class HomePage : UIPage
 
             if (distance > dragThreshold)
             {
+                //Debug.Log("Dragging");
                 StartGame();
             }
 
@@ -78,7 +86,7 @@ public class HomePage : UIPage
 
     private void StartGame()
     {
-        isGameStarted = true;
+        //isGameStarted = true;
         UIManager.instance.OpenPage(PageType.HUD, true);
         Informant.NotifyStart();
     }
