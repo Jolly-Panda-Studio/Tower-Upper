@@ -33,5 +33,13 @@ namespace JollyPanda.LastFlag.PlayerModule
         {
             bullet.gameObject.SetActive(false);
         }
+
+        public void ReturnAllBullet()
+        {
+            foreach (var bullet in pool)
+            {
+                bullet.gameObject.SetActive(false);
+            }
+        }
     }
 }

@@ -74,6 +74,7 @@ namespace MJUtilities.UI
             Debug.Log("Next round started!");
             CloseThisPopup();
             //ToDo: start wave
+            GameManager.instance.UnPauseGame();
         }
     }
 }

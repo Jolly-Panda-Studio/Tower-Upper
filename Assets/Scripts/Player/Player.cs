@@ -1,4 +1,5 @@
 ﻿using JollyPanda.LastFlag.Handlers;
+using System;
 using UnityEngine;
 
 namespace JollyPanda.LastFlag.PlayerModule
@@ -13,12 +14,14 @@ namespace JollyPanda.LastFlag.PlayerModule
         {
             gunSelector.OnGunChange += GunChanged;
             Informant.OnLose += Losing;
+            Informant.OnChangeUIPage += ChoicePlayerAnimation;
         }
 
         private void OnDisable()
         {
             gunSelector.OnGunChange -= GunChanged;
             Informant.OnLose -= Losing;
+            Informant.OnChangeUIPage -= ChoicePlayerAnimation;
         }
 
         private void GunChanged(Gun activeGun)
@@ -29,6 +32,21 @@ namespace JollyPanda.LastFlag.PlayerModule
         {
             gunSelector.DisableGun();
             animationController.PlayDefeat();
+        }
+
+        private void ChoicePlayerAnimation(PageType type)
+        {
+            switch (type)
+            {
+                case PageType.HUD:
+                    animationController.PlayShooting(true);
+                    break;
+                case PageType.Home:
+                    animationController.PlayShooting(false);
+                    animationController.PlayIdle();
+                    gunSelector.DisableGun();
+                    break;
+            }
         }
     }
 }

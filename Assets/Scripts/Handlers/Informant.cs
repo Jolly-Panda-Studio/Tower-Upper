@@ -10,6 +10,7 @@ namespace JollyPanda.LastFlag.Handlers
         public static event Action<Enemy> OnEnemyReachedTop;
         public static event Action OnLose;
         public static event Action OnStart;
+        public static event Action<PageType> OnChangeUIPage;
         public static event Action<int> OnWaveStart;
         public static event Action<int, int> OnWaveEnd;
         public static event Action<int, int> OnEnemyKilled;
@@ -56,7 +57,10 @@ namespace JollyPanda.LastFlag.Handlers
             var data = SaveSystem.Load();
             SaveSystem.Save(data);
         }
-        
-        
+
+        internal static void OnChangePage(PageType pageType)
+        {
+            OnChangeUIPage?.Invoke(pageType);
+        }
     }
 }

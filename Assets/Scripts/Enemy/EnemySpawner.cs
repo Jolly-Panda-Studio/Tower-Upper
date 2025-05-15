@@ -54,12 +54,30 @@ namespace JollyPanda.LastFlag.EnemyModule
         {
             Informant.OnLose += StopSpawning;
             Informant.OnStart += StartSpawningWave;
+            Informant.OnChangeUIPage += DestroyEnemies;
         }
 
         private void OnDisable()
         {
             Informant.OnLose -= StopSpawning;
             Informant.OnStart -= StartSpawningWave;
+            Informant.OnChangeUIPage -= DestroyEnemies;
+        }
+
+        private void DestroyEnemies(PageType type)
+        {
+            if (type == PageType.Home)
+            {
+                foreach (var enemyQueue in enemyPools.Values)
+                {
+                    foreach (var enemy in enemyQueue)
+                    {
+                        enemy.gameObject.SetActive(false);
+                    }
+                }
+
+                StopSpawning();
+            }
         }
 
         /// <summary>

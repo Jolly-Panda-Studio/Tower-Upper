@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using UnityEditor;
 using UnityEngine.Serialization;
+using JollyPanda.LastFlag.Handlers;
 
 namespace MJUtilities.UI
 {
@@ -123,6 +124,8 @@ namespace MJUtilities.UI
                 page.gameObject.SetActive(true);
                 page.OnSetValues();
             }
+
+            Informant.OnChangePage(pageType);
         }
         public void OpenPage(PageType pageType, bool closeLastPage)
         {

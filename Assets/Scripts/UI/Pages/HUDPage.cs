@@ -48,12 +48,12 @@ public class HUDPage : UIPage
 
     private void Start()
     {
-        newWaveNotificationCanvasGroup.alpha = 0;
+        
     }
 
     public override void OnAwake()
     {
-        
+        newWaveNotificationCanvasGroup.alpha = 0;
     }
 
     private void PauseButtonClicked()

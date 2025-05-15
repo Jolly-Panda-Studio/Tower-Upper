@@ -1,3 +1,4 @@
+using JollyPanda.LastFlag.Handlers;
 using MJUtilities.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,7 +22,8 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         UIManager.instance.CloseEverything();
-        SceneManager.LoadScene(0);
+        UIManager.instance.OpenPage(PageType.Home);
+        //SceneManager.LoadScene(0);
     }
 
     public void PauseGame()

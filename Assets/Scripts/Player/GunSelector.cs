@@ -58,6 +58,9 @@ namespace JollyPanda.LastFlag.PlayerModule
 
         internal void DisableGun()
         {
+            if (activeGun == null)
+                return;
+
             activeGun.SetActive(false);
         }
     }

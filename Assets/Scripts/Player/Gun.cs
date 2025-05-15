@@ -45,6 +45,11 @@ namespace JollyPanda.LastFlag.PlayerModule
         internal void SetActive(bool isActive)
         {
             this.isActive = isActive;
+
+            if (!isActive)
+            {
+                BulletPool.ReturnAllBullet();
+            }
         }
 
         public void SetFireRate(float fireRate)
