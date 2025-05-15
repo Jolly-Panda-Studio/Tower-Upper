@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.74063504, g: 0.9395742, b: 0.9264066, a: 1}
+  m_IndirectSpecularColor: {r: 0.7410362, g: 0.9389528, b: 0.924075, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -67,6 +67,9 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -129,6 +132,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &126217673 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2291436680101175170, guid: 13ed1ba2b702508418b187240d1be474, type: 3}
+  m_PrefabInstance: {fileID: 7875766621972275821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815828775f3d26b40af8adeb9a558668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &177022655 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4199466143404695668, guid: 13ed1ba2b702508418b187240d1be474, type: 3}
+  m_PrefabInstance: {fileID: 7875766621972275821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815828775f3d26b40af8adeb9a558668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &264853844 stripped
@@ -686,17 +711,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707423234}
   m_CullTransparentMesh: 0
---- !u!114 &744315386 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 446499296776823042, guid: 13ed1ba2b702508418b187240d1be474, type: 3}
-  m_PrefabInstance: {fileID: 7875766621972275821}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &749454464 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1077173722640822101, guid: 71af65e9ea007ac43bea4264a092fc6c, type: 3}
@@ -717,6 +731,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &880874562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 78070552324942457, guid: 13ed1ba2b702508418b187240d1be474, type: 3}
+  m_PrefabInstance: {fileID: 7875766621972275821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815828775f3d26b40af8adeb9a558668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &936400819 stripped
@@ -746,6 +771,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8635503973573855381, guid: 7efbf74a8d203f14b8b601208cddfd3a, type: 3}
   m_PrefabInstance: {fileID: 1218641686636908053}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1064165253 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 926682628287783440, guid: 13ed1ba2b702508418b187240d1be474, type: 3}
+  m_PrefabInstance: {fileID: 7875766621972275821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815828775f3d26b40af8adeb9a558668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1065787974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,11 +1515,11 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8138200823247070787, guid: 80fb5799ecf6a084faa18e393d4bd0f4, type: 3}
-      propertyPath: 'waves.Array.data[0]'
+      propertyPath: waves.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 93daa36b1c719d74399a46252bd33e1c, type: 2}
     - target: {fileID: 8138200823247070787, guid: 80fb5799ecf6a084faa18e393d4bd0f4, type: 3}
-      propertyPath: 'waves.Array.data[1]'
+      propertyPath: waves.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 1ac1e0dcb6a065543a7565f6a27b83db, type: 2}
     m_RemovedComponents: []
@@ -2758,10 +2794,10 @@ MonoBehaviour:
   damageUpgradeButton: {fileID: 611488005}
   bulletSpeedUpgradeButton: {fileID: 624208411}
   bulletSizeUpgradeButton: {fileID: 1409754568}
-  fireRateUpgradeCostText: {fileID: 0}
-  damageUpgradeCostText: {fileID: 0}
-  bulletSpeedUpgradeCostText: {fileID: 0}
-  bulletSizeUpgradeCostText: {fileID: 744315386}
+  fireRateUpgradeProgress: {fileID: 1064165253}
+  damageUpgradeProgress: {fileID: 126217673}
+  bulletSpeedUpgradProgress: {fileID: 880874562}
+  bulletSizeUpgradeProgress: {fileID: 177022655}
 --- !u!1001 &8555415238537433974
 PrefabInstance:
   m_ObjectHideFlags: 0

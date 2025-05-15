@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 8974287653631210581}
   - component: {fileID: 5068611835165824974}
   - component: {fileID: 2833264664470659472}
+  - component: {fileID: 5010853094600183120}
   m_Layer: 5
   m_Name: UpgradeSlot
   m_TagString: Untagged
@@ -476,6 +477,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5010853094600183120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417218681625340016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815828775f3d26b40af8adeb9a558668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeCostText: {fileID: 8791001032571030566}
+  activeProgressImages:
+  - {fileID: 3659446194745499622}
+  - {fileID: 6596628713003606732}
+  - {fileID: 7793775850075849553}
+  - {fileID: 4851379695061790392}
 --- !u!1 &2668463351125638621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,7 +1575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4640067884817532931
 RectTransform:
   m_ObjectHideFlags: 0
