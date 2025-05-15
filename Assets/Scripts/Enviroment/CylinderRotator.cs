@@ -1,3 +1,5 @@
+using JollyPanda.LastFlag.Handlers;
+using System;
 using UnityEngine;
 
 namespace JollyPanda.LastFlag.EnviromentModule
@@ -7,8 +9,35 @@ namespace JollyPanda.LastFlag.EnviromentModule
         public float rotationSpeed = 100f;
         private Vector2 lastMousePosition;
 
+        private bool isActive = false;
+
+        private void OnEnable()
+        {
+            Informant.OnStart += SetActive;
+            Informant.OnWaveEnd += SetDeactive;
+        }
+
+        private void OnDisable()
+        {
+            Informant.OnStart -= SetActive;
+            Informant.OnWaveEnd -= SetDeactive;
+        }
+
+        private void SetActive()
+        {
+            isActive = true;
+        }
+
+        private void SetDeactive(int arg1, int arg2)
+        {
+            isActive = false;
+        }
+
         void Update()
         {
+            if (!isActive)
+                return;
+
             if (Input.GetMouseButtonDown(0))
             {
                 lastMousePosition = Input.mousePosition;
