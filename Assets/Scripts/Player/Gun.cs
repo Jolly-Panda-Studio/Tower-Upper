@@ -20,7 +20,7 @@ namespace JollyPanda.LastFlag.PlayerModule
 
         private float timer;
 
-        private bool isActive = true;
+        private bool isActive = false;
 
         void Update()
         {

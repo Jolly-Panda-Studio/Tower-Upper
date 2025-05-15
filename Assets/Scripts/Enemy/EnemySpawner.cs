@@ -69,7 +69,7 @@ namespace JollyPanda.LastFlag.EnemyModule
         {
             GenerateSpawnPoints();
             spawnCooldowns = new float[numberOfSpawnPoints];
-            StartSpawningWave();
+            //StartSpawningWave();
         }
 
         /// <summary>
@@ -144,7 +144,6 @@ namespace JollyPanda.LastFlag.EnemyModule
             spawnCooldowns[spawnIndex] = 0.9f; // Reset cooldown for this spawn point
 
             spawnedInWave++;
-            aliveEnemies++;
         }
 
         void PositionEnemyAtSpawnPoint(Enemy enemy, int spawnIndex)
@@ -169,8 +168,8 @@ namespace JollyPanda.LastFlag.EnemyModule
                 if (aliveEnemies <= 0 && waveInProgress)
                 {
                     EndCurrentWave();
-                    Informant.NotifyEnemyKilled(aliveEnemies, totalEnemies);
                 }
+                Informant.NotifyEnemyKilled(aliveEnemies, totalEnemies);
             });
         }
 
@@ -219,7 +218,7 @@ namespace JollyPanda.LastFlag.EnemyModule
             spawnedInWave = 0;
             waveInProgress = true;
 
-            aliveEnemies = 0;
+            aliveEnemies = wave.EnemyCount;
             totalEnemies = wave.EnemyCount;
 
             OnWaveStart?.Invoke(currentWaveIndex);
@@ -227,6 +226,7 @@ namespace JollyPanda.LastFlag.EnemyModule
 
             CancelInvoke(nameof(SpawnEnemy));
             InvokeRepeating(nameof(SpawnEnemy), 0f, wave.SpawnInterval);
+            Informant.NotifyEnemyKilled(aliveEnemies, totalEnemies);
         }
 
         private void EndCurrentWave()

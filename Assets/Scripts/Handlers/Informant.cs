@@ -47,7 +47,7 @@ namespace JollyPanda.LastFlag.Handlers
 
         public static void NotifyEnemyKilled(int alivedEnemyCount, int totalEnemy)
         {
-            Debug.Log("NotifyEnemyKilled");
+            //Debug.Log("NotifyEnemyKilled");
             OnEnemyKilled?.Invoke(alivedEnemyCount, totalEnemy);
         }
         public static void GetUpdatedData()

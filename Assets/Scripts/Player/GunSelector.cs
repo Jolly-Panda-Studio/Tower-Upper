@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JollyPanda.LastFlag.Handlers;
+using System;
 using UnityEngine;
 
 namespace JollyPanda.LastFlag.PlayerModule
@@ -10,6 +11,21 @@ namespace JollyPanda.LastFlag.PlayerModule
         private Gun activeGun;
 
         public event Action<Gun> OnGunChange;
+
+        private void OnEnable()
+        {
+            Informant.OnStart += ActiveGun;
+        }
+
+        private void OnDisable()
+        {
+            Informant.OnStart -= ActiveGun;
+        }
+
+        private void ActiveGun()
+        {
+            activeGun.SetActive(true);
+        }
 
         private void Start()
         {
@@ -29,7 +45,7 @@ namespace JollyPanda.LastFlag.PlayerModule
                     gun.gameObject.SetActive(true);
 
                     activeGun = gun;
-                    activeGun.SetActive(true);
+                    //activeGun.SetActive(true);
 
                     OnGunChange?.Invoke(activeGun);
                 }
