@@ -75,7 +75,7 @@ public class HUDPage : UIPage
     {
         GameManager.instance.UnPauseGame();
         
-        var currentWave = waveIndex;
+        var currentWave = waveIndex + 1;
         waveIndexText.text = currentWave.ToString();
         StartCoroutine(WaveNotificationCoroutine(currentWave));
     }
@@ -89,7 +89,18 @@ public class HUDPage : UIPage
     {
         newWaveNotificationCanvasGroup.alpha = 1f;
         startWaveText.text = $"Enemies rise!\n Wave {waveIndex} has begun!";
-        yield return new WaitForSecondsRealtime(5f);
+
+        float duration = 5f;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            float t = timer / duration;
+            newWaveNotificationCanvasGroup.alpha = Mathf.Lerp(1f, 0f, t);
+            timer += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
         newWaveNotificationCanvasGroup.alpha = 0f;
     }
 }
