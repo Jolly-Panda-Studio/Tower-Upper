@@ -132,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 1015465146873478720}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.09, z: -0}
+  m_LocalPosition: {x: 0, y: 9.65, z: -0}
   m_LocalScale: {x: 5.2426, y: 0, z: 5.2426}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -305,20 +305,10 @@ MonoBehaviour:
   radius: 2.6213002
   height: 90
   cylinderRenderer: {fileID: 5459558350284184089}
-  enemyPrefabs:
-  - {fileID: 4702841107484503214, guid: 2d9ff0640a9ca6546b54dd7a177d720f, type: 3}
-  - {fileID: 4702841107484503214, guid: b44efb29b69c8d2488919b4329223ab1, type: 3}
-  - {fileID: 4702841107484503214, guid: de35c7dc5e9613a4595c336d225963a2, type: 3}
-  - {fileID: 4702841107484503214, guid: 1223fe3f05b863844bf4dc2416b8fe04, type: 3}
-  - {fileID: 4702841107484503214, guid: 27c7f42b5dc40e247a5366f496b33db2, type: 3}
-  - {fileID: 4702841107484503214, guid: e587dbc38c2f45246aebaea8a8c29eee, type: 3}
-  - {fileID: 4702841107484503214, guid: 5124bb628ea12964ab09f4da21ba5068, type: 3}
-  - {fileID: 4702841107484503214, guid: e096728f43786dc4ea35c7da6f09a71b, type: 3}
-  - {fileID: 4702841107484503214, guid: dfa05c4b1cefdfa46ab0505e19e1d642, type: 3}
-  - {fileID: 4702841107484503214, guid: 9711d041bc9294b4d9110e9554b65c99, type: 3}
-  spawnInterval: 2
-  poolSizePerEnemyType: 10
   enemyParent: {fileID: 1608550352578170127}
+  waves:
+  - {fileID: 11400000, guid: 93daa36b1c719d74399a46252bd33e1c, type: 2}
+  - {fileID: 11400000, guid: 1ac1e0dcb6a065543a7565f6a27b83db, type: 2}
 --- !u!1 &5459558350284184091
 GameObject:
   m_ObjectHideFlags: 0
