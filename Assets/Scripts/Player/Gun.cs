@@ -1,5 +1,3 @@
-using JollyPanda.LastFlag.Handlers;
-using System;
 using UnityEngine;
 
 namespace JollyPanda.LastFlag.PlayerModule
@@ -37,7 +35,7 @@ namespace JollyPanda.LastFlag.PlayerModule
 
         void Fire()
         {
-            var bullet = BulletPool.GetBullet(bulletDamage, bulletSize, bulletSpeed);
+            var bullet = BulletPool.GetBullet(bulletDamage, bulletSize, bulletSpeed, true);
             bullet.transform.position = FirePoint.position;
             bullet.transform.rotation = FirePoint.rotation;
         }
@@ -45,10 +43,22 @@ namespace JollyPanda.LastFlag.PlayerModule
         internal void SetActive(bool isActive)
         {
             this.isActive = isActive;
+        }
 
-            if (!isActive)
+        internal void DisableAllBullets()
+        {
+            BulletPool.ReturnAllBullet();
+        }
+
+        internal void PauseBulletsMoving(bool isPause)
+        {
+            if (isPause)
             {
-                BulletPool.ReturnAllBullet();
+                BulletPool.PauseMoving();
+            }
+            else
+            {
+                BulletPool.ResumeMoving();
             }
         }
 
@@ -64,7 +74,7 @@ namespace JollyPanda.LastFlag.PlayerModule
 
         public void SetBulletSize(float scale)
         {
-            bulletSize= scale;
+            bulletSize = scale;
         }
 
         public void SetBulletSpeed(float speed)

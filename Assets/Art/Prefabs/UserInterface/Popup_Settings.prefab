@@ -750,7 +750,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015215, y: -252}
+  m_AnchoredPosition: {x: 0.000015215, y: -141}
   m_SizeDelta: {x: 770.87, y: 133}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1889463122226617747
@@ -2079,7 +2079,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8635503973573855381}
-  - component: {fileID: 8871323155937034891}
+  - component: {fileID: 6293702718157876306}
+  - component: {fileID: 5781795611043188071}
   m_Layer: 5
   m_Name: Popup_Settings
   m_TagString: Untagged
@@ -2094,7 +2095,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4947728495242659976}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
   m_ConstrainProportionsScale: 0
@@ -2109,7 +2110,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8871323155937034891
+--- !u!114 &6293702718157876306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2118,11 +2119,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 4947728495242659976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a00128818eda43dfaa959b83527b255, type: 3}
+  m_Script: {fileID: 11500000, guid: 38a6397bccdc411d8fb01deccc5099ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherPanels:
-  - {fileID: 0}
+  popupType: 4
+  backButton: {fileID: 3569844688536057865}
+--- !u!95 &5781795611043188071
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947728495242659976}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4791fbb663008454ea3e8d5ac777b4f3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4960276411080031098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,7 +2254,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076111, y: -32.999966}
+  m_AnchoredPosition: {x: 0.0000076111, y: 78.00008}
   m_SizeDelta: {x: 770.87, y: 224.6945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5238604935280774516
@@ -3135,6 +3157,7 @@ GameObject:
   - component: {fileID: 5458068432834762911}
   - component: {fileID: 7682729680117249315}
   - component: {fileID: 5520642394144640366}
+  - component: {fileID: 8274039045294587864}
   m_Layer: 5
   m_Name: Popup
   m_TagString: Untagged
@@ -3164,7 +3187,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 881.9869, y: 790.6909}
+  m_SizeDelta: {x: 881.9869, y: 555.9648}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5458068432834762911
 CanvasRenderer:
@@ -3219,6 +3242,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.2}
   m_EffectDistance: {x: 0, y: -20}
   m_UseGraphicAlpha: 1
+--- !u!225 &8274039045294587864
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6578780610474338571}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6924471278651366402
 GameObject:
   m_ObjectHideFlags: 0
@@ -3311,7 +3346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3565019499624725625
 RectTransform:
   m_ObjectHideFlags: 0

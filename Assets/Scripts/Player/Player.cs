@@ -15,6 +15,7 @@ namespace JollyPanda.LastFlag.PlayerModule
             gunSelector.OnGunChange += GunChanged;
             Informant.OnLose += Losing;
             Informant.OnChangeUIPage += ChoicePlayerAnimation;
+            Informant.OnPause += PauseAnything;
         }
 
         private void OnDisable()
@@ -46,6 +47,20 @@ namespace JollyPanda.LastFlag.PlayerModule
                     animationController.PlayIdle();
                     gunSelector.DisableGun();
                     break;
+            }
+        }
+
+        private void PauseAnything(bool isPause)
+        {
+            if (isPause)
+            {
+                animationController.Pause();
+                gunSelector.PauseShooting();
+            }
+            else
+            {
+                animationController.Resume();
+                gunSelector.ResumeShooting();
             }
         }
     }

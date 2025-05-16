@@ -30,7 +30,7 @@ public class PausePopup : UIPopup
     private void QuitButtonClicked()
     {
         GameManager.instance.UnPauseGame();
-        GameManager.instance.RestartGame();
+        GameManager.instance.BackHome();
         UIManager.instance.OpenPage(PageType.Home);
     }
     private void ResumeButtonClicked()
@@ -40,8 +40,8 @@ public class PausePopup : UIPopup
     }
     private void RestartButtonClicked()
     {
-        GameManager.instance.UnPauseGame();
-        GameManager.instance.RestartGame();
-        UIManager.instance.OpenPage(PageType.Home);
+        //GameManager.instance.UnPauseGame();
+        //GameManager.instance.BackHome();
+        //UIManager.instance.OpenPage(PageType.Home);
     }
 }

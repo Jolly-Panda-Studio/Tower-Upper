@@ -11,8 +11,14 @@ namespace MJUtilities.UI
         
         [Header("Can Be Null")]
         [SerializeField] private Button backButton;
+
         public abstract void OnAwake();
         public abstract void OnSetValues();
+
+        protected virtual void OnEnable()
+        {
+
+        }
 
         public void CloseThisPopup()
         {

@@ -22,11 +22,6 @@ namespace JollyPanda.LastFlag.PlayerModule
             Informant.OnStart -= ActiveGun;
         }
 
-        private void ActiveGun()
-        {
-            activeGun.SetActive(true);
-        }
-
         private void Start()
         {
             if (guns.Length > 0)
@@ -56,12 +51,36 @@ namespace JollyPanda.LastFlag.PlayerModule
             }
         }
 
+        private void ActiveGun()
+        {
+            activeGun.SetActive(true);
+        }
+
         internal void DisableGun()
         {
             if (activeGun == null)
                 return;
 
             activeGun.SetActive(false);
+            activeGun.DisableAllBullets();
+        }
+
+        internal void PauseShooting()
+        {
+            if (activeGun == null)
+                return;
+
+            activeGun.SetActive(false);
+            activeGun.PauseBulletsMoving(true);
+        }
+
+        internal void ResumeShooting()
+        {
+            if (activeGun == null)
+                return;
+
+            activeGun.SetActive(true);
+            activeGun.PauseBulletsMoving(false);
         }
     }
 }

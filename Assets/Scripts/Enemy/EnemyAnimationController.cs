@@ -32,5 +32,15 @@ namespace JollyPanda.LastFlag.EnemyModule
         {
             animator.SetTrigger(hangingIdle);
         }
+
+        internal void Pause()
+        {
+            animator.speed = 0;
+        }
+
+        internal void Resume()
+        {
+            animator.speed = 1;
+        }
     }
 }

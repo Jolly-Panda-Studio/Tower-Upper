@@ -69,7 +69,7 @@ public class HUDPage : UIPage
     private void WaveEnd(int waveIndex, int killedEnemy)
     {
         UIManager.instance.OpenPopup(PopupType.Countdown);
-        GameManager.instance.PauseGame();
+        //GameManager.instance.PauseGame();
     }
     private void WaveStart(int waveIndex)
     {
@@ -91,24 +91,5 @@ public class HUDPage : UIPage
         startWaveText.text = $"Enemies rise!\n Wave {waveIndex} has begun!";
         yield return new WaitForSecondsRealtime(5f);
         newWaveNotificationCanvasGroup.alpha = 0f;
-    }
-    
-    
-    
-
-    [ContextMenu(nameof(TestOnEnemyKilled_Call))]
-    public void TestOnEnemyKilled_Call()
-    {
-        Informant.NotifyEnemyKilled(5,15);
-    }
-    [ContextMenu(nameof(TestWaveStart_Call))]
-    public void TestWaveStart_Call()
-    {
-        Informant.NotifyStartWave(2);
-    }
-    [ContextMenu(nameof(TestOnWaveEnd_Call))]
-    public void TestOnWaveEnd_Call()
-    {
-        Informant.NotifyFinishWave(1,15);
     }
 }

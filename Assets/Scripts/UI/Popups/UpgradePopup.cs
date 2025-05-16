@@ -25,8 +25,9 @@ namespace MJUtilities.UI
         [SerializeField] private UpgradeProgressConfig bulletSpeedUpgradProgress;
         [SerializeField] private UpgradeProgressConfig bulletSizeUpgradeProgress;
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             Informant.OnProfileChange += ProfileChange;
         }
 

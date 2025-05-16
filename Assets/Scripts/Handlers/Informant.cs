@@ -1,7 +1,6 @@
 using JollyPanda.LastFlag.Database;
 using JollyPanda.LastFlag.EnemyModule;
 using System;
-using UnityEngine;
 
 namespace JollyPanda.LastFlag.Handlers
 {
@@ -9,7 +8,9 @@ namespace JollyPanda.LastFlag.Handlers
     {
         public static event Action<Enemy> OnEnemyReachedTop;
         public static event Action OnLose;
+        public static event Action<int> OnEarnCoin;
         public static event Action OnStart;
+        public static event Action<bool> OnPause;
         public static event Action<PageType> OnChangeUIPage;
         public static event Action<int> OnWaveStart;
         public static event Action<int, int> OnWaveEnd;
@@ -20,15 +21,25 @@ namespace JollyPanda.LastFlag.Handlers
             remove => SaveSystem.OnApplyChange -= value;
         }
 
-        public static void NotifyEnemyReachedTop(Enemy enemy)
+        public static void NotifyEnemyReachedTop(Enemy enemy, int killedEnemy)
         {
             OnEnemyReachedTop?.Invoke(enemy);
-            OnLose?.Invoke();
+
+            int earnedCoins = killedEnemy * 10;
+            var data = SaveSystem.Load();
+            data.Money += earnedCoins;
+            SaveSystem.Save(data);
+            OnEarnCoin?.Invoke(earnedCoins);
         }
 
         public static void NotifyStart()
         {
             OnStart?.Invoke();
+        }
+
+        public static void PauseGame(bool isPause)
+        {
+            OnPause?.Invoke(isPause);
         }
 
         public static void NotifyStartWave(int waveIndex)
@@ -38,12 +49,13 @@ namespace JollyPanda.LastFlag.Handlers
 
         public static void NotifyFinishWave(int waveIndex, int killedEnemy)
         {
-            OnWaveEnd?.Invoke(waveIndex, killedEnemy);
-
             int earnedCoins = killedEnemy * 10;
             var data = SaveSystem.Load();
             data.Money += earnedCoins;
             SaveSystem.Save(data);
+            OnEarnCoin?.Invoke(earnedCoins);
+
+            OnWaveEnd?.Invoke(waveIndex, killedEnemy);
         }
 
         public static void NotifyEnemyKilled(int alivedEnemyCount, int totalEnemy)

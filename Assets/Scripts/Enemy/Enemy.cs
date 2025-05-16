@@ -12,6 +12,7 @@ namespace JollyPanda.LastFlag.EnemyModule
         [SerializeField] private EnemyPositionChecker positionChecker;
 
         private Action<Enemy> OnDead;
+        private Action<Enemy> OnReach;
 
         private void OnEnable()
         {
@@ -21,6 +22,7 @@ namespace JollyPanda.LastFlag.EnemyModule
             positionChecker.OnEnemyReachedTop += ReachingTop;
             positionChecker.OnEnemyReachedGround += ReachingGround;
             Informant.OnEnemyReachedTop += OneEnemyReachedTop;
+            Informant.OnPause += PauseAnything;
         }
 
         private void OnDisable()
@@ -31,6 +33,7 @@ namespace JollyPanda.LastFlag.EnemyModule
             positionChecker.OnEnemyReachedTop -= ReachingTop;
             positionChecker.OnEnemyReachedGround -= ReachingGround;
             Informant.OnEnemyReachedTop -= OneEnemyReachedTop;
+            Informant.OnPause -= PauseAnything;
         }
 
         private void OnHealthChange(int healthValue)
@@ -64,7 +67,7 @@ namespace JollyPanda.LastFlag.EnemyModule
             movement.StopClimbing();
             health.ShowHealthBar(false);
             animationController.PlayClimbingOverEdge();
-            Informant.NotifyEnemyReachedTop(this);
+            OnReach?.Invoke(this);
         }
 
         private void OneEnemyReachedTop(Enemy reachedEnemy)
@@ -90,6 +93,25 @@ namespace JollyPanda.LastFlag.EnemyModule
         public void SetDeadAction(Action<Enemy> action)
         {
             OnDead = action;
+        }
+
+        public void SetReachAction(Action<Enemy> action)
+        {
+            OnReach = action;
+        }
+
+        private void PauseAnything(bool isPause)
+        {
+            if (isPause)
+            {
+                movement.StopClimbing();
+                animationController.Pause();
+            }
+            else
+            {
+                movement.Climbing(false);
+                animationController.Resume();
+            }
         }
     }
 }

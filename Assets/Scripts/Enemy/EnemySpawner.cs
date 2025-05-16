@@ -68,15 +68,20 @@ namespace JollyPanda.LastFlag.EnemyModule
         {
             if (type == PageType.Home)
             {
-                foreach (var enemyQueue in enemyPools.Values)
-                {
-                    foreach (var enemy in enemyQueue)
-                    {
-                        enemy.gameObject.SetActive(false);
-                    }
-                }
+                DestroyEnemies();
 
                 StopSpawning();
+            }
+        }
+
+        private void DestroyEnemies()
+        {
+            foreach (var enemyQueue in enemyPools.Values)
+            {
+                foreach (var enemy in enemyQueue)
+                {
+                    enemy.gameObject.SetActive(false);
+                }
             }
         }
 
@@ -189,6 +194,10 @@ namespace JollyPanda.LastFlag.EnemyModule
                 }
                 Informant.NotifyEnemyKilled(aliveEnemies, totalEnemies);
             });
+            enemy.SetReachAction((reachedEnemy) =>
+            {
+                Informant.NotifyEnemyReachedTop(reachedEnemy, Mathf.Abs(spawnedInWave - aliveEnemies));
+            });
         }
 
         /// <summary>
@@ -223,6 +232,8 @@ namespace JollyPanda.LastFlag.EnemyModule
 
         private void StartSpawningWave()
         {
+            DestroyEnemies();
+
             if (currentWaveIndex >= waves.Length) return;
 
             var wave = waves[currentWaveIndex];

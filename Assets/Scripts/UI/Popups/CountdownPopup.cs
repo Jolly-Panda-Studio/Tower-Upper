@@ -1,3 +1,4 @@
+using JollyPanda.LastFlag.Handlers;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace MJUtilities.UI
 {
     public class CountdownPopup : UIPopup
     {
+        [SerializeField] private TMP_Text coinText;
+
         [Header("Buttons")]
         [SerializeField] private Button quitButton;
         [SerializeField] private Button startWaveButton;
@@ -16,27 +19,38 @@ namespace MJUtilities.UI
         [SerializeField] private float startTime = 10f;
         private float currentTime;
         private bool isCountingDown;
-        
-        
+
         public override void OnAwake()
         {
-            
+            quitButton.onClick.RemoveAllListeners();
+            quitButton.onClick.AddListener(QuitButtonClicked);
+
+            startWaveButton.onClick.RemoveAllListeners();
+            startWaveButton.onClick.AddListener(StartWaveButtonClicked);
+
+            Informant.OnEarnCoin += DisplayEarnCoin;
+        }
+
+        private void OnDestroy()
+        {
+            Informant.OnEarnCoin -= DisplayEarnCoin;
+        }
+
+        private void DisplayEarnCoin(int value)
+        {
+            coinText.SetText(value.ToString("n0"));
         }
 
         public override void OnSetValues()
         {
-            quitButton.onClick.RemoveAllListeners();
-            quitButton.onClick.AddListener(QuitButtonClicked); 
             
-            startWaveButton.onClick.RemoveAllListeners();
-            startWaveButton.onClick.AddListener(StartWaveButtonClicked);
 
             StartCountdown();
         }
         
         private void QuitButtonClicked()
         {
-            GameManager.instance.RestartGame();
+            GameManager.instance.BackHome();
         }
 
         private void StartWaveButtonClicked()

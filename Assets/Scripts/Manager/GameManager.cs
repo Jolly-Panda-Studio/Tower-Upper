@@ -1,5 +1,6 @@
 using JollyPanda.LastFlag.Handlers;
 using MJUtilities.UI;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,20 +20,28 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
     
-    public void RestartGame()
+    public void BackHome()
     {
         UIManager.instance.CloseEverything();
         UIManager.instance.OpenPage(PageType.Home);
         //SceneManager.LoadScene(0);
     }
 
+    public void RestartCurrentWave()
+    {
+        UIManager.instance.CloseEverything();
+        UIManager.instance.OpenPage(PageType.HUD);
+        Informant.NotifyStart();
+    }
+
     public void PauseGame()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+        Informant.PauseGame(true);
     }
     public void UnPauseGame()
     {
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
+        Informant.PauseGame(false);
     }
-    
 }
