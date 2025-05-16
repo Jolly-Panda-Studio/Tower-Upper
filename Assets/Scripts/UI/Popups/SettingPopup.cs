@@ -17,9 +17,8 @@ namespace MJUtilities.UI
         {
             base.OnEnable();
 
-            var data = SaveSystem.Load();
-            backgroundVolume.value = data.BackgroundVolume;
-            sfxVolume.value = data.SfxVolume;
+            backgroundVolume.value = SaveSystem.GetBackgroundVolume();
+            sfxVolume.value = SaveSystem.GetSfxVolume();
         }
 
         private void OnDisable()

@@ -24,11 +24,12 @@ namespace JollyPanda.LastFlag.Handlers
         public static void NotifyEnemyReachedTop(Enemy enemy, int killedEnemy)
         {
             OnEnemyReachedTop?.Invoke(enemy);
+            OnLose?.Invoke();
 
-            int earnedCoins = killedEnemy * 10;
-            var data = SaveSystem.Load();
-            data.Money += earnedCoins;
-            SaveSystem.Save(data);
+            int level = SaveSystem.GetCurrentWaveIndex();
+            int rewardPerEnemy = WaveDataGenerator.Instance.CalculateCoinRewardPerEnemy(level);
+            int earnedCoins = killedEnemy * rewardPerEnemy;
+            SaveSystem.AddMoney(earnedCoins);
             OnEarnCoin?.Invoke(earnedCoins);
         }
 
@@ -49,13 +50,13 @@ namespace JollyPanda.LastFlag.Handlers
 
         public static void NotifyFinishWave(int waveIndex, int killedEnemy)
         {
-            int earnedCoins = killedEnemy * 10;
-            var data = SaveSystem.Load();
-            data.Money += earnedCoins;
-            data.lastWaveIndex = waveIndex;
-            SaveSystem.Save(data);
-            OnEarnCoin?.Invoke(earnedCoins);
+            int level = waveIndex + 1;
+            int rewardPerEnemy = WaveDataGenerator.Instance.CalculateCoinRewardPerEnemy(level);
+            int earnedCoins = killedEnemy * rewardPerEnemy;
 
+            SaveSystem.AddMoney(earnedCoins);
+            SaveSystem.UpdateLastWaveIndex(waveIndex);
+            OnEarnCoin?.Invoke(earnedCoins);
             OnWaveEnd?.Invoke(waveIndex, killedEnemy);
         }
 
@@ -63,12 +64,6 @@ namespace JollyPanda.LastFlag.Handlers
         {
             //Debug.Log("NotifyEnemyKilled");
             OnEnemyKilled?.Invoke(alivedEnemyCount, totalEnemy);
-        }
-        public static void GetUpdatedData()
-        {
-            //Debug.Log("NotifyProfileChange");
-            var data = SaveSystem.Load();
-            SaveSystem.Save(data);
         }
 
         internal static void OnChangePage(PageType pageType)

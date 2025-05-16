@@ -116,5 +116,10 @@ namespace JollyPanda.LastFlag.EnemyModule
                 animationController.Resume();
             }
         }
+
+        internal void SetHealth(int value)
+        {
+            health.SetMaxHealth(value);
+        }
     }
 }

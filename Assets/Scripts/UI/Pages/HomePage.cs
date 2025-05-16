@@ -26,6 +26,9 @@ public class HomePage : UIPage
     private void OnEnable()
     {
         Informant.OnProfileChange += ProfileChange;
+        
+        long currentMoney = SaveSystem.GetMoney();
+        moneyText.text = FormatMoney(currentMoney);
     }
 
     private void OnDisable()
@@ -40,8 +43,6 @@ public class HomePage : UIPage
 
         upgradeButton.onClick.RemoveAllListeners();
         upgradeButton.onClick.AddListener(UpgradeButtonClicked);
-        
-        Informant.GetUpdatedData();
     }
 
     public override void OnAwake()

@@ -15,10 +15,8 @@ namespace JollyPanda.LastFlag.PlayerModule
         [SerializeField] private UpgradeData damageUpgrade;
         [SerializeField] private UpgradeData bulletSizeUpgrade;
         [SerializeField] private UpgradeData bulletSpeedUpgrade;
-        
-        private Gun activeGun;
-        private PlayerSaveData saveData;
 
+        private Gun activeGun;
 
         public UpgradeData GetBulletSizeUpgradeData() => bulletSizeUpgrade;
         public UpgradeData GetBulletSpeedUpgradeData() => bulletSpeedUpgrade;
@@ -48,23 +46,20 @@ namespace JollyPanda.LastFlag.PlayerModule
         private void GunChanged(Gun newGun)
         {
             activeGun = newGun;
-
             ApplyUpgrades();
         }
 
-        void Start()
+        private void Start()
         {
             ApplyUpgrades();
         }
 
         private void LoadPlayerData()
         {
-            saveData = SaveSystem.Load();
-            
-            fireRateUpgrade.Level = saveData.FireRateLevel;
-            damageUpgrade.Level = saveData.DamageLevel;
-            bulletSizeUpgrade.Level = saveData.BulletSizeLevel;
-            bulletSpeedUpgrade.Level = saveData.BulletSpeedLevel;
+            fireRateUpgrade.Level = SaveSystem.GetFireRateLevel();
+            damageUpgrade.Level = SaveSystem.GetDamageLevel();
+            bulletSizeUpgrade.Level = SaveSystem.GetBulletSizeLevel();
+            bulletSpeedUpgrade.Level = SaveSystem.GetBulletSpeedLevel();
         }
 
         public void ApplyUpgrades()
@@ -85,33 +80,36 @@ namespace JollyPanda.LastFlag.PlayerModule
 
         public static bool TryUpgradeFireRate()
         {
-            return instance.TryUpgrade(instance.fireRateUpgrade, (lvl) => instance.saveData.FireRateLevel = lvl, ref instance.saveData.Money);
+            return instance.TryUpgrade(instance.fireRateUpgrade, SaveSystem.UpdateFireRateLevel);
         }
 
         public static bool TryUpgradeDamage()
         {
-            return instance.TryUpgrade(instance.damageUpgrade, (lvl) => instance.saveData.DamageLevel = lvl, ref instance.saveData.Money);
+            return instance.TryUpgrade(instance.damageUpgrade, SaveSystem.UpdateDamageLevel);
         }
 
         public static bool TryUpgradeBulletSpeed()
         {
-            return instance.TryUpgrade(instance.bulletSpeedUpgrade, (lvl) => instance.saveData.BulletSpeedLevel = lvl, ref instance.saveData.Money);
+            return instance.TryUpgrade(instance.bulletSpeedUpgrade, SaveSystem.UpdateBulletSpeedLevel);
         }
 
         public static bool TryUpgradeBulletSize()
         {
-            return instance.TryUpgrade(instance.bulletSizeUpgrade, (lvl) => instance.saveData.BulletSizeLevel = lvl, ref instance.saveData.Money);
+            return instance.TryUpgrade(instance.bulletSizeUpgrade, SaveSystem.UpdateBulletSizeLevel);
         }
 
-        private bool TryUpgrade(UpgradeData upgrade, Action<int> onLevelSaved, ref int playerMoney)
+        private bool TryUpgrade(UpgradeData upgrade, Action<int> saveLevelAction)
         {
+            int playerMoney = SaveSystem.GetMoney();
+
             if (!upgrade.CanUpgrade || playerMoney < upgrade.NextLevelCost)
                 return false;
 
             playerMoney -= upgrade.NextLevelCost;
             upgrade.Level++;
-            onLevelSaved(upgrade.Level);
-            SaveSystem.Save(saveData);
+            saveLevelAction(upgrade.Level);
+            SaveSystem.UpdateMoney(playerMoney);
+
             ApplyUpgrades();
             return true;
         }

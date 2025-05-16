@@ -40,10 +40,7 @@ public class HUDPage : UIPage
     public override void OnSetValues()
     {
         pauseButton.onClick.RemoveAllListeners();
-        pauseButton.onClick.AddListener(PauseButtonClicked);
-        
-        Informant.GetUpdatedData();
-        
+        pauseButton.onClick.AddListener(PauseButtonClicked);        
     }
 
     private void Start()

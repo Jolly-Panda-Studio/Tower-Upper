@@ -30,6 +30,13 @@ namespace JollyPanda.LastFlag.EnemyModule
             ShowHealthBar(true);
         }
 
+        internal void SetMaxHealth(int value)
+        {
+            maxHealth = value;
+            healthSlider.maxValue = maxHealth;
+            SetHealth(maxHealth);
+        }
+
         public void TakeDamage(int amount)
         {
             SetHealth(currentHealth - amount);

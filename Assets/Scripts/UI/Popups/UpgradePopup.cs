@@ -29,6 +29,9 @@ namespace MJUtilities.UI
         {
             base.OnEnable();
             Informant.OnProfileChange += ProfileChange;
+
+            long currentMoney = SaveSystem.GetMoney();
+            moneyText.text = FormatMoney(currentMoney);
         }
 
         private void OnDisable()
@@ -48,7 +51,6 @@ namespace MJUtilities.UI
             bulletSizeUpgradeButton.onClick.AddListener(BulletSizeUpgradeButtonClicked);
 
             LoadCurrentUpgradeStatus();
-            Informant.GetUpdatedData();
         }
 
         private void OnDestroy()
@@ -70,6 +72,8 @@ namespace MJUtilities.UI
                 var upgradeData = GunUpgradeManager.instance.GetBulletSizeUpgradeData();
                 bulletSizeUpgradeProgress.HandleUpgrade(upgradeData);
             }
+
+            LoadCurrentUpgradeStatus();
         }
 
         private void BulletSpeedUpgradeButtonClicked()
@@ -80,6 +84,8 @@ namespace MJUtilities.UI
                 var upgradeData = GunUpgradeManager.instance.GetBulletSpeedUpgradeData();
                 bulletSpeedUpgradProgress.HandleUpgrade(upgradeData);
             }
+
+            LoadCurrentUpgradeStatus();
         }
 
         private void DamageUpgradeButtonClicked()
@@ -90,6 +96,8 @@ namespace MJUtilities.UI
                 var upgradeData = GunUpgradeManager.instance.GetDamageUpgradeData();
                 damageUpgradeProgress.HandleUpgrade(upgradeData);
             }
+
+            LoadCurrentUpgradeStatus();
         }
 
         private void FireRateUpgradeButtonClicked()
@@ -100,24 +108,30 @@ namespace MJUtilities.UI
                 var upgradeData = GunUpgradeManager.instance.GetFireRateUpgradeData();
                 fireRateUpgradeProgress.HandleUpgrade(upgradeData);
             }
+
+            LoadCurrentUpgradeStatus();
         }
 
         private void LoadCurrentUpgradeStatus()
         {
             var gunUpgradeManager = GunUpgradeManager.instance;
-            
+            long currentMoney = SaveSystem.GetMoney();
+
             var upgradeData = gunUpgradeManager.GetFireRateUpgradeData();
             fireRateUpgradeProgress.HandleUpgrade(upgradeData);
-            
+            fireRateUpgradeButton.interactable = upgradeData.NextLevelCost <= currentMoney && upgradeData.Level < 4;
+
             upgradeData = gunUpgradeManager.GetDamageUpgradeData();
             damageUpgradeProgress.HandleUpgrade(upgradeData);
-            
+            damageUpgradeButton.interactable = upgradeData.NextLevelCost <= currentMoney && upgradeData.Level < 4;
+
             upgradeData = gunUpgradeManager.GetBulletSpeedUpgradeData();
             bulletSpeedUpgradProgress.HandleUpgrade(upgradeData);
-            
+            bulletSpeedUpgradeButton.interactable = upgradeData.NextLevelCost <= currentMoney && upgradeData.Level < 4;
+
             upgradeData = gunUpgradeManager.GetBulletSizeUpgradeData();
             bulletSizeUpgradeProgress.HandleUpgrade(upgradeData);
-            
+            bulletSizeUpgradeButton.interactable = upgradeData.NextLevelCost <= currentMoney && upgradeData.Level < 4;
         }
 
         public override void OnAwake()

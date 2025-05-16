@@ -618,13 +618,13 @@ MonoBehaviour:
     - cost: 0
       value: 1
     - cost: 100
-      value: 1.2
+      value: 1.5
     - cost: 200
-      value: 1.4
-    - cost: 600
-      value: 1.6
-    - cost: 1000
       value: 2
+    - cost: 600
+      value: 2.5
+    - cost: 1000
+      value: 3
   bulletSpeedUpgrade:
     <Values>k__BackingField:
     - cost: 0

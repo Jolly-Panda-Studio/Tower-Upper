@@ -15,6 +15,7 @@ namespace JollyPanda.LastFlag.PlayerModule
         {
             foreach (var bullet in pool)
             {
+                if(bullet == null) continue;
                 if (!bullet.gameObject.activeInHierarchy)
                 {
                     bullet.Initialize(damage, scale, speed);

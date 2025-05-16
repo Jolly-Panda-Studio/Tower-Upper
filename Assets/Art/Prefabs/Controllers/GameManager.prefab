@@ -338,6 +338,8 @@ MonoBehaviour:
   maxSpawnInterval: 2.5
   baseSpeedMin: 1
   baseSpeedMax: 5
+  baseHealthMin: 1
+  baseHealthMax: 3
   delayAfterWave: 5
 --- !u!1 &5459558350284184091
 GameObject:
@@ -496,6 +498,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 100
+  mouseSensitivity: 1
+  touchSensitivity: 0.3
+  smoothTime: 0.1
+  resetDuration: 1
 --- !u!1 &8326718621762962829
 GameObject:
   m_ObjectHideFlags: 0

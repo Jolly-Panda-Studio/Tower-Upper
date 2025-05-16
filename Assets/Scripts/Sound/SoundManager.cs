@@ -55,9 +55,8 @@ namespace USound
 
             DontDestroyOnLoad(gameObject);
 
-            var data = SaveSystem.Load();
-            backgroundVolume = data.BackgroundVolume;
-            sfxVolume = data.SfxVolume;
+            backgroundVolume = SaveSystem.GetBackgroundVolume();
+            sfxVolume = SaveSystem.GetSfxVolume();
 
             currentBG = null;
             nextBG = null;
@@ -196,10 +195,8 @@ namespace USound
 
         public void Save()
         {
-            var data = SaveSystem.Load();
-            data.BackgroundVolume = backgroundVolume;
-            data.SfxVolume = sfxVolume;
-            SaveSystem.Save(data);
+            SaveSystem.UpdateBackgroundVolume(backgroundVolume);
+            SaveSystem.UpdateSfxVolume(sfxVolume);
         }
     }
 }
