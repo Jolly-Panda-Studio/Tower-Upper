@@ -11,6 +11,7 @@ namespace JollyPanda.LastFlag.PlayerModule
         private Gun activeGun;
 
         public event Action<Gun> OnGunChange;
+        public event Action OnGunFire;
 
         private void OnEnable()
         {
@@ -41,6 +42,8 @@ namespace JollyPanda.LastFlag.PlayerModule
 
                     activeGun = gun;
                     //activeGun.SetActive(true);
+
+                    activeGun.SetFireAction(OnGunFire);
 
                     OnGunChange?.Invoke(activeGun);
                 }

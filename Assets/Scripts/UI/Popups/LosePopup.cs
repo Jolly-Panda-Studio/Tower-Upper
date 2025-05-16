@@ -18,11 +18,17 @@ public class LosePopup : UIPopup
     public override void OnAwake()
     {
         Informant.OnProfileChange += DisplayEarnCoin;
+        restartButton.onClick.AddListener(RestartButtonClicked);
+
+        homeButton.onClick.AddListener(HomeButtonClicked);
     }
 
     private void OnDestroy()
     {
         Informant.OnProfileChange -= DisplayEarnCoin;
+        restartButton.onClick.RemoveListener(RestartButtonClicked);
+
+        homeButton.onClick.RemoveListener(HomeButtonClicked);
     }
 
     private void DisplayEarnCoin(PlayerSaveData data)
@@ -32,11 +38,6 @@ public class LosePopup : UIPopup
 
     public override void OnSetValues()
     {
-        restartButton.onClick.RemoveAllListeners();
-        restartButton.onClick.AddListener(RestartButtonClicked);
-
-        homeButton.onClick.RemoveAllListeners();
-        homeButton.onClick.AddListener(HomeButtonClicked);
     }
 
 

@@ -23,10 +23,8 @@ namespace MJUtilities.UI
 
         public override void OnAwake()
         {
-            quitButton.onClick.RemoveAllListeners();
             quitButton.onClick.AddListener(QuitButtonClicked);
 
-            startWaveButton.onClick.RemoveAllListeners();
             startWaveButton.onClick.AddListener(StartWaveButtonClicked);
 
             Informant.OnProfileChange += DisplayEarnCoin;
@@ -35,6 +33,10 @@ namespace MJUtilities.UI
         private void OnDestroy()
         {
             Informant.OnProfileChange -= DisplayEarnCoin;
+            quitButton.onClick.RemoveListener(QuitButtonClicked);
+
+            startWaveButton.onClick.RemoveListener(StartWaveButtonClicked);
+
         }
 
         private void DisplayEarnCoin(PlayerSaveData data)

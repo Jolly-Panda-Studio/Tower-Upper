@@ -10,6 +10,7 @@ namespace JollyPanda.LastFlag.EnemyModule
         [SerializeField] private EnemyHealth health;
         [SerializeField] private EnemyMovement movement;
         [SerializeField] private EnemyPositionChecker positionChecker;
+        [SerializeField] private EnemySoundController soundController;
 
         private Action<Enemy> OnDead;
         private Action<Enemy> OnReach;
@@ -53,6 +54,7 @@ namespace JollyPanda.LastFlag.EnemyModule
         {
             animationController.PlayClimb();
             positionChecker.SetCheckState(EnemyPositionChecker.CheckState.MoveUp);
+            soundController.PlayClimbSound();
         }
 
         private void Falling()
@@ -60,6 +62,7 @@ namespace JollyPanda.LastFlag.EnemyModule
             animationController.PlayFall();
             positionChecker.SetCheckState(EnemyPositionChecker.CheckState.MoveDown);
             health.ShowHealthBar(false);
+            soundController.PlayFallSound();
         }
 
         private void ReachingTop()

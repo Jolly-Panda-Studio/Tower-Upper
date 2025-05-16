@@ -39,20 +39,27 @@ namespace MJUtilities.UI
         {
             BackButtonConfig();
             
-            fireRateUpgradeButton.onClick.RemoveAllListeners();
             fireRateUpgradeButton.onClick.AddListener(FireRateUpgradeButtonClicked);
             
-            damageUpgradeButton.onClick.RemoveAllListeners();
             damageUpgradeButton.onClick.AddListener(DamageUpgradeButtonClicked);
             
-            bulletSpeedUpgradeButton.onClick.RemoveAllListeners();
             bulletSpeedUpgradeButton.onClick.AddListener(BulletSpeedUpgradeButtonClicked);
             
-            bulletSizeUpgradeButton.onClick.RemoveAllListeners();
             bulletSizeUpgradeButton.onClick.AddListener(BulletSizeUpgradeButtonClicked);
 
             LoadCurrentUpgradeStatus();
             Informant.GetUpdatedData();
+        }
+
+        private void OnDestroy()
+        {
+            fireRateUpgradeButton.onClick.RemoveListener(FireRateUpgradeButtonClicked);
+
+            damageUpgradeButton.onClick.RemoveListener(DamageUpgradeButtonClicked);
+
+            bulletSpeedUpgradeButton.onClick.RemoveListener(BulletSpeedUpgradeButtonClicked);
+
+            bulletSizeUpgradeButton.onClick.RemoveListener(BulletSizeUpgradeButtonClicked);
         }
 
         private void BulletSizeUpgradeButtonClicked()

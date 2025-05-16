@@ -2250,6 +2250,8 @@ MonoBehaviour:
   backButton: {fileID: 3569844688536057865}
   languageButton: {fileID: 2172259304613274177}
   webButton: {fileID: 7968941255215225292}
+  sfxVolume: {fileID: 4866666007261419791}
+  backgroundVolume: {fileID: 2476107468028135365}
 --- !u!95 &5781795611043188071
 Animator:
   serializedVersion: 5

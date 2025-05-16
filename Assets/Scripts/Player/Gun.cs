@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,6 +23,8 @@ namespace JollyPanda.LastFlag.PlayerModule
         private float timer;
 
         private bool isActive = false;
+
+        private Action _onFire;
 
         void Update()
         {
@@ -82,6 +85,11 @@ namespace JollyPanda.LastFlag.PlayerModule
         public void SetBulletSpeed(float speed)
         {
             bulletSpeed = speed;
+        }
+
+        public void SetFireAction(Action action)
+        {
+            _onFire = action;
         }
     }
 }

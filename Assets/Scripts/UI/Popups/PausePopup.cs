@@ -11,22 +11,29 @@ public class PausePopup : UIPopup
     [SerializeField] private Button restartButton;
     public override void OnSetValues()
     {
-        quitButton.onClick.RemoveAllListeners();
-        quitButton.onClick.AddListener(QuitButtonClicked);
         
-        resumeButton.onClick.RemoveAllListeners();
-        resumeButton.onClick.AddListener(ResumeButtonClicked);
-        
-        restartButton.onClick.RemoveAllListeners();
-        restartButton.onClick.AddListener(RestartButtonClicked);
 
     }
     
     public override void OnAwake()
     {
-        
+        quitButton.onClick.AddListener(QuitButtonClicked);
+
+        resumeButton.onClick.AddListener(ResumeButtonClicked);
+
+        restartButton.onClick.AddListener(RestartButtonClicked);
     }
-    
+
+    private void OnDestroy()
+    {
+        quitButton.onClick.RemoveListener(QuitButtonClicked);
+
+        resumeButton.onClick.RemoveListener(ResumeButtonClicked);
+
+        restartButton.onClick.RemoveListener(RestartButtonClicked);
+
+    }
+
     private void QuitButtonClicked()
     {
         GameManager.instance.UnPauseGame();

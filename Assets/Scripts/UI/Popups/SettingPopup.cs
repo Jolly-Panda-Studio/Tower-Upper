@@ -1,3 +1,4 @@
+using JollyPanda.LastFlag.Database;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,14 +9,50 @@ namespace MJUtilities.UI
         [SerializeField] private Button languageButton;
         [SerializeField] private Button webButton;
 
+        [Header("Sound")]
+        [SerializeField] private Slider sfxVolume;
+        [SerializeField] private Slider backgroundVolume;
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            var data = SaveSystem.Load();
+            backgroundVolume.value = data.BackgroundVolume;
+            sfxVolume.value = data.SfxVolume;
+        }
+
+        private void OnDisable()
+        {
+            USound.SoundManager.Instance.Save();
+        }
+
         public override void OnAwake()
         {
-            languageButton.onClick.RemoveAllListeners();
-            languageButton.onClick.AddListener(()=>UIManager.instance.OpenPopup(PopupType.Language));
+            languageButton.onClick.AddListener(ClickOnLanguage);
 
-            webButton.onClick.RemoveAllListeners();
-            webButton.onClick.AddListener(() => Application.OpenURL("https://useffarahmand.com/"));
+            webButton.onClick.AddListener(ClickOnWeb);
+
+            sfxVolume.onValueChanged.AddListener(ChangeSFXVolume);
+
+            backgroundVolume.onValueChanged.AddListener(ChangeBackgroundVolume);
         }
+
+        private void OnDestroy()
+        {
+            languageButton.onClick.RemoveListener(ClickOnLanguage);
+
+            webButton.onClick.RemoveListener(ClickOnWeb);
+
+            sfxVolume.onValueChanged.RemoveListener(ChangeSFXVolume);
+
+            backgroundVolume.onValueChanged.RemoveListener(ChangeBackgroundVolume);
+        }
+
+        private void ClickOnLanguage() => UIManager.instance.OpenPopup(PopupType.Language);
+        private void ClickOnWeb() => Application.OpenURL("https://useffarahmand.com/");
+        private void ChangeSFXVolume(float volume) => USound.SoundManager.Instance.SetSFXVolume(volume);
+        private void ChangeBackgroundVolume(float volume) => USound.SoundManager.Instance.SetBackgroundVolume(volume);
 
         public override void OnSetValues()
         {

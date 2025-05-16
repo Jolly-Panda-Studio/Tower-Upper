@@ -11,22 +11,18 @@ namespace JollyPanda.LastFlag.Database
 
         public static void Save(PlayerSaveData data)
         {
-            string json = JsonUtility.ToJson(data);
-            PlayerPrefs.SetString(SaveKey, json);
-            PlayerPrefs.Save();
-
+            ES3.Save(SaveKey, data);
             OnApplyChange?.Invoke(data);
         }
 
         public static PlayerSaveData Load()
         {
-            if (PlayerPrefs.HasKey(SaveKey))
+            if (ES3.KeyExists(SaveKey))
             {
-                string json = PlayerPrefs.GetString(SaveKey);
-                return JsonUtility.FromJson<PlayerSaveData>(json);
+                return ES3.Load<PlayerSaveData>(SaveKey);
             }
+
             return PlayerSaveData.Default;
         }
     }
-
 }

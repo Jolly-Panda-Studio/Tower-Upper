@@ -12,12 +12,16 @@ namespace MJUtilities.UI
 
         public override void OnAwake()
         {
-            confirmButton.onClick.RemoveAllListeners();
-            cancelButton.onClick.RemoveAllListeners();
-            
             confirmButton.onClick.AddListener(OnConfirmClicked);
             cancelButton.onClick.AddListener(OnCancelClicked);
         }
+
+        private void OnDestroy()
+        {
+            confirmButton.onClick.RemoveListener(OnConfirmClicked);
+            cancelButton.onClick.RemoveListener(OnCancelClicked);
+        }
+
         public override void OnSetValues()
         {
             

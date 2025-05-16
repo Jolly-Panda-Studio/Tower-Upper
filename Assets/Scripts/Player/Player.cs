@@ -9,10 +9,12 @@ namespace JollyPanda.LastFlag.PlayerModule
     {
         [SerializeField] private GunSelector gunSelector;
         [SerializeField] private PlayerAnimationController animationController;
+        [SerializeField] private PlayerSoundController soundController;
 
         private void OnEnable()
         {
             gunSelector.OnGunChange += GunChanged;
+            gunSelector.OnGunFire += GunFire;
             Informant.OnLose += Losing;
             Informant.OnChangeUIPage += ChoicePlayerAnimation;
             Informant.OnPause += PauseAnything;
@@ -21,18 +23,26 @@ namespace JollyPanda.LastFlag.PlayerModule
         private void OnDisable()
         {
             gunSelector.OnGunChange -= GunChanged;
+            gunSelector.OnGunFire -= GunFire;
             Informant.OnLose -= Losing;
             Informant.OnChangeUIPage -= ChoicePlayerAnimation;
+            Informant.OnPause -= PauseAnything;
         }
 
         private void GunChanged(Gun activeGun)
         {
         }
 
+        private void GunFire()
+        {
+            soundController.PlayFireSound();
+        }
+
         private void Losing()
         {
             gunSelector.DisableGun();
             animationController.PlayDefeat();
+            soundController.PlayDefeatSound();
         }
 
         private void ChoicePlayerAnimation(PageType type)
@@ -46,6 +56,7 @@ namespace JollyPanda.LastFlag.PlayerModule
                     animationController.PlayShooting(false);
                     animationController.PlayIdle();
                     gunSelector.DisableGun();
+                    soundController.PlayIdleSound();
                     break;
             }
         }
