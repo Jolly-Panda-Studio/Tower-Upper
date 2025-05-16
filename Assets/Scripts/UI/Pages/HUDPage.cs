@@ -75,7 +75,7 @@ public class HUDPage : UIPage
     {
         GameManager.instance.UnPauseGame();
         
-        var currentWave = waveIndex + 1;
+        var currentWave = waveIndex;
         waveIndexText.text = currentWave.ToString();
         StartCoroutine(WaveNotificationCoroutine(currentWave));
     }

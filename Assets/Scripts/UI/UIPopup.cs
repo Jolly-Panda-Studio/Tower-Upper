@@ -47,5 +47,6 @@ namespace MJUtilities.UI
         Setting,
         Upgrade,
         Confirm,
+        Language
     }
 }

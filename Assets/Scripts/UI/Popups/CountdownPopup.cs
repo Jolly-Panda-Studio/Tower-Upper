@@ -1,3 +1,4 @@
+using JollyPanda.LastFlag.Database;
 using JollyPanda.LastFlag.Handlers;
 using System.Collections;
 using TMPro;
@@ -28,17 +29,17 @@ namespace MJUtilities.UI
             startWaveButton.onClick.RemoveAllListeners();
             startWaveButton.onClick.AddListener(StartWaveButtonClicked);
 
-            Informant.OnEarnCoin += DisplayEarnCoin;
+            Informant.OnProfileChange += DisplayEarnCoin;
         }
 
         private void OnDestroy()
         {
-            Informant.OnEarnCoin -= DisplayEarnCoin;
+            Informant.OnProfileChange -= DisplayEarnCoin;
         }
 
-        private void DisplayEarnCoin(int value)
+        private void DisplayEarnCoin(PlayerSaveData data)
         {
-            coinText.SetText(value.ToString("n0"));
+            coinText.SetText(data.Money.ToString("n0"));
         }
 
         public override void OnSetValues()

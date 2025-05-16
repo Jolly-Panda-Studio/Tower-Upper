@@ -1,10 +1,9 @@
-﻿using System;
-using JollyPanda.LastFlag.EnemyModule;
+﻿using JollyPanda.LastFlag.Database;
 using JollyPanda.LastFlag.Handlers;
-using UnityEngine;
-using UnityEngine.UI;
 using MJUtilities.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class LosePopup : UIPopup
 {
@@ -15,27 +14,27 @@ public class LosePopup : UIPopup
     [Header("Buttons")]
     [SerializeField] private Button restartButton;
     [SerializeField] private Button homeButton;
-    
+
     public override void OnAwake()
     {
-        Informant.OnEarnCoin += DisplayEarnCoin;
+        Informant.OnProfileChange += DisplayEarnCoin;
     }
 
     private void OnDestroy()
     {
-        Informant.OnEarnCoin -= DisplayEarnCoin;
+        Informant.OnProfileChange -= DisplayEarnCoin;
     }
 
-    private void DisplayEarnCoin(int value)
+    private void DisplayEarnCoin(PlayerSaveData data)
     {
-        coinText.SetText(value.ToString("n0"));
+        coinText.SetText(data.Money.ToString("n0"));
     }
 
     public override void OnSetValues()
     {
         restartButton.onClick.RemoveAllListeners();
         restartButton.onClick.AddListener(RestartButtonClicked);
-        
+
         homeButton.onClick.RemoveAllListeners();
         homeButton.onClick.AddListener(HomeButtonClicked);
     }
