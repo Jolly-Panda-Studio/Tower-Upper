@@ -5,11 +5,11 @@ namespace JollyPanda.LastFlag.EnviromentModule
 {
     public class CylinderRotator : MonoBehaviour
     {
+        [Header("Rotation Settings")]
         public float rotationSpeed = 100f;
-
-        [Header("Step Rotation Settings")]
-        public bool useStepRotation = false;
-        public float rotationStepSize = 15f;
+        public float mouseSensitivity = 1f;
+        public float touchSensitivity = 0.3f;
+        public float smoothTime = 0.1f;
 
         [Header("Reset Settings")]
         public float resetDuration = 1f;
@@ -18,6 +18,10 @@ namespace JollyPanda.LastFlag.EnviromentModule
         private bool isActive = false;
         private Quaternion defaultRotation;
 
+        private float targetRotationY = 0f;
+        private float currentRotationY = 0f;
+        private float rotationVelocity = 0f;
+
         private bool isResetting = false;
         private float resetTimer = 0f;
         private Quaternion startRotation;
@@ -25,6 +29,8 @@ namespace JollyPanda.LastFlag.EnviromentModule
         private void Awake()
         {
             defaultRotation = transform.rotation;
+            currentRotationY = transform.eulerAngles.y;
+            targetRotationY = currentRotationY;
         }
 
         private void OnEnable()
@@ -51,7 +57,7 @@ namespace JollyPanda.LastFlag.EnviromentModule
             }
         }
 
-        void Update()
+        private void Update()
         {
             if (isResetting)
             {
@@ -60,7 +66,11 @@ namespace JollyPanda.LastFlag.EnviromentModule
                 transform.rotation = Quaternion.Slerp(startRotation, defaultRotation, t);
 
                 if (t >= 1f)
+                {
                     isResetting = false;
+                    currentRotationY = defaultRotation.eulerAngles.y;
+                    targetRotationY = currentRotationY;
+                }
 
                 return;
             }
@@ -68,27 +78,33 @@ namespace JollyPanda.LastFlag.EnviromentModule
             if (!isActive)
                 return;
 
+            HandleInput();
+            SmoothRotate();
+        }
+
+        private void HandleInput()
+        {
             if (Input.GetMouseButtonDown(0))
             {
                 lastMousePosition = Input.mousePosition;
             }
             else if (Input.GetMouseButton(0))
             {
-                Vector2 delta = (Vector2)Input.mousePosition - lastMousePosition;
-                float rotationAmount = -delta.x * rotationSpeed * Time.deltaTime;
+                Vector2 currentMousePosition = Input.mousePosition;
+                Vector2 delta = currentMousePosition - lastMousePosition;
 
-                if (useStepRotation)
-                {
-                    float step = Mathf.Round(rotationAmount / rotationStepSize) * rotationStepSize;
-                    transform.Rotate(Vector3.up, step);
-                }
-                else
-                {
-                    transform.Rotate(Vector3.up, rotationAmount);
-                }
+                float sensitivity = Input.touchCount > 0 ? touchSensitivity : mouseSensitivity;
+                float rotationDelta = -delta.x * rotationSpeed * sensitivity * Time.deltaTime;
 
-                lastMousePosition = Input.mousePosition;
+                targetRotationY += rotationDelta;
+                lastMousePosition = currentMousePosition;
             }
+        }
+
+        private void SmoothRotate()
+        {
+            currentRotationY = Mathf.SmoothDampAngle(currentRotationY, targetRotationY, ref rotationVelocity, smoothTime);
+            transform.rotation = Quaternion.Euler(0f, currentRotationY, 0f);
         }
 
         public void ResetRotation()
