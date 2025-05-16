@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace JollyPanda.LastFlag.PlayerModule
 {
@@ -10,6 +11,8 @@ namespace JollyPanda.LastFlag.PlayerModule
         [field: SerializeField] public Transform FirePoint { get; private set; }
 
         [SerializeField] private BulletPool BulletPool;
+
+        [SerializeField] private UnityEvent onFire;
 
         private float fireRate = 0.5f;
         private int bulletDamage;
@@ -35,9 +38,8 @@ namespace JollyPanda.LastFlag.PlayerModule
 
         void Fire()
         {
-            var bullet = BulletPool.GetBullet(bulletDamage, bulletSize, bulletSpeed, true);
-            bullet.transform.position = FirePoint.position;
-            bullet.transform.rotation = FirePoint.rotation;
+            BulletPool.GetBullet(bulletDamage, bulletSize, bulletSpeed, true, FirePoint.position, FirePoint.rotation);
+            onFire?.Invoke();
         }
 
         internal void SetActive(bool isActive)
