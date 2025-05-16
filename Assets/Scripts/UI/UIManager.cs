@@ -10,7 +10,7 @@ namespace MJUtilities.UI
     public class UIManager : MonoBehaviour
     {
         public static UIManager instance;
-        public bool DontDestroyOnLoad = true;
+        public bool _DontDestroyOnLoad = true;
 
         [Header("Panels & Popups")] 
         public List<UIPage> pageList = new List<UIPage>();
@@ -22,7 +22,7 @@ namespace MJUtilities.UI
 
         private void Awake()
         {
-            if (DontDestroyOnLoad)
+            if (_DontDestroyOnLoad)
             {
                 if (!instance)
                 {
