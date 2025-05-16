@@ -1,5 +1,4 @@
 using JollyPanda.LastFlag.Handlers;
-using System;
 using UnityEngine;
 
 namespace JollyPanda.LastFlag.EnviromentModule
@@ -13,24 +12,25 @@ namespace JollyPanda.LastFlag.EnviromentModule
 
         private void OnEnable()
         {
-            Informant.OnStart += SetActive;
-            Informant.OnWaveEnd += SetDeactive;
+            Informant.OnChangeUIPage += SwitchActive;
         }
 
         private void OnDisable()
         {
-            Informant.OnStart -= SetActive;
-            Informant.OnWaveEnd -= SetDeactive;
+            Informant.OnChangeUIPage -= SwitchActive;
         }
 
-        private void SetActive()
+        private void SwitchActive(PageType type)
         {
-            isActive = true;
-        }
-
-        private void SetDeactive(int arg1, int arg2)
-        {
-            isActive = false;
+            switch (type)
+            {
+                case PageType.HUD:
+                    isActive = true;
+                    break;
+                case PageType.Home:
+                    isActive = false;
+                    break;
+            }
         }
 
         void Update()
