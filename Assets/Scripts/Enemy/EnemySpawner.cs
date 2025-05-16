@@ -96,6 +96,17 @@ namespace JollyPanda.LastFlag.EnemyModule
             //StartSpawningWave();
         }
 
+        private void Update()
+        {
+            for (int i = 0; i < spawnCooldowns.Length; i++)
+            {
+                if (spawnCooldowns[i] > 0f)
+                {
+                    spawnCooldowns[i] -= Time.deltaTime;
+                }
+            }
+        }
+
         /// <summary>
         /// Generates spawn points in a circular layout at the bottom of the cylinder.
         /// </summary>
