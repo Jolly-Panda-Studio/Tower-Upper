@@ -52,6 +52,7 @@ namespace JollyPanda.LastFlag.Handlers
             int earnedCoins = killedEnemy * 10;
             var data = SaveSystem.Load();
             data.Money += earnedCoins;
+            data.lastWaveIndex = waveIndex;
             SaveSystem.Save(data);
             OnEarnCoin?.Invoke(earnedCoins);
 

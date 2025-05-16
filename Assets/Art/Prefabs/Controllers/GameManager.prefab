@@ -267,6 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 185801724377375827}
   - component: {fileID: 8138200823247070787}
+  - component: {fileID: 66350070564711282}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -306,9 +307,38 @@ MonoBehaviour:
   height: 90
   cylinderRenderer: {fileID: 5459558350284184089}
   enemyParent: {fileID: 1608550352578170127}
-  waves:
-  - {fileID: 11400000, guid: 93daa36b1c719d74399a46252bd33e1c, type: 2}
-  - {fileID: 11400000, guid: 1ac1e0dcb6a065543a7565f6a27b83db, type: 2}
+  waveDataGenerator: {fileID: 66350070564711282}
+--- !u!114 &66350070564711282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4856282799951837362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2a92b1b15ee624fa3cd7ba2cb9b6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allEnemies:
+  - {fileID: 810352909983491241, guid: 2d9ff0640a9ca6546b54dd7a177d720f, type: 3}
+  - {fileID: 810352909983491241, guid: b44efb29b69c8d2488919b4329223ab1, type: 3}
+  - {fileID: 810352909983491241, guid: de35c7dc5e9613a4595c336d225963a2, type: 3}
+  - {fileID: 810352909983491241, guid: 1223fe3f05b863844bf4dc2416b8fe04, type: 3}
+  - {fileID: 810352909983491241, guid: 27c7f42b5dc40e247a5366f496b33db2, type: 3}
+  - {fileID: 810352909983491241, guid: e587dbc38c2f45246aebaea8a8c29eee, type: 3}
+  - {fileID: 810352909983491241, guid: 5124bb628ea12964ab09f4da21ba5068, type: 3}
+  - {fileID: 810352909983491241, guid: e096728f43786dc4ea35c7da6f09a71b, type: 3}
+  - {fileID: 810352909983491241, guid: dfa05c4b1cefdfa46ab0505e19e1d642, type: 3}
+  - {fileID: 810352909983491241, guid: 9711d041bc9294b4d9110e9554b65c99, type: 3}
+  maxEnemyTypesPerWave: 3
+  minCount: 5
+  maxCount: 50
+  minSpawnInterval: 0.5
+  maxSpawnInterval: 2.5
+  baseSpeedMin: 1
+  baseSpeedMax: 5
+  delayAfterWave: 5
 --- !u!1 &5459558350284184091
 GameObject:
   m_ObjectHideFlags: 0

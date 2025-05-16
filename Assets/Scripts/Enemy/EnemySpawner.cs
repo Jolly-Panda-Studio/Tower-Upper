@@ -1,3 +1,4 @@
+using JollyPanda.LastFlag.Database;
 using JollyPanda.LastFlag.Handlers;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,8 +34,8 @@ namespace JollyPanda.LastFlag.EnemyModule
         private Transform[] spawnPoints;
 
         [Header("Wave Settings")]
-        public WaveData[] waves;
-        private int currentWaveIndex = 0;
+        [SerializeField] private WaveDataGenerator waveDataGenerator;
+        private WaveData currentWaveData;
         private int spawnedInWave = 0;
         private bool waveInProgress = false;
 
@@ -121,7 +122,7 @@ namespace JollyPanda.LastFlag.EnemyModule
 
         void SpawnEnemy()
         {
-            if (currentWaveIndex >= waves.Length || spawnedInWave >= waves[currentWaveIndex].EnemyCount)
+            if (spawnedInWave >= currentWaveData.EnemyCount)
                 return;
 
             int spawnIndex = GetValidSpawnPointIndex();
@@ -155,14 +156,13 @@ namespace JollyPanda.LastFlag.EnemyModule
 
         void SpawnEnemyAtPoint(int spawnIndex)
         {
-            var wave = waves[currentWaveIndex];
-            var prefab = wave.EnemyPrefabs[Random.Range(0, wave.EnemyPrefabs.Length)];
+            var prefab = currentWaveData.EnemyPrefabs[Random.Range(0, currentWaveData.EnemyPrefabs.Length)];
             var enemy = GetFromPool(prefab);
 
             if (enemy == null) return;
 
             PositionEnemyAtSpawnPoint(enemy, spawnIndex);
-            SetEnemyBehavior(enemy, wave);
+            SetEnemyBehavior(enemy);
 
             spawnCooldowns[spawnIndex] = 0.9f; // Reset cooldown for this spawn point
 
@@ -182,9 +182,9 @@ namespace JollyPanda.LastFlag.EnemyModule
             }
         }
 
-        void SetEnemyBehavior(Enemy enemy, WaveData wave)
+        void SetEnemyBehavior(Enemy enemy)
         {
-            enemy.SetClimbSpeed(Random.Range(wave.MinSpeed, wave.MaxSpeed));
+            enemy.SetClimbSpeed(Random.Range(currentWaveData.MinSpeed, currentWaveData.MaxSpeed));
             enemy.SetDeadAction((killedEnemy) =>
             {
                 aliveEnemies--;
@@ -234,27 +234,32 @@ namespace JollyPanda.LastFlag.EnemyModule
         {
             DestroyEnemies();
 
-            if (currentWaveIndex >= waves.Length) return;
+            var data = SaveSystem.Load();
+            currentWaveData = waveDataGenerator.GenerateWave(data.CurrentWaveIndex);
 
-            var wave = waves[currentWaveIndex];
-
-            if (wave.EnemyPrefabs == null || wave.EnemyPrefabs.Length == 0)
+            if (currentWaveData.EnemyPrefabs == null || currentWaveData.EnemyPrefabs.Length == 0)
             {
-                Debug.LogError($"Wave {currentWaveIndex} has no enemy prefabs!");
+                Debug.LogError($"Generated wave {data.CurrentWaveIndex} has no enemy prefabs!");
+                return;
+            }
+
+            if (currentWaveData.EnemyPrefabs == null || currentWaveData.EnemyPrefabs.Length == 0)
+            {
+                Debug.LogError($"Wave {data.CurrentWaveIndex} has no enemy prefabs!");
                 return;
             }
 
             spawnedInWave = 0;
             waveInProgress = true;
 
-            aliveEnemies = wave.EnemyCount;
-            totalEnemies = wave.EnemyCount;
+            aliveEnemies = currentWaveData.EnemyCount;
+            totalEnemies = currentWaveData.EnemyCount;
 
-            OnWaveStart?.Invoke(currentWaveIndex);
-            Informant.NotifyStartWave(currentWaveIndex);
+            OnWaveStart?.Invoke(data.CurrentWaveIndex);
+            Informant.NotifyStartWave(data.CurrentWaveIndex);
 
             CancelInvoke(nameof(SpawnEnemy));
-            InvokeRepeating(nameof(SpawnEnemy), 0f, wave.SpawnInterval);
+            InvokeRepeating(nameof(SpawnEnemy), 0f, currentWaveData.SpawnInterval);
             Informant.NotifyEnemyKilled(aliveEnemies, totalEnemies);
         }
 
@@ -262,20 +267,12 @@ namespace JollyPanda.LastFlag.EnemyModule
         {
             CancelInvoke(nameof(SpawnEnemy));
             waveInProgress = false;
+            var data = SaveSystem.Load();
 
-            var wave = waves[currentWaveIndex];
-            OnWaveEnd?.Invoke(currentWaveIndex);
-            Informant.NotifyFinishWave(currentWaveIndex, Mathf.Abs(spawnedInWave - aliveEnemies));
+            OnWaveEnd?.Invoke(data.CurrentWaveIndex);
+            Informant.NotifyFinishWave(data.CurrentWaveIndex, Mathf.Abs(spawnedInWave - aliveEnemies));
 
-            currentWaveIndex++;
-            if (currentWaveIndex < waves.Length)
-            {
-                Invoke(nameof(StartSpawningWave), waves[currentWaveIndex - 1].DelayAfterWave);
-            }
-            else
-            {
-                Debug.LogWarning("All waves completed. No more enemies will spawn.");
-            }
+            Invoke(nameof(StartSpawningWave), currentWaveData.DelayAfterWave);
         }
 
         private void StopSpawning()
@@ -310,7 +307,8 @@ namespace JollyPanda.LastFlag.EnemyModule
         {
             if (!waveInProgress) return;
 
-            Debug.LogWarning($"[Debug] Force skipping wave {currentWaveIndex}");
+            var data = SaveSystem.Load();
+            Debug.LogWarning($"[Debug] Force skipping wave {data.CurrentWaveIndex}");
 
             // Deactivate all alive enemies (optional, if you want to force-clear)
             foreach (Transform child in enemyParent)
