@@ -10,6 +10,7 @@ namespace JollyPanda.LastFlag.Handlers
         public static event Action OnLose;
         public static event Action<int> OnEarnCoin;
         public static event Action OnStart;
+        public static event Action OnFinish;
         public static event Action<bool> OnPause;
         public static event Action<PageType> OnChangeUIPage;
         public static event Action<int> OnWaveStart;
@@ -58,6 +59,7 @@ namespace JollyPanda.LastFlag.Handlers
             SaveSystem.UpdateLastWaveIndex(waveIndex);
             OnEarnCoin?.Invoke(earnedCoins);
             OnWaveEnd?.Invoke(waveIndex, killedEnemy);
+            OnFinish?.Invoke();
         }
 
         public static void NotifyEnemyKilled(int alivedEnemyCount, int totalEnemy)

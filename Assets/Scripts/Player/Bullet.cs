@@ -22,7 +22,7 @@ namespace JollyPanda.LastFlag.PlayerModule
 
         private void ForceDestory()
         {
-            DestroyImmediate(gameObject);
+            gameObject.SetActive(false);
         }
 
         void Update()

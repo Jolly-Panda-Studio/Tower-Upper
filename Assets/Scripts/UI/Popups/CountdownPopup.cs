@@ -1,6 +1,7 @@
 using JollyPanda.LastFlag.Database;
 using JollyPanda.LastFlag.Handlers;
 using System.Collections;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,21 +28,21 @@ namespace MJUtilities.UI
 
             startWaveButton.onClick.AddListener(StartWaveButtonClicked);
 
-            Informant.OnProfileChange += DisplayEarnCoin;
+            Informant.OnEarnCoin += DisplayEarnCoin;
         }
 
         private void OnDestroy()
         {
-            Informant.OnProfileChange -= DisplayEarnCoin;
+            Informant.OnEarnCoin -= DisplayEarnCoin;
             quitButton.onClick.RemoveListener(QuitButtonClicked);
 
             startWaveButton.onClick.RemoveListener(StartWaveButtonClicked);
 
         }
 
-        private void DisplayEarnCoin(PlayerSaveData data)
+        private void DisplayEarnCoin(int value)
         {
-            coinText.SetText(data.Money.ToString("n0"));
+            coinText.SetText(value.ToString("N0", CultureInfo.InvariantCulture));
         }
 
         public override void OnSetValues()

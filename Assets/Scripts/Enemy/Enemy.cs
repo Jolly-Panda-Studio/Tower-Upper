@@ -17,9 +17,10 @@ namespace JollyPanda.LastFlag.EnemyModule
 
         private void OnEnable()
         {
-            health.OnHealthChange += OnHealthChange;
-            movement.OnStartClimbing += Climbing;
-            movement.OnStartFalling += Falling;
+            health.OnDead += Falling;
+            health.OnRevive += Climbing;
+            //movement.OnStartClimbing += Climbing;
+            //movement.OnStartFalling += Falling;
             positionChecker.OnEnemyReachedTop += ReachingTop;
             positionChecker.OnEnemyReachedGround += ReachingGround;
             Informant.OnEnemyReachedTop += OneEnemyReachedTop;
@@ -28,30 +29,19 @@ namespace JollyPanda.LastFlag.EnemyModule
 
         private void OnDisable()
         {
-            health.OnHealthChange -= OnHealthChange;
-            movement.OnStartClimbing -= Climbing;
-            movement.OnStartFalling -= Falling;
+            health.OnDead -= Falling;
+            health.OnRevive -= Climbing;
+            //movement.OnStartClimbing -= Climbing;
+            //movement.OnStartFalling -= Falling;
             positionChecker.OnEnemyReachedTop -= ReachingTop;
             positionChecker.OnEnemyReachedGround -= ReachingGround;
             Informant.OnEnemyReachedTop -= OneEnemyReachedTop;
             Informant.OnPause -= PauseAnything;
         }
 
-        private void OnHealthChange(int healthValue)
-        {
-            if (healthValue <= 0)
-            {
-                movement.Falling();
-                OnDead?.Invoke(this);
-            }
-            else
-            {
-                movement.Climbing();
-            }
-        }
-
         private void Climbing()
         {
+            movement.Climbing();
             animationController.PlayClimb();
             positionChecker.SetCheckState(EnemyPositionChecker.CheckState.MoveUp);
             soundController.PlayClimbSound();
@@ -59,10 +49,12 @@ namespace JollyPanda.LastFlag.EnemyModule
 
         private void Falling()
         {
+            movement.Falling();
             animationController.PlayFall();
             positionChecker.SetCheckState(EnemyPositionChecker.CheckState.MoveDown);
             health.ShowHealthBar(false);
             soundController.PlayFallSound();
+            OnDead?.Invoke(this);
         }
 
         private void ReachingTop()

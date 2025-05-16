@@ -174,11 +174,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1642994884296031140, guid: 94a564bd864edd94f979d9c9d8b0fa16, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.14
+      value: 11.442
       objectReference: {fileID: 0}
     - target: {fileID: 1642994884296031140, guid: 94a564bd864edd94f979d9c9d8b0fa16, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.4
+      value: -2.012
       objectReference: {fileID: 0}
     - target: {fileID: 1642994884296031140, guid: 94a564bd864edd94f979d9c9d8b0fa16, type: 3}
       propertyPath: m_LocalRotation.w
@@ -606,11 +606,11 @@ MonoBehaviour:
     - cost: 0
       value: 1
     - cost: 100
-      value: 5
+      value: 2
     - cost: 200
-      value: 10
+      value: 5
     - cost: 300
-      value: 15
+      value: 10
     - cost: 400
       value: 20
   bulletSizeUpgrade:

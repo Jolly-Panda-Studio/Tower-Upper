@@ -42,6 +42,8 @@ namespace JollyPanda.LastFlag.EnemyModule
         private int aliveEnemies = 0;
         private int totalEnemies = 0;
 
+        private bool isPaused = false;
+
         public event WaveEventHandler OnWaveStart;
         public event WaveEventHandler OnWaveEnd;
 
@@ -56,6 +58,7 @@ namespace JollyPanda.LastFlag.EnemyModule
             Informant.OnLose += StopSpawning;
             Informant.OnStart += StartSpawningWave;
             Informant.OnChangeUIPage += DestroyEnemies;
+            Informant.OnPause += Informant_OnPause;
         }
 
         private void OnDisable()
@@ -63,6 +66,36 @@ namespace JollyPanda.LastFlag.EnemyModule
             Informant.OnLose -= StopSpawning;
             Informant.OnStart -= StartSpawningWave;
             Informant.OnChangeUIPage -= DestroyEnemies;
+            Informant.OnPause -= Informant_OnPause;
+        }
+
+        private void Informant_OnPause(bool isPause)
+        {
+            if (isPause)
+                PauseSpawning();
+            else
+                ResumeSpawning();
+        }
+
+        void PauseSpawning()
+        {
+            if (!isPaused)
+            {
+                isPaused = true;
+                CancelInvoke(nameof(SpawnEnemy));
+            }
+        }
+
+        void ResumeSpawning()
+        {
+            if (isPaused)
+            {
+                isPaused = false;
+                if (waveInProgress)
+                {
+                    InvokeRepeating(nameof(SpawnEnemy), 0f, currentWaveData.SpawnInterval);
+                }
+            }
         }
 
         private void DestroyEnemies(PageType type)
@@ -133,6 +166,9 @@ namespace JollyPanda.LastFlag.EnemyModule
 
         void SpawnEnemy()
         {
+            if (isPaused)
+                return;
+
             if (spawnedInWave >= currentWaveData.EnemyCount)
                 return;
 

@@ -1,6 +1,7 @@
 ﻿using JollyPanda.LastFlag.Database;
 using JollyPanda.LastFlag.Handlers;
 using MJUtilities.UI;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +18,7 @@ public class LosePopup : UIPopup
 
     public override void OnAwake()
     {
-        Informant.OnProfileChange += DisplayEarnCoin;
+        Informant.OnEarnCoin += DisplayEarnCoin;
         restartButton.onClick.AddListener(RestartButtonClicked);
 
         homeButton.onClick.AddListener(HomeButtonClicked);
@@ -25,15 +26,15 @@ public class LosePopup : UIPopup
 
     private void OnDestroy()
     {
-        Informant.OnProfileChange -= DisplayEarnCoin;
+        Informant.OnEarnCoin -= DisplayEarnCoin;
         restartButton.onClick.RemoveListener(RestartButtonClicked);
 
         homeButton.onClick.RemoveListener(HomeButtonClicked);
     }
 
-    private void DisplayEarnCoin(PlayerSaveData data)
+    private void DisplayEarnCoin(int value)
     {
-        coinText.SetText(data.Money.ToString("n0"));
+        coinText.SetText(value.ToString("N0", CultureInfo.InvariantCulture));
     }
 
     public override void OnSetValues()

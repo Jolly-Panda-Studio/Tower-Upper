@@ -339,8 +339,8 @@ MonoBehaviour:
   baseSpeedMin: 1
   baseSpeedMax: 5
   baseHealthMin: 1
-  baseHealthMax: 3
-  delayAfterWave: 5
+  baseHealthMax: 2
+  delayAfterWave: 10
 --- !u!1 &5459558350284184091
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,14 +561,6 @@ PrefabInstance:
     - target: {fileID: 5848639913901952454, guid: 7ff8cc635d5432748bdb5df075e6116d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5848639913901952454, guid: 7ff8cc635d5432748bdb5df075e6116d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 11.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 5848639913901952454, guid: 7ff8cc635d5432748bdb5df075e6116d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 5848639913901952454, guid: 7ff8cc635d5432748bdb5df075e6116d, type: 3}
       propertyPath: m_LocalRotation.w

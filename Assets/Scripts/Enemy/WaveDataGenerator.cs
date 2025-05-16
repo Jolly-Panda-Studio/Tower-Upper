@@ -38,14 +38,14 @@ namespace JollyPanda.LastFlag.EnemyModule
         public int baseHealthMax = 2;
 
         [Header("Wave Timing")]
-        public float delayAfterWave = 5f;
+        public float delayAfterWave = 10f;
 
         public WaveData GenerateWave(int level)
         {
             int enemyCount = Mathf.Clamp(minCount + level, minCount, maxCount);
 
-            float minSpeed = baseSpeedMin + Mathf.Min(level * 0.1f, 4f);
-            float maxSpeed = baseSpeedMax + Mathf.Min(level * 0.15f, 5f);
+            float minSpeed = Mathf.Clamp(baseSpeedMin * (1 + level * 0.1f), baseSpeedMin, 5f);
+            float maxSpeed = Mathf.Clamp(baseSpeedMax * (1 + level * 0.15f), baseSpeedMax, 10f);
 
             float spawnInterval = Mathf.Max(maxSpawnInterval - (level * 0.05f), minSpawnInterval);
 
@@ -57,20 +57,10 @@ namespace JollyPanda.LastFlag.EnemyModule
                 selectedEnemies[i] = allEnemies[index];
             }
 
-            // Health scaling
             int minHealth = Mathf.Clamp(Mathf.RoundToInt(baseHealthMin * level * 0.1f), baseHealthMin, 10);
             int maxHealth = Mathf.Clamp(Mathf.RoundToInt(baseHealthMax * level * 0.15f), baseHealthMax, 20);
 
-            float delay = Mathf.Max(delayAfterWave - (level * 0.05f), 1f);
-
-            return new WaveData(selectedEnemies, enemyCount, spawnInterval, minSpeed, maxSpeed, minHealth, maxHealth, delay);
-        }
-
-        public static int CalculateCoinReward(int level, int minHealth, int maxHealth)
-        {
-            float avgHealth = (minHealth + maxHealth) / 2f;
-            float reward = 1f + (0.2f * level) + (0.1f * avgHealth);
-            return Mathf.RoundToInt(reward);
+            return new WaveData(selectedEnemies, enemyCount, spawnInterval, minSpeed, maxSpeed, minHealth, maxHealth, delayAfterWave);
         }
 
         public int CalculateCoinRewardPerEnemy(int level)

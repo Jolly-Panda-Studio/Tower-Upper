@@ -18,6 +18,8 @@ namespace JollyPanda.LastFlag.PlayerModule
             Informant.OnLose += Losing;
             Informant.OnChangeUIPage += ChoicePlayerAnimation;
             Informant.OnPause += PauseAnything;
+            Informant.OnFinish += Stop;
+            Informant.OnWaveStart += Informant_OnWaveStart;
         }
 
         private void OnDisable()
@@ -27,6 +29,8 @@ namespace JollyPanda.LastFlag.PlayerModule
             Informant.OnLose -= Losing;
             Informant.OnChangeUIPage -= ChoicePlayerAnimation;
             Informant.OnPause -= PauseAnything;
+            Informant.OnFinish -= Stop;
+            Informant.OnWaveStart -= Informant_OnWaveStart;
         }
 
         private void GunChanged(Gun activeGun)
@@ -59,6 +63,19 @@ namespace JollyPanda.LastFlag.PlayerModule
                     soundController.PlayIdleSound();
                     break;
             }
+        }
+
+        private void Informant_OnWaveStart(int obj)
+        {
+            animationController.PlayShooting(true);
+            gunSelector.ResumeShooting();
+        }
+
+        private void Stop()
+        {
+            animationController.PlayShooting(false);
+            animationController.PlayIdle();
+            gunSelector.PauseShooting();
         }
 
         private void PauseAnything(bool isPause)
