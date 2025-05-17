@@ -29,6 +29,9 @@ namespace USound
         }
         private static SoundManager _instance;
 
+        [SerializeField] private SoundTag splashAudioClip;
+        [SerializeField] private bool playSplashMusicOnStart = true;
+
         [Header("Volume Settings")]
         private float backgroundVolume = 1f;
         private float sfxVolume = 1f;
@@ -61,7 +64,27 @@ namespace USound
             currentBG = null;
             nextBG = null;
 
-            PlayHomeBackground();
+            if (playSplashMusicOnStart && splashAudioClip != null)
+            {
+                StartCoroutine(PlaySplashThenHome());
+            }
+            else
+            {
+                PlayHomeBackground();
+            }
+        }
+
+        private IEnumerator PlaySplashThenHome()
+        {
+            yield return FadeInOnly(splashAudioClip);
+
+            AudioSource splashSource = splashAudioClip.GetAudioSource();
+            while (splashSource.isPlaying)
+            {
+                yield return null;
+            }
+
+            FadeToBackground(homeAudioClip);
         }
 
         private void Start()

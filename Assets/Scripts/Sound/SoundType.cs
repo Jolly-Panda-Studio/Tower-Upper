@@ -3,6 +3,7 @@
     public enum SoundType
     {
         Background,
-        SFX
+        SFX,
+        None
     }
 }

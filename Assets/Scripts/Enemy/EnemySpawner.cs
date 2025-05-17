@@ -19,7 +19,7 @@ namespace JollyPanda.LastFlag.EnemyModule
         
         [Tooltip("Rope prefab that grows from spawn point.")]
         [SerializeField] private RopeGrower ropePrefab;
-        private RopeGrower[] ropeGrowers;
+        private RopeGrower[] ropeGrowers = new RopeGrower[0];
 
         [Tooltip("Radius of the circular spawn area around the center.")]
         [SerializeField] private float radius = 2f;

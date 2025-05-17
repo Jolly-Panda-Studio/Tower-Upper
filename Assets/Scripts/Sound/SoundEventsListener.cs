@@ -5,11 +5,6 @@ namespace USound
 {
     internal class SoundEventsListener : MonoBehaviour
     {
-        private void Start()
-        {
-            SoundManager.Instance.PlayHomeBackground();
-        }
-
         private void OnEnable()
         {
             Informant.OnChangeUIPage += ChangeBackgroundSound;
