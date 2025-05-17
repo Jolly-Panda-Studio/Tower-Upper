@@ -2456,15 +2456,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8190118204351583771, guid: 8dd458fb5fce50b4984f8e0385babfc6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.041732177
+      value: 0.041732196
       objectReference: {fileID: 0}
     - target: {fileID: 8190118204351583771, guid: 8dd458fb5fce50b4984f8e0385babfc6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.07632041
+      value: -0.07632038
       objectReference: {fileID: 0}
     - target: {fileID: 8190118204351583771, guid: 8dd458fb5fce50b4984f8e0385babfc6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.003197152
+      value: 0.0031971517
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5096,10 +5096,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8138200823247070787, guid: 80fb5799ecf6a084faa18e393d4bd0f4, type: 3}
-      propertyPath: outwardOffset
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138200823247070787, guid: 80fb5799ecf6a084faa18e393d4bd0f4, type: 3}
       propertyPath: ropeGrowSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -5574,6 +5570,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3685617543816715004, guid: 71af65e9ea007ac43bea4264a092fc6c, type: 3}
+      propertyPath: m_text
+      value: Drag & Defend
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685617543816715004, guid: 71af65e9ea007ac43bea4264a092fc6c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.2784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685617543816715004, guid: 71af65e9ea007ac43bea4264a092fc6c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.11372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685617543816715004, guid: 71af65e9ea007ac43bea4264a092fc6c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.5647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685617543816715004, guid: 71af65e9ea007ac43bea4264a092fc6c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4282850704
+      objectReference: {fileID: 0}
     - target: {fileID: 4507652920936964506, guid: 71af65e9ea007ac43bea4264a092fc6c, type: 3}
       propertyPath: m_Color.a
       value: 0.4745098
@@ -5649,6 +5665,10 @@ PrefabInstance:
     - target: {fileID: 6947216839606703881, guid: 71af65e9ea007ac43bea4264a092fc6c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199062995186416671, guid: 71af65e9ea007ac43bea4264a092fc6c, type: 3}
+      propertyPath: m_EffectColor.a
+      value: 0.7607843
       objectReference: {fileID: 0}
     - target: {fileID: 7261752993386069110, guid: 71af65e9ea007ac43bea4264a092fc6c, type: 3}
       propertyPath: m_AnchoredPosition.y
