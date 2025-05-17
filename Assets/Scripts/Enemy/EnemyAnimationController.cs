@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace JollyPanda.LastFlag.EnemyModule
 {
-    [RequireComponent(typeof(Animator))]
     public class EnemyAnimationController : MonoBehaviour
     {
         [SerializeField] private Animator animator;

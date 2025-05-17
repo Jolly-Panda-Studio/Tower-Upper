@@ -12,6 +12,8 @@ namespace JollyPanda.LastFlag.EnemyModule
         [SerializeField] private EnemyPositionChecker positionChecker;
         [SerializeField] private EnemySoundController soundController;
 
+        public int CurrentSpawnIndex { get; set; }
+
         private Action<Enemy> OnDead;
         private Action<Enemy> OnReach;
 

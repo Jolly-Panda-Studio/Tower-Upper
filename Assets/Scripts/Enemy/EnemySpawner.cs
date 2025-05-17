@@ -15,21 +15,25 @@ namespace JollyPanda.LastFlag.EnemyModule
     {
         [Header("Spawn Settings")]
         [Tooltip("Number of points around the cylinder where enemies can spawn.")]
-        public int numberOfSpawnPoints = 8;
+        [SerializeField] private int numberOfSpawnPoints = 8;
+        
+        [Tooltip("Rope prefab that grows from spawn point.")]
+        [SerializeField] private RopeGrower ropePrefab;
+        private RopeGrower[] ropeGrowers;
 
         [Tooltip("Radius of the circular spawn area around the center.")]
-        public float radius = 2f;
+        [SerializeField] private float radius = 2f;
 
         [Tooltip("Height of the visual gizmo for spawn lines.")]
-        public float height = 5f;
+        [SerializeField] private float height = 5f;
 
         [Tooltip("Reference to the cylinder renderer (optional, not used in logic).")]
-        public Renderer cylinderRenderer;
+        [SerializeField] private Renderer cylinderRenderer;
 
         [Header("Hierarchy")]
         [Tooltip("Parent transform under which all spawned enemies will be organized.")]
-        public Transform enemyParent;
-
+        [SerializeField] private Transform enemyParent;
+        [SerializeField] private float outwardOffset;
         // Array holding spawn point transforms positioned around the cylinder
         private Transform[] spawnPoints;
 
@@ -46,6 +50,8 @@ namespace JollyPanda.LastFlag.EnemyModule
 
         public event WaveEventHandler OnWaveStart;
         public event WaveEventHandler OnWaveEnd;
+
+        private Dictionary<int, List<Enemy>> activeEnemiesPerPoint = new();
 
         // Dictionary mapping each prefab to its pool of reusable GameObjects
         private Dictionary<Enemy, Queue<Enemy>> enemyPools = new();
@@ -124,9 +130,8 @@ namespace JollyPanda.LastFlag.EnemyModule
         /// </summary>
         void Start()
         {
-            GenerateSpawnPoints();
             spawnCooldowns = new float[numberOfSpawnPoints];
-            //StartSpawningWave();
+            GenerateSpawnPoints();
         }
 
         private void Update()
@@ -136,6 +141,16 @@ namespace JollyPanda.LastFlag.EnemyModule
                 if (spawnCooldowns[i] > 0f)
                 {
                     spawnCooldowns[i] -= Time.deltaTime;
+
+                    if (spawnCooldowns[i] <= 0f)
+                    {
+                        spawnCooldowns[i] = 0f;
+
+                        if (activeEnemiesPerPoint[i].Count == 0)
+                        {
+                            ropeGrowers[i].Shrink();
+                        }
+                    }
                 }
             }
         }
@@ -145,20 +160,33 @@ namespace JollyPanda.LastFlag.EnemyModule
         /// </summary>
         void GenerateSpawnPoints()
         {
+            ropeGrowers = new RopeGrower[numberOfSpawnPoints];
             spawnPoints = new Transform[numberOfSpawnPoints];
+
             for (int i = 0; i < numberOfSpawnPoints; i++)
             {
+                activeEnemiesPerPoint[i] = new List<Enemy>();
+
                 float angle = i * Mathf.PI * 2f / numberOfSpawnPoints;
-                Vector3 position = new(
+                Vector3 localPos = new(
                     Mathf.Cos(angle) * radius,
                     -height / 2f,
                     Mathf.Sin(angle) * radius
                 );
 
-                GameObject point = new GameObject("SpawnPoint_" + i);
-                point.transform.position = transform.position + position;
-                point.transform.parent = transform;
-                spawnPoints[i] = point.transform;
+                Vector3 worldPos = transform.position + localPos;
+
+                GameObject startGO = new GameObject("StartPoint_" + i);
+                startGO.transform.position = worldPos;
+                startGO.transform.SetParent(transform);
+
+                RopeGrower rope = Instantiate(ropePrefab, transform);
+                rope.name = "Rope_" + i;
+
+                rope.Initialize(height, startGO.transform);
+
+                spawnPoints[i] = startGO.transform;
+                ropeGrowers[i] = rope;
             }
         }
 
@@ -209,8 +237,12 @@ namespace JollyPanda.LastFlag.EnemyModule
             if (enemy == null) return;
 
             PositionEnemyAtSpawnPoint(enemy, spawnIndex);
+            activeEnemiesPerPoint[spawnIndex].Add(enemy);
+            enemy.CurrentSpawnIndex = spawnIndex;
+
             SetEnemyBehavior(enemy);
 
+            ropeGrowers[spawnIndex].Grow();
             spawnCooldowns[spawnIndex] = 0.9f; // Reset cooldown for this spawn point
 
             spawnedInWave++;
@@ -218,7 +250,15 @@ namespace JollyPanda.LastFlag.EnemyModule
 
         void PositionEnemyAtSpawnPoint(Enemy enemy, int spawnIndex)
         {
-            enemy.transform.position = spawnPoints[spawnIndex].position;
+            Vector3 basePosition = spawnPoints[spawnIndex].position;
+
+            Vector3 directionFromCenter = (basePosition - transform.position);
+            directionFromCenter.y = 0;
+            directionFromCenter.Normalize();
+
+            Vector3 finalPosition = basePosition + directionFromCenter * outwardOffset;
+
+            enemy.transform.position = finalPosition;
 
             Vector3 directionToCenter = transform.position - enemy.transform.position;
             directionToCenter.y = 0;
@@ -236,6 +276,8 @@ namespace JollyPanda.LastFlag.EnemyModule
             enemy.SetDeadAction((killedEnemy) =>
             {
                 aliveEnemies--;
+                activeEnemiesPerPoint[killedEnemy.CurrentSpawnIndex].Remove(killedEnemy);
+
                 if (aliveEnemies <= 0 && waveInProgress)
                 {
                     EndCurrentWave();
