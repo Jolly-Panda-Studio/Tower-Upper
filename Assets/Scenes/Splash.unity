@@ -238,7 +238,7 @@ MonoBehaviour:
   - canvasGroup: {fileID: 1768907374}
     holdDuration: 4
   - canvasGroup: {fileID: 1683837726}
-    holdDuration: 5
+    holdDuration: 6
   fadeInDuration: 1
   fadeOutDuration: 1
   sceneToLoad: Game
