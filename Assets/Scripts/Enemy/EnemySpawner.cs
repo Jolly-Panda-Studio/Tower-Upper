@@ -112,6 +112,11 @@ namespace JollyPanda.LastFlag.EnemyModule
 
                 StopSpawning();
             }
+
+            foreach (var rope in ropeGrowers)
+            {
+                rope?.Shrink();
+            }
         }
 
         private void DestroyEnemies()
