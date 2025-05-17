@@ -307,7 +307,7 @@ MonoBehaviour:
   height: 90
   cylinderRenderer: {fileID: 5459558350284184089}
   enemyParent: {fileID: 1608550352578170127}
-  outwardOffset: 0.2
+  outwardOffset: -0.1
   waveDataGenerator: {fileID: 66350070564711282}
 --- !u!114 &66350070564711282
 MonoBehaviour:
